@@ -44,3 +44,8 @@ button {
   margin-top: 5vb;
   cursor: pointer;
 }
+button:hover {
+  color: black;
+  border: 1px solid rgb(245, 229, 195);
+  background-color: rgb(245, 229, 195); /* Background color on hover */
+}

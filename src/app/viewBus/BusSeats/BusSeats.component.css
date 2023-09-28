@@ -25,7 +25,8 @@ input[type="checkbox"] {
 
 /* Style the custom checkbox when it's checked */
 input[type="checkbox"]:checked + .custom-checkbox::before {
-  background-image: url("sofaselected.png"); /* Replace with your checked image URL */
+  /* background-image: url("sofaselected.png"); Replace with your checked image URL */
+  background-color: pink;
 }
 
 input[type="checkbox"] {
@@ -99,8 +100,8 @@ h3 {
 
 /* Styling for the checkmark inside the checkbox */
 .custom-checkbox input[type="checkbox"]:checked + .checkmark {
-  background-color: black;
-  border-color: black;
+  background-color: pink;
+  border-color: pink;
 }
 
 /* Hide the checkmark when not checked */

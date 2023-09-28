@@ -24,7 +24,7 @@
   display: flex;
 }
 .contentval {
-  margin: 10px;
+  margin: 30px;
   width: 750px;
   padding: 20px;
   background-color: rgb(250, 246, 238);
@@ -47,6 +47,11 @@ h3 {
   border-radius: 2px;
   color: white;
 }
-.items {
+.contentval {
   cursor: pointer;
+  transition: transform 0.2s ease-in-out; /* Adjust the timing and easing as needed */
+  transform-origin: center bottom;
+}
+.contentval:hover {
+  transform: scale(1.05); /* Adjust the scale factor as desired */
 }

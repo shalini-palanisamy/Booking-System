@@ -30,15 +30,20 @@ h2 {
   border: 2px solid rgb(190, 166, 113);
 }
 button {
-  width: 15vb;
-  height: 4vh;
-  margin-top: 5vb;
+  width: 8vw;
+  height: 5vh;
   border-radius: 5px;
   background-color: rgb(190, 166, 113);
   color: white;
   font-weight: bold;
   border: 1px solid rgb(190, 166, 113);
+  margin-top: 5vb;
   cursor: pointer;
+}
+button:hover {
+  color: black;
+  border: 1px solid rgb(245, 229, 195);
+  background-color: rgb(245, 229, 195); /* Background color on hover */
 }
 input.ng-invalid.ng-touched {
   border: red 1px solid;

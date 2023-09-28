@@ -1,0 +1,52 @@
+.container {
+  margin: 0px;
+  padding: 0px;
+  /* width: 100%; */
+  display: flex;
+  gap: 10vb;
+  margin-top: 10vb;
+}
+.search {
+  width: 25%;
+  height: 25%;
+}
+.firLine {
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+.firLine p {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.date {
+  display: flex;
+}
+.contentval {
+  margin: 10px;
+  width: 750px;
+  padding: 20px;
+  background-color: rgb(250, 246, 238);
+  border-radius: 10px;
+  border: 1px solid rgb(150, 126, 76);
+}
+.Price {
+  color: rgb(150, 126, 76);
+  font-weight: bolder;
+  font-size: 18px;
+}
+h3 {
+  color: rgb(150, 126, 76);
+  font-weight: bolder;
+}
+.Rating {
+  background-color: rgb(150, 126, 76);
+  width: 23px;
+  height: 20px;
+  border-radius: 2px;
+  color: white;
+}
+.items {
+  cursor: pointer;
+}

@@ -1,0 +1,67 @@
+<div class="container">
+  <form [formGroup]="SubmitBooking" (ngSubmit)="OnShow()">
+    <div class="form" *ngFor="let formVal of selectedSeats; let i = index">
+      <div>
+        <h3>Seat Number: {{ formVal.SeatNo }}/{{ formVal.SeatType }}</h3>
+      </div>
+      <div>Price: {{ formVal.price }}</div>
+      <div class="form-group" [formGroupName]="'seat-' + (i + 1)">
+        <input
+          type="hidden"
+          name="SeatNo"
+          formControlName="SeatNo"
+          [value]="formVal.SeatNo"
+        />
+        <div>
+          <label for="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            formControlName="name"
+          />
+        </div>
+        <div>
+          <label for="age">Age</label>
+          <input
+            type="number"
+            name="age"
+            class="form-control"
+            formControlName="age"
+          />
+        </div>
+        <div class="date">
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              class="form-control"
+              formControlName="gender"
+            />
+            Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              class="form-control"
+              formControlName="gender"
+            />
+            Female
+          </label>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>Total Price:{{ totalPrice }}</h3>
+    </div>
+    <button type="submit">Confirm Booking</button>
+  </form>
+  <div class="error" *ngIf="ShowError">
+    Your input doesn't satisfied the validations that name should contain
+    minimum of 3 characters and not allow numbers and special characters or
+    Minimum age should be 5
+  </div>
+</div>

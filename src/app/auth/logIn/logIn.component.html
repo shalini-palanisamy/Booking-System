@@ -1,0 +1,45 @@
+<div class="container">
+  <div *ngIf="isLoading" class="load">
+    <app-loading></app-loading>
+  </div>
+  <form [formGroup]="logInForm" (ngSubmit)="Onsubmit()" *ngIf="!isLoading">
+    <div class="form-group">
+      <div>
+        <label for="">Email*</label>
+        <input
+          name="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+        />
+        <small
+          *ngIf="
+            !logInForm.get('email').valid && logInForm.get('email').touched
+          "
+        >
+          Please enter valid email*
+        </small>
+      </div>
+      <div class="pass">
+        <label for="">Password*</label>
+        <input
+          type="password"
+          name="password"
+          id="pass"
+          class="form-control"
+          formControlName="password"
+        />
+        <small
+          *ngIf="
+            !logInForm.get('password').valid &&
+            logInForm.get('password').touched
+          "
+        >
+          Please enter the required field*
+        </small>
+      </div>
+      <button class="btn btn-primary" type="submit">LogIn</button>
+    </div>
+    <div class="error">{{ error }}</div>
+  </form>
+</div>

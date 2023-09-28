@@ -1,0 +1,42 @@
+.container {
+  padding: 5vb;
+  padding-bottom: 0%;
+  width: 500px;
+}
+.form-group label {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+}
+.pass {
+  margin-top: 4vh;
+}
+.form-group div input {
+  margin-top: 5px;
+  width: 250px;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid rgb(190, 166, 113);
+}
+button {
+  width: 8vw;
+  height: 5vh;
+  border-radius: 5px;
+  background-color: rgb(190, 166, 113);
+  color: white;
+  font-weight: bold;
+  border: 1px solid rgb(190, 166, 113);
+  margin-top: 5vb;
+  cursor: pointer;
+}
+input.ng-invalid.ng-touched {
+  border: red 1px solid;
+}
+small {
+  color: red;
+}
+.error {
+  margin-top: 5px;
+  color: rgb(190, 166, 113);
+  font-weight: bolder;
+}

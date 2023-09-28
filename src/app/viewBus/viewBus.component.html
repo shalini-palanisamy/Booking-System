@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="search">
+    <app-search (searchElement)="returnBus($event)"></app-search>
+  </div>
+  <div class="content">
+    <div *ngIf="searchStatus === false">
+      <div *ngFor="let busValue of BusesView" class="contentval">
+        <div class="items" (click)="OnShowItem(busValue)">
+          <div class="firLine">
+            <h3 class="busName">{{ busValue.BusName }}</h3>
+            <p class="Price">Rs.{{ busValue.Price }}</p>
+          </div>
+          <div class="date">
+            <div>
+              <p>{{ busValue.FromLocation }}</p>
+              <p>{{ busValue.time.startTime }}</p>
+            </div>
+            <div>
+              <p><----{{ busValue.time.totalHours }}----></p>
+            </div>
+            <div>
+              <p>{{ busValue.ToLocation }}</p>
+              <p>{{ busValue.time.endTime }}</p>
+            </div>
+          </div>
+          <p>
+            Seater: {{ busValue.AvailbleSeat.seater }}/Sleeper:
+            {{ busValue.AvailbleSeat.sleeper }}
+          </p>
+
+          <p class="Rating">{{ busValue.Rating }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="searchStatus">
+      <div *ngFor="let busValue of searchBus" class="contentval">
+        <div class="items" (click)="OnShowItem(busValue)">
+          <div class="firLine">
+            <h3 class="busName">{{ busValue.BusName }}</h3>
+            <p class="Price">Rs.{{ busValue.Price }}</p>
+          </div>
+          <div class="date">
+            <div>
+              <p>{{ busValue.FromLocation }}</p>
+              <p>{{ busValue.time.startTime }}</p>
+            </div>
+            <div>
+              <p><----{{ busValue.time.totalHours }}----></p>
+            </div>
+            <div>
+              <p>{{ busValue.ToLocation }}</p>
+              <p>{{ busValue.time.endTime }}</p>
+            </div>
+          </div>
+          <p>
+            Seater: {{ busValue.AvailbleSeat.seater }}/Sleeper:
+            {{ busValue.AvailbleSeat.sleeper }}
+          </p>
+
+          <p class="Rating">{{ busValue.Rating }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

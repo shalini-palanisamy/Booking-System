@@ -1,0 +1,35 @@
+.container {
+  margin: 0px;
+  padding: 0px;
+}
+.form {
+  background-color: rgb(250, 246, 238);
+  width: 25%;
+  height: 35vh;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 0%;
+  padding-right: 0%;
+}
+.form div {
+  margin: 5px;
+}
+.col1 {
+  display: flex;
+}
+.date {
+  margin: 50px;
+}
+.date input {
+  width: 70%;
+}
+button {
+  margin-left: 5px;
+  margin-top: 10px;
+  width: 70px;
+  height: 30px;
+  color: white;
+  background-color: rgb(150, 126, 76);
+  border: none;
+  border-radius: 10px;
+}

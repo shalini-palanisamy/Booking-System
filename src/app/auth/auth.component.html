@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="selectButton">
+    <button (click)="OnAdmin()" class="admin">Admin</button>
+    <button (click)="OnUser()" class="user">User</button>
+  </div>
+
+  <div *ngIf="logInRenderUser">
+    <app-logIn></app-logIn>
+    <div class="renderSignIn">
+      <p>Create an account</p>
+      <a routerLink="signIn">SignIn</a>
+    </div>
+  </div>
+  <div *ngIf="logInRenderAdmin">
+    <app-admin></app-admin>
+  </div>
+</div>

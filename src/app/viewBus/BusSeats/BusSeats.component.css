@@ -1,0 +1,239 @@
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Create a custom checkbox container */
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  width: 50px; /* Set the width and height as per your image size */
+  height: 50px;
+}
+
+/* Style the custom checkbox */
+.custom-checkbox::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url("sofa.png"); /* Replace with your image URL */
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Style the custom checkbox when it's checked */
+input[type="checkbox"]:checked + .custom-checkbox::before {
+  background-image: url("sofaselected.png"); /* Replace with your checked image URL */
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+.female {
+  border: 3px solid pink;
+  width: 55px; /* Set the width and height as per your image size */
+  height: 55px;
+  border-radius: 4px;
+}
+.male {
+  border: 3px solid rgb(174, 174, 238);
+  width: 55px; /* Set the width and height as per your image size */
+  height: 55px;
+  border-radius: 4px;
+}
+.femalecolor {
+  border: 3px solid pink;
+  width: 20px;
+  height: 20px;
+}
+.malecolor {
+  border: 3px solid rgb(174, 174, 238);
+  width: 20px;
+  height: 20px;
+}
+.info {
+  display: flex;
+  gap: 10px;
+  width: 200px;
+}
+.info p {
+  font-size: larger;
+  font-weight: bolder;
+}
+h3 {
+  font-weight: bolder;
+}
+.Booked {
+  width: 20px;
+  height: 20px;
+  background-color: #ccc;
+}
+/* Styling for the custom checkbox */
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px; /* Adjust as needed */
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none; /* Hide the actual checkbox */
+}
+
+/* Create the rectangular shape for the custom checkbox */
+.custom-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 40px; /* Adjust the width to control the rectangle shape */
+  background-color: white;
+  border: 1px solid #999;
+  border-radius: 4px; /* Adjust as needed */
+}
+
+/* Styling for the checkmark inside the checkbox */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  background-color: black;
+  border-color: black;
+}
+
+/* Hide the checkmark when not checked */
+.custom-checkbox input[type="checkbox"]:not(:checked) + .checkmark:after {
+  display: none;
+}
+
+/* Styling for the checkmark symbol (✓) */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark:after {
+  content: "\2713"; /* Unicode checkmark symbol */
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  font-size: 16px;
+  color: white;
+}
+
+/* Style the custom checkbox when it's checked */
+input[type="checkbox"]:checked + .checkbox-custom2 {
+  background-color: white; /* Change background color when checked */
+  border-color: #007bff; /* Change border color when checked */
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.seater {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+button {
+  width: 8vw;
+  height: 5vh;
+  border-radius: 5px;
+  background-color: rgb(190, 166, 113);
+  color: white;
+  font-weight: bold;
+  border: 1px solid rgb(190, 166, 113);
+  margin-top: 5vb;
+  cursor: pointer;
+  margin-top: 0px;
+}
+.disabled-checkbox .custom-checkbox {
+  background-color: #ccc;
+}
+.disabled-checkbox .checkmark {
+  background-color: #ccc;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  border: 3px solid rgb(190, 166, 113);
+  background-color: rgb(250, 246, 238);
+  padding: 30px;
+  border-radius: 10px;
+  width: 600px;
+  height: 800px;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr; /* Two columns */
+  grid-gap: 20px; /* Gap between columns */
+}
+.left-column-seater label {
+  margin-bottom: 0px;
+}
+.left-column-seater {
+  grid-row: 1 / span 2; /* Lower seater divided into 2 rows */
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr; /* Two columns in the left column */
+  grid-gap: 5px; /* Gap between columns */
+}
+
+.seaterWindow-column,
+.seater-column {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  /* Gap between rows */
+}
+
+.seaterWindow-column {
+  grid-column: 1;
+}
+.seater-column {
+  grid-column: 2;
+}
+.empty {
+  margin-bottom: 0px;
+  height: 80px;
+}
+.lowerSleeper-column {
+  margin-bottom: 50px;
+}
+.right-column {
+  grid-column: 3 / span 2; /* Upper divided into 3 columns */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Three columns in the right column */
+  grid-gap: 50px; /* Gap between upper rows and columns */
+}
+.seatsSelected {
+  display: table;
+  width: 300px;
+  height: 300px;
+  background-color: rgb(250, 246, 238);
+  border-radius: 10px;
+}
+
+.seatsSelected div {
+  padding: 5px;
+}
+.table-row {
+  display: table-row;
+  font-size: 20px;
+}
+
+.table-cell {
+  display: table-cell;
+  padding: 5px 10px;
+}
+
+/* Style the first column differently if needed */
+.table-cell:first-child {
+  font-weight: bold;
+}
+
+/* Style the last column differently if needed */
+.table-cell:last-child {
+  text-align: right;
+}
+.heading {
+  display: flex;
+  justify-content: left;
+  gap: 250px;
+  margin-left: 300px;
+}

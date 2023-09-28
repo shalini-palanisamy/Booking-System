@@ -1,0 +1,23 @@
+<h1>Bus Information</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Bus Name</th>
+      <th>Booked Seats</th>
+      <th>Available Seats</th>
+      <th>From</th>
+      <th>To</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bus of busData">
+      <td>{{ bus.BusName }}</td>
+      <td>{{ bus.BookedSeats.seater + bus.BookedSeats.sleeper }}</td>
+      <td>{{ bus.AvailbleSeat.seater + bus.AvailbleSeat.sleeper }}</td>
+      <td>{{ bus.FromLocation }}</td>
+      <td>{{ bus.ToLocation }}</td>
+      <td><button (click)="OnView(bus)">View Bus</button></td>
+    </tr>
+  </tbody>
+</table>

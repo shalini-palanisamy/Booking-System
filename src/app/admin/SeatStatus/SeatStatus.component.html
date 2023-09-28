@@ -1,0 +1,29 @@
+<div>
+  <h3>{{ BusDetails.BusName }}</h3>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Seat Name</th>
+      <th>Booking Status</th>
+      <th>Seat Type & Seat Position</th>
+      <th>Customer Name</th>
+      <th>Customer Age</th>
+      <th>Customer Gender</th>
+      <th>Cancellation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let seat of SeatDetails">
+      <td>{{ seat.SeatNo }}</td>
+      <td>{{ seat.BookingStatus ? "Booked" : "Not Booked" }}</td>
+      <td>{{ seat.SeatType }} & {{ seat.SeatPosition }}</td>
+      <td>{{ seat.CustName }}</td>
+      <td>{{ seat.CustAge }}</td>
+      <td>{{ seat.CustGender }}</td>
+      <td *ngIf="seat.BookingStatus">
+        <button (click)="OnCancel(seat)">cancel Booking</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

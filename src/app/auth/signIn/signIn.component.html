@@ -1,0 +1,70 @@
+<div class="container">
+  <div *ngIf="isLoading" class="load">
+    <app-loading></app-loading>
+  </div>
+  <form [formGroup]="signInForm" (ngSubmit)="Onsubmit()" *ngIf="!isLoading">
+    <h2>SignUp</h2>
+    <div class="form-group">
+      <div>
+        <label for="">Name*</label>
+        <input
+          name="name"
+          id="name"
+          class="form-control"
+          formControlName="name"
+        />
+        <small
+          *ngIf="
+            !signInForm.get('name').valid && signInForm.get('name').touched
+          "
+        >
+          Please enter the required field*
+        </small>
+      </div>
+      <div>
+        <label for="">Email*</label>
+        <input
+          name="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+        />
+        <small
+          *ngIf="
+            !signInForm.get('email').valid && signInForm.get('email').touched
+          "
+        >
+          Please enter valid email*
+        </small>
+      </div>
+      <div class="pass">
+        <label for="">Create Password*</label>
+        <input
+          type="password"
+          name="password"
+          id="pass"
+          class="form-control"
+          formControlName="password"
+        />
+        <small
+          *ngIf="
+            signInForm.get('password').hasError('required') &&
+            signInForm.get('password').touched
+          "
+          >Password is required.</small
+        >
+        <small *ngIf="signInForm.get('password').hasError('strongPassword')"
+          >Password is not strong enough.</small
+        >
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!signInForm.valid"
+      >
+        SignUp
+      </button>
+    </div>
+    <div class="error">{{ error }}</div>
+  </form>
+</div>

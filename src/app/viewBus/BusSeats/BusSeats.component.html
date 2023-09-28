@@ -1,0 +1,139 @@
+
+<div class="header">
+  <div>
+    <h3>{{ BusDetails.BusName }}</h3>
+  </div>
+
+  <div class="heading">
+    <div><h4>Lower</h4></div>
+    <div><h4>Upper</h4></div>
+  </div>
+  <div class="container">
+    <div class="content">
+      <div class="left-column-seater">
+        <!-- "Lower" seats -->
+        <div *ngFor="let value of Stucture; let i = index" class="empty">
+          <div
+            *ngIf="
+              value.SeatType === 'seater' && value.SeatNo.includes('W') !== -1
+            "
+            [ngClass]="{
+              female: getStyle(value, i) === 'pink',
+              male: getStyle(value, i) === 'blue'
+            }"
+            class="seaterWindow-column"
+            #checkboxesContainer
+          >
+            <label [class.disabled-checkbox]="value.BookingStatus">
+              <input
+                type="checkbox"
+                (change)="onCheckboxChange($event, i)"
+                [disabled]="value.BookingStatus"
+              />
+              <span class="custom-checkbox"></span>
+            </label>
+            <p>Rs.{{ value.price }}</p>
+          </div>
+          <div
+            *ngIf="
+              value.SeatType === 'seater' && value.SeatNo.includes('W') === -1
+            "
+            class="seater-column"
+            [ngClass]="{
+              female: getStyle(value, i) === 'pink',
+              male: getStyle(value, i) === 'blue'
+            }"
+          >
+            <label [class.disabled-checkbox]="value.BookingStatus">
+              <input
+                type="checkbox"
+                (change)="onCheckboxChange($event, i)"
+                [disabled]="value.BookingStatus"
+              />
+              <span class="custom-checkbox"></span>
+            </label>
+            <p>Rs.{{ value.price }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="lower-sleeper">
+        <ng-container *ngFor="let value of Stucture; let i = index">
+          <div
+            *ngIf="
+              value.SeatType === 'sleeper' && value.SeatPosition === 'lower'
+            "
+            class="lowerSleeper-column"
+          >
+            <label
+              class="custom-checkbox"
+              [class.disabled-checkbox]="value.BookingStatus"
+            >
+              <input
+                [disabled]="value.BookingStatus"
+                type="checkbox"
+                class="myCheckbox"
+                (change)="onCheckboxChange($event, i)"
+              />
+              <span class="checkmark"></span>
+            </label>
+
+            <p>Rs.{{ value.price }}</p>
+          </div>
+        </ng-container>
+      </div>
+      <div class="right-column">
+        <ng-container *ngFor="let value of Stucture; let i = index">
+          <div
+            *ngIf="
+              value.SeatType === 'sleeper' && value.SeatPosition === 'upper'
+            "
+            class="upper"
+          >
+            <label
+              class="custom-checkbox"
+              [class.disabled-checkbox]="value.BookingStatus"
+            >
+              <input
+                [disabled]="value.BookingStatus"
+                type="checkbox"
+                class="myCheckbox"
+                (change)="onCheckboxChange($event, i)"
+              />
+              <span class="checkmark"></span>
+            </label>
+            <p>Rs.{{ value.price }}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="seatsSelected">
+      <div class="table-row">
+        <div class="table-cell"><p>Seater:</p></div>
+        <div class="table-cell">{{ seater }}</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell"><p>Sleeper:</p></div>
+        <div class="table-cell">{{ sleeper }}</div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell"><p>Total Seats:</p></div>
+        <div class="table-cell">{{ TotalSeats }}</div>
+      </div>
+      <div><button type="submit" (click)="CheckValue()">confirm</button></div>
+      <div>
+        <div class="info">
+          <div class="Booked"></div>
+          <p>Booked</p>
+        </div>
+        <div class="info">
+          <div class="femalecolor"></div>
+          <p>Only for female</p>
+        </div>
+        <div class="info">
+          <div class="malecolor"></div>
+          <p>Only for male</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

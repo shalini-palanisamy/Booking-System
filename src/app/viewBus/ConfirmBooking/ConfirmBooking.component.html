@@ -1,0 +1,24 @@
+<div class="container">
+  <div *ngFor="let value of FormValue" class="status">
+    <div>
+      <h3>{{ value.SeatNo }}</h3>
+    </div>
+    <div>
+      <h4>Customer Name:</h4>
+      <p>{{ value.name }}</p>
+    </div>
+    <div>
+      <h4>Customer Age:</h4>
+      <p>{{ value.age }}</p>
+    </div>
+    <div>
+      <h4>Customer Gender:</h4>
+      <p>{{ value.gender }}</p>
+    </div>
+    <hr />
+  </div>
+  <div>
+    <h3>Total Amount: {{ Totalamount }}</h3>
+  </div>
+  <button (click)="Onsubmit()" type="submit">Payment</button>
+</div>

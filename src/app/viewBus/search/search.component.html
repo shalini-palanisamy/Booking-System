@@ -1,0 +1,37 @@
+<div class="container">
+  <form [formGroup]="searchForm" (ngSubmit)="OnShow()">
+    <div class="form">
+      <div class="col1">
+        <div>
+          <label for="fromLocation">From</label>
+          <input
+            type="text"
+            name="fromLoc"
+            class="form-control"
+            formControlName="fromLoc"
+          />
+        </div>
+        <div>
+          <label for="ToLocation">To</label>
+          <input
+            type="text"
+            name="ToLoc"
+            class="form-control"
+            formControlName="toLoc"
+          />
+        </div>
+      </div>
+      <div class="date">
+        <label for="date">Date</label>
+        <input
+          type="date"
+          name="date"
+          placeholder=" "
+          class="form-control"
+          formControlName="date"
+        />
+      </div>
+      <button type="submit">Search</button>
+    </div>
+  </form>
+</div>

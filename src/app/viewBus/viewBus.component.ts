@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { SeatsService } from './BusSeats/Seats.servicce';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-viewBus',
@@ -17,7 +18,8 @@ export class ViewBusComponent implements OnInit {
     private http: HttpClient,
     private route: Router,
     private router: ActivatedRoute,
-    private busSelectedService: SeatsService
+    private busSelectedService: SeatsService,
+    private authSerive: AuthService
   ) {}
   ngOnInit() {
     this.http
@@ -58,5 +60,8 @@ export class ViewBusComponent implements OnInit {
     this.busSelectedService.selectedBus = busValue;
     console.log(this.busSelectedService.selectedBus);
     this.route.navigate(['../busSeats'], { relativeTo: this.router });
+  }
+  OnLogout() {
+    this.authSerive.logout();
   }
 }

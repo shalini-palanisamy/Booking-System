@@ -1,13 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { BusSelectedService } from '../BusStatus/BusSelected.service';
 @Injectable({ providedIn: 'root' })
 export class SeatFetchService {
-  constructor(
-    private http: HttpClient,
-    private BusSelected: BusSelectedService
-  ) {}
+  SelectedBus;
+  constructor(private http: HttpClient) {}
   OnFetch(Bus) {
     return this.http
       .get(
@@ -30,39 +27,40 @@ export class SeatFetchService {
   }
   cancellation(data) {
     console.log(data);
+    console.log(this.SelectedBus);
     if (data.SeatType === 'seater') {
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.BusSelected.SelectedBus.id +
+            this.SelectedBus.id +
             '/BookedSeats/seater.json',
-          Math.abs(this.BusSelected.SelectedBus.BookedSeats.seater - 1)
+          Math.abs(this.SelectedBus.BookedSeats.seater - 1)
         )
         .subscribe((res) => {});
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.BusSelected.SelectedBus.id +
+            this.SelectedBus.id +
             '/AvailbleSeat/seater.json',
-          this.BusSelected.SelectedBus.AvailbleSeat.seater + 1
+          this.SelectedBus.AvailbleSeat.seater + 1
         )
         .subscribe((res) => {});
     } else {
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.BusSelected.SelectedBus.id +
+            this.SelectedBus.id +
             '/BookedSeats/sleeper.json',
-          Math.abs(this.BusSelected.SelectedBus.BookedSeats.sleeper - 1)
+          Math.abs(this.SelectedBus.BookedSeats.sleeper - 1)
         )
         .subscribe((res) => {});
 
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.BusSelected.SelectedBus.id +
+            this.SelectedBus.id +
             '/AvailbleSeat/sleeper.json',
-          this.BusSelected.SelectedBus.AvailbleSeat.sleeper + 1
+          this.SelectedBus.AvailbleSeat.sleeper + 1
         )
         .subscribe((res) => {});
     }
@@ -70,7 +68,7 @@ export class SeatFetchService {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.BusSelected.SelectedBus.BusNo +
+          this.SelectedBus.BusNo +
           '/' +
           data.id +
           '/BookingStatus.json',
@@ -80,7 +78,7 @@ export class SeatFetchService {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.BusSelected.SelectedBus.BusNo +
+          this.SelectedBus.BusNo +
           '/' +
           data.id +
           '/CustAge.json',
@@ -90,7 +88,7 @@ export class SeatFetchService {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.BusSelected.SelectedBus.BusNo +
+          this.SelectedBus.BusNo +
           '/' +
           data.id +
           '/CustName.json',
@@ -100,7 +98,7 @@ export class SeatFetchService {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.BusSelected.SelectedBus.BusNo +
+          this.SelectedBus.BusNo +
           '/' +
           data.id +
           '/CustGender.json',

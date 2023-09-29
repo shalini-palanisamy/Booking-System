@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="SubmitBooking" (ngSubmit)="OnShow()">
+  <form [formGroup]="SubmitBooking" (ngSubmit)="OnShow()" *ngIf="!showConfirm">
     <div class="form" *ngFor="let formVal of selectedSeats; let i = index">
       <div>
         <h3>Seat Number: {{ formVal.SeatNo }}/{{ formVal.SeatType }}</h3>
@@ -59,6 +59,71 @@
     </div>
     <button type="submit">Confirm Booking</button>
   </form>
+  <div *ngIf="showConfirm && !paymentConfirm">
+    <div *ngFor="let value of seatDataArray" class="status">
+      <div>
+        <h3>{{ value.SeatNo }}</h3>
+      </div>
+      <div>
+        <h4 class="same-line">Customer Name:</h4>
+        <p class="same-line">{{ value.name }}</p>
+      </div>
+      <div>
+        <h4 class="same-line">Customer Age:</h4>
+        <p class="same-line">{{ value.age }}</p>
+      </div>
+      <div>
+        <h4 class="same-line">Customer Gender:</h4>
+        <p class="same-line">{{ value.gender }}</p>
+      </div>
+      <hr />
+    </div>
+    <div>
+      <h3>Total Amount: {{ totalPrice }}</h3>
+    </div>
+    <button (click)="Onsubmit()" type="submit">Payment</button>
+  </div>
+  <div *ngIf="paymentConfirm">
+    <div class="tick">
+      <img
+        src="data:image/png;base64,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"
+        alt=""
+        width="50vb"
+        height="100px"
+      />
+    </div>
+    <div *ngFor="let value of BookingSummary" class="status">
+      <div>
+        <h3>{{ value.SeatNo }}</h3>
+      </div>
+      <div>
+        <h4 class="same-line">Seat Type:</h4>
+        <p class="same-line">{{ value.SeatType }}</p>
+      </div>
+      <div>
+        <h4 class="same-line">Seat Position:</h4>
+        <p class="same-line">{{ value.SeatPosition }}</p>
+      </div>
+      <div>
+        <h4 class="same-line">Price:</h4>
+        <p class="same-line">{{ value.price }}</p>
+      </div>
+      <div>
+        <h4 class="same-line">Customer Name:</h4>
+        <p class="same-line">{{ value.CustName }}</p>
+      </div>
+      <div>
+        <h4 class="same-line">Customer Age:</h4>
+        <p class="same-line">{{ value.CustAge }}</p>
+      </div>
+      <div>
+        <h4 class="same-line">Customer Gender</h4>
+        <p class="same-line">{{ value.CustGender }}</p>
+      </div>
+      <hr />
+    </div>
+    <button (click)="BusList()">Go To BusList</button>
+  </div>
   <div class="error" *ngIf="ShowError">
     Your input doesn't satisfied the validations that name should contain
     minimum of 3 characters and not allow numbers and special characters or

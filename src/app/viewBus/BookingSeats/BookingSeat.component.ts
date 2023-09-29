@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { map } from 'rxjs';
 import { SeatsService } from '../BusSeats/Seats.servicce';
 import { BookingEditSerive } from './BookingEdit.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,6 +21,10 @@ export class BookingSeatComponent implements OnInit {
   seatForms: FormGroup[] = [];
   totalPrice = 0;
   ShowError = false;
+  showConfirm = false;
+  seatDataArray;
+  paymentConfirm = false;
+  BookingSummary;
   constructor(
     private seatSerives: SeatsService,
     private fb: FormBuilder,
@@ -73,17 +76,26 @@ export class BookingSeatComponent implements OnInit {
       if (!namePattern.test(value)) {
         return { invalidName: true }; // Validation failed
       }
-
-      return null; // Validation passed
+      return null;
     };
   }
   OnShow() {
     if (this.SubmitBooking.valid) {
-      // Access the form values for each seat
-      const seatDataArray = this.seatForms.map((seatForm) => seatForm.value);
-      this.BookingService.FormData = seatDataArray;
+      this.seatDataArray = this.seatForms.map((seatForm) => seatForm.value);
+      this.BookingService.FormData = this.seatDataArray;
       this.BookingService.TotalAmount = this.totalPrice;
-      this.route.navigate(['../confirmBooking'], { relativeTo: this.router });
+      this.showConfirm = true;
     }
+  }
+  Onsubmit() {
+    this.BookingService.OnEditData();
+    alert('Your tickets has been booked...');
+    this.paymentConfirm = true;
+    this.BookingSummary = this.BookingService.UpdatedData;
+    console.log(this.BookingSummary);
+    // this.route.navigate(['../bookingStatus'], { relativeTo: this.router });
+  }
+  BusList() {
+    this.route.navigate(['viewBus']);
   }
 }

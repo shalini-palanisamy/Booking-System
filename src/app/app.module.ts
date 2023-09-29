@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SignInComponent } from './auth/signIn/signIn.component';
@@ -15,13 +16,10 @@ import { ViewBusComponent } from './viewBus/viewBus.component';
 import { SearchComponent } from './viewBus/search/search.component';
 import { BusSeatsComponent } from './viewBus/BusSeats/BusSeats.component';
 import { BookingSeatComponent } from './viewBus/BookingSeats/BookingSeat.component';
-import { BookingSummaryComponent } from './viewBus/BookingSummary/BookingSummary.component';
 import { AdminComponent } from './admin/admin.component';
 import { BusStatusComponent } from './admin/BusStatus/BusStatus.component';
-import { SeatStatusComponent } from './admin/SeatStatus/SeatStatus.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthGuard } from './auth/auth.guard';
-import { ConfirmBookingComponent } from './viewBus/ConfirmBooking/ConfirmBooking.component';
 
 const appRoutes: Routes = [
   { path: '', component: HeaderComponent },
@@ -38,25 +36,10 @@ const appRoutes: Routes = [
     component: BookingSeatComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'bookingStatus',
-    component: BookingSummaryComponent,
-    canActivate: [AuthGuard],
-  },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   {
     path: 'busStatus',
     component: BusStatusComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'seatStatus',
-    component: SeatStatusComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'confirmBooking',
-    component: ConfirmBookingComponent,
     canActivate: [AuthGuard],
   },
 ];
@@ -72,16 +55,14 @@ const appRoutes: Routes = [
     SearchComponent,
     BusSeatsComponent,
     BookingSeatComponent,
-    BookingSummaryComponent,
     AdminComponent,
     BusStatusComponent,
-    SeatStatusComponent,
-    ConfirmBookingComponent,
   ],
   imports: [
     FontAwesomeModule,
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],

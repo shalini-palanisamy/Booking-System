@@ -1,4 +1,4 @@
-/* bus-info.component.css */
+/* bus-info.component.css
 table {
   border-collapse: collapse;
   width: 80%;
@@ -21,7 +21,6 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-/* CSS for styling specific columns */
 .bus-name {
   font-weight: bold;
 }
@@ -43,4 +42,93 @@ button {
   border: 1px solid rgb(190, 166, 113);
   margin-top: 5vb;
   cursor: pointer;
+} */
+.container {
+  margin: 0px;
+  padding: 0px;
+  /* width: 100%; */
+  display: flex;
+  gap: 10vb;
+  margin-top: 10vb;
+}
+.search {
+  width: 25%;
+  height: 25%;
+}
+.firLine {
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+.firLine p {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.date {
+  display: flex;
+}
+.contentval {
+  margin: 30px;
+  width: 750px;
+  padding: 20px;
+  background-color: rgb(250, 246, 238);
+  border-radius: 10px;
+  border: 1px solid rgb(150, 126, 76);
+}
+.Price {
+  color: rgb(150, 126, 76);
+  font-weight: bolder;
+  font-size: 18px;
+}
+h3 {
+  color: rgb(150, 126, 76);
+  font-weight: bolder;
+}
+.AvaSeats {
+  color: green;
+}
+.BookedSeats {
+  color: red;
+}
+.contentval {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: 10px auto;
+  margin-left: 0px;
+  padding-left: 0px;
+  font-family: Arial, sans-serif;
+}
+td {
+  padding: 5px;
+  text-align: left;
+}
+button {
+  width: auto;
+  height: 4vh;
+  border-radius: 5px;
+  background-color: rgb(190, 166, 113);
+  color: white;
+  font-weight: bold;
+  border: 1px solid rgb(190, 166, 113);
+  margin-top: 5vb;
+  cursor: pointer;
+}
+input {
+  width: 100px;
+}
+.showValue {
+  text-decoration: underline;
+}
+.value {
+  padding: 4px;
+  margin-top: 20px;
+  margin-left: 90%;
+  background-color: rgb(190, 166, 113);
+  border: none;
+  color: white;
 }

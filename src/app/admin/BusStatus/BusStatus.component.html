@@ -1,23 +1,171 @@
-<h1>Bus Information</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Bus Name</th>
-      <th>Booked Seats</th>
-      <th>Available Seats</th>
-      <th>From</th>
-      <th>To</th>
-      <th>View</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let bus of busData">
-      <td>{{ bus.BusName }}</td>
-      <td>{{ bus.BookedSeats.seater + bus.BookedSeats.sleeper }}</td>
-      <td>{{ bus.AvailbleSeat.seater + bus.AvailbleSeat.sleeper }}</td>
-      <td>{{ bus.FromLocation }}</td>
-      <td>{{ bus.ToLocation }}</td>
-      <td><button (click)="OnView(bus)">View Bus</button></td>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <button (click)="Addbus()">Add Bus</button>
+  <button (click)="OnLogout()" class="value">Logout</button>
+</div>
+
+<div class="container">
+  <div class="search">
+    <app-search (searchElement)="returnBus($event)"></app-search>
+  </div>
+  <div class="content">
+    <div *ngIf="searchStatus === false">
+      <div *ngFor="let busValue of busData" class="contentval">
+        <div
+          class="items"
+          (click)="OnView(busValue); selectedBus = busValue.BusName"
+        >
+          <div class="firLine">
+            <h3 class="busName">{{ busValue.BusName }}</h3>
+            <p class="Price">Rs.{{ busValue.Price }}</p>
+          </div>
+          <div class="date">
+            <div>
+              <p>{{ busValue.FromLocation }}</p>
+              <p>{{ busValue.time.startTime }}</p>
+            </div>
+            <div>
+              <p><----{{ busValue.time.totalHours }}----></p>
+            </div>
+            <div>
+              <p>{{ busValue.ToLocation }}</p>
+              <p>{{ busValue.time.endTime }}</p>
+            </div>
+          </div>
+          <p class="AvaSeats">
+            Availble Seats ----> Seater:
+            {{ busValue.AvailbleSeat.seater }}/Sleeper:
+            {{ busValue.AvailbleSeat.sleeper }} ----->
+            {{ busValue.AvailbleSeat.seater + busValue.AvailbleSeat.sleeper }}
+          </p>
+          <p class="BookedSeats">
+            Booked Seats ---->Seater: {{ busValue.BookedSeats.seater }}/Sleeper:
+            {{ busValue.BookedSeats.sleeper }} ----->
+            {{ busValue.BookedSeats.seater + busValue.BookedSeats.sleeper }}
+          </p>
+        </div>
+        <div>
+          <table *ngIf="showtable && selectedBus === busValue.BusName">
+            <tbody>
+              <tr *ngFor="let seat of SeatDetails">
+                <ng-container *ngIf="seat.BookingStatus">
+                  <td>{{ seat.SeatNo }}</td>
+                  <td>{{ seat.SeatType }} & {{ seat.SeatPosition }}</td>
+                  <td>{{ seat.CustName }}</td>
+                  <td>{{ seat.CustAge }}</td>
+                  <td>{{ seat.CustGender }}</td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+          <form
+            [formGroup]="CancelForm"
+            (ngSubmit)="Onsubmit()"
+            *ngIf="showtable && selectedBus === busValue.BusName"
+          >
+            <div class="form-group">
+              <div>
+                <label for="">Seat Name*</label>
+                <input
+                  name="SeatName"
+                  id="SeatName"
+                  class="form-control"
+                  formControlName="SeatName"
+                  (click)="$event.stopPropagation()"
+                />
+                <small
+                  *ngIf="
+                    !CancelForm.get('SeatName').valid &&
+                    CancelForm.get('SeatName').touched
+                  "
+                >
+                  Please enter valid email*
+                </small>
+              </div>
+            </div>
+            <button type="submit" (click)="$event.stopPropagation()">
+              Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="searchStatus">
+      <div *ngFor="let busValue of searchBus" class="contentval">
+        <div class="items" (click)="OnShowItem(busValue)">
+          <div class="firLine">
+            <h3 class="busName">{{ busValue.BusName }}</h3>
+            <p class="Price">Rs.{{ busValue.Price }}</p>
+          </div>
+          <div class="date">
+            <div>
+              <p>{{ busValue.FromLocation }}</p>
+              <p>{{ busValue.time.startTime }}</p>
+            </div>
+            <div>
+              <p><----{{ busValue.time.totalHours }}----></p>
+            </div>
+            <div>
+              <p>{{ busValue.ToLocation }}</p>
+              <p>{{ busValue.time.endTime }}</p>
+            </div>
+          </div>
+          <p class="AvaSeats">
+            Availble Seats ----> Seater:
+            {{ busValue.AvailbleSeat.seater }}/Sleeper:
+            {{ busValue.AvailbleSeat.sleeper }} ----->
+            {{ busValue.AvailbleSeat.seater + busValue.AvailbleSeat.sleeper }}
+          </p>
+          <p class="BookedSeats">
+            Booked Seats ---->Seater: {{ busValue.BookedSeats.seater }}/Sleeper:
+            {{ busValue.BookedSeats.sleeper }} ----->
+            {{ busValue.BookedSeats.seater + busValue.BookedSeats.sleeper }}
+          </p>
+        </div>
+        <div>
+          <table *ngIf="showtable && selectedBus === busValue.BusName">
+            <tbody>
+              <tr *ngFor="let seat of SeatDetails">
+                <ng-container *ngIf="seat.BookingStatus">
+                  <td>{{ seat.SeatNo }}</td>
+                  <td>{{ seat.SeatType }} & {{ seat.SeatPosition }}</td>
+                  <td>{{ seat.CustName }}</td>
+                  <td>{{ seat.CustAge }}</td>
+                  <td>{{ seat.CustGender }}</td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+          <form
+            [formGroup]="CancelForm"
+            (ngSubmit)="Onsubmit()"
+            *ngIf="showtable && selectedBus === busValue.BusName"
+          >
+            <div class="form-group">
+              <div>
+                <label for="">Seat Name*</label>
+                <input
+                  name="SeatName"
+                  id="SeatName"
+                  class="form-control"
+                  formControlName="SeatName"
+                  (click)="$event.stopPropagation()"
+                />
+                <small
+                  *ngIf="
+                    !CancelForm.get('SeatName').valid &&
+                    CancelForm.get('SeatName').touched
+                  "
+                >
+                  Please enter valid email*
+                </small>
+              </div>
+            </div>
+            <button type="submit" (click)="$event.stopPropagation()">
+              Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

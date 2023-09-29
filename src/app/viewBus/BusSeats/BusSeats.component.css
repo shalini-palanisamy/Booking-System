@@ -26,7 +26,8 @@ input[type="checkbox"] {
 /* Style the custom checkbox when it's checked */
 input[type="checkbox"]:checked + .custom-checkbox::before {
   /* background-image: url("sofaselected.png"); Replace with your checked image URL */
-  background-color: pink;
+  background-color: rgb(210, 243, 160);
+  border-radius: 4px;
 }
 
 input[type="checkbox"] {
@@ -77,9 +78,6 @@ h3 {
   position: relative;
   padding-left: 30px; /* Adjust as needed */
   cursor: pointer;
-  font-size: 16px;
-  line-height: 24px;
-  color: #333;
 }
 
 .custom-checkbox input[type="checkbox"] {
@@ -100,29 +98,13 @@ h3 {
 
 /* Styling for the checkmark inside the checkbox */
 .custom-checkbox input[type="checkbox"]:checked + .checkmark {
-  background-color: pink;
-  border-color: pink;
+  background-color: rgb(210, 243, 160);
+  border-color: rgb(210, 243, 160);
 }
 
 /* Hide the checkmark when not checked */
 .custom-checkbox input[type="checkbox"]:not(:checked) + .checkmark:after {
   display: none;
-}
-
-/* Styling for the checkmark symbol (✓) */
-.custom-checkbox input[type="checkbox"]:checked + .checkmark:after {
-  content: "\2713"; /* Unicode checkmark symbol */
-  position: absolute;
-  top: 2px;
-  left: 10px;
-  font-size: 16px;
-  color: white;
-}
-
-/* Style the custom checkbox when it's checked */
-input[type="checkbox"]:checked + .checkbox-custom2 {
-  background-color: white; /* Change background color when checked */
-  border-color: #007bff; /* Change border color when checked */
 }
 .container {
   display: grid;

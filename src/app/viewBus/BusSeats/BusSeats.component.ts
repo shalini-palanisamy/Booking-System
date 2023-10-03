@@ -26,6 +26,19 @@ export class BusSeatsComponent implements OnInit {
     this.seatService.OnFetchBus().subscribe((res) => {
       this.Stucture = res;
       console.log(this.Stucture);
+      const seatNumbers = this.Stucture.map((item) => {
+        const seatNumber = parseInt(item.SeatNo.replace(/\D/g, ''), 10);
+        return seatNumber;
+      });
+
+      // Sort the this.structure array based on the parsed seat numbers
+      this.Stucture.sort((a, b) => {
+        const seatNumberA = seatNumbers[this.Stucture.indexOf(a)];
+        const seatNumberB = seatNumbers[this.Stucture.indexOf(b)];
+        return seatNumberA - seatNumberB;
+      });
+
+      console.log(this.Stucture);
       this.BusDetails = this.seatService.selectedBus;
     });
   }

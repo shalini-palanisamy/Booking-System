@@ -1,0 +1,112 @@
+<div class="container">
+  <form [formGroup]="AddBusForm" (ngSubmit)="Onsubmit()">
+    <div class="form-group">
+      <div class="busName">
+        <label for="">Bus Name*</label>
+        <input
+          name="BusName"
+          id="BusName"
+          class="form-control"
+          formControlName="BusName"
+        />
+        <small
+          *ngIf="
+            !AddBusForm.get('BusName').valid &&
+            AddBusForm.get('BusName').touched
+          "
+        >
+          This field is required*
+        </small>
+      </div>
+      <div class="busNo">
+        <label for="">Bus Number*</label>
+        <input
+          type="text"
+          name="BusNo"
+          id="BusNo"
+          class="form-control"
+          formControlName="BusNo"
+        />
+        <small
+          *ngIf="
+            !AddBusForm.get('BusNo').valid && AddBusForm.get('BusNo').touched
+          "
+        >
+          Please enter the required field*
+        </small>
+      </div>
+      <div class="fromLoc">
+        <label for="">From*</label>
+        <input
+          type="text"
+          name="FromLoc"
+          id="FromLoc"
+          class="form-control"
+          formControlName="FromLoc"
+        />
+        <small
+          *ngIf="
+            !AddBusForm.get('FromLoc').valid &&
+            AddBusForm.get('FromLoc').touched
+          "
+        >
+          Please enter the required field*
+        </small>
+      </div>
+      <div class="toLoc">
+        <label for="">To*</label>
+        <input
+          type="text"
+          name="ToLoc"
+          id="ToLoc"
+          class="form-control"
+          formControlName="ToLoc"
+        />
+        <small
+          *ngIf="
+            !AddBusForm.get('ToLoc').valid && AddBusForm.get('ToLoc').touched
+          "
+        >
+          Please enter the required field*
+        </small>
+      </div>
+      <div class="seaterPrice">
+        <label for="">Seater Price*</label>
+        <input
+          type="number"
+          name="SeaterPrice"
+          id="SeaterPrice"
+          class="form-control"
+          formControlName="SeaterPrice"
+        />
+        <small
+          *ngIf="
+            !AddBusForm.get('SeaterPrice').valid &&
+            AddBusForm.get('SeaterPrice').touched
+          "
+        >
+          Please enter the required field*
+        </small>
+      </div>
+      <div class="SleeperPrice">
+        <label for="">Sleeper Price*</label>
+        <input
+          type="number"
+          name="SleeperPrice"
+          id="SleeperPrice"
+          class="form-control"
+          formControlName="SleeperPrice"
+        />
+        <small
+          *ngIf="
+            !AddBusForm.get('SleeperPrice').valid &&
+            AddBusForm.get('SleeperPrice').touched
+          "
+        >
+          Please enter the required field*
+        </small>
+      </div>
+      <button class="btn btn-primary" type="submit">Add Bus</button>
+    </div>
+  </form>
+</div>

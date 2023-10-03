@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SeatFetchService } from './SeatFetch.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-busStatus',
   templateUrl: './BusStatus.component.html',
@@ -13,7 +14,8 @@ export class BusStatusComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private SeatView: SeatFetchService,
-    private authSerive: AuthService
+    private authSerive: AuthService,
+    private route: Router
   ) {}
   ngOnInit(): void {
     this.http
@@ -31,6 +33,8 @@ export class BusStatusComponent implements OnInit {
       )
       .subscribe((res) => {
         this.busData = res;
+        this.SeatView.TotalBus = this.busData.length;
+        console.log(this.SeatView.TotalBus);
       });
     this.CancelForm = new FormGroup({
       SeatName: new FormControl(null, [Validators.required, Validators.email]),
@@ -93,5 +97,7 @@ export class BusStatusComponent implements OnInit {
   OnLogout() {
     this.authSerive.logout();
   }
-  Addbus() {}
+  Addbus() {
+    this.route.navigate(['addBus']);
+  }
 }

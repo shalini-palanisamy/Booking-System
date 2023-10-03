@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class SeatFetchService {
   SelectedBus;
+  TotalBus;
   constructor(private http: HttpClient) {}
   OnFetch(Bus) {
     return this.http

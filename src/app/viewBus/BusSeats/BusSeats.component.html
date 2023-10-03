@@ -1,4 +1,3 @@
-
 <div class="header">
   <div>
     <h3>{{ BusDetails.BusName }}</h3>
@@ -87,7 +86,11 @@
             *ngIf="
               value.SeatType === 'sleeper' && value.SeatPosition === 'upper'
             "
-            class="upper"
+            class="seater-column"
+            [ngClass]="{
+              female: getStyle(value, i) === 'pink',
+              male: getStyle(value, i) === 'blue'
+            }"
           >
             <label
               class="custom-checkbox"

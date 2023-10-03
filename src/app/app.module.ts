@@ -20,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
 import { BusStatusComponent } from './admin/BusStatus/BusStatus.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthGuard } from './auth/auth.guard';
+import { AddBusComponent } from './admin/addBus/addBus.component';
 
 const appRoutes: Routes = [
   { path: '', component: HeaderComponent },
@@ -42,6 +43,11 @@ const appRoutes: Routes = [
     component: BusStatusComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'addBus',
+    component: AddBusComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 @NgModule({
   declarations: [
@@ -57,6 +63,7 @@ const appRoutes: Routes = [
     BookingSeatComponent,
     AdminComponent,
     BusStatusComponent,
+    AddBusComponent,
   ],
   imports: [
     FontAwesomeModule,

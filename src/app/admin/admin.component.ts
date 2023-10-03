@@ -1,25 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthResponseData, AuthService } from '../auth/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
   logInForm: FormGroup;
   validateAdmin;
   displayError = false;
-  constructor(
-    private authService: AuthService,
-    private route: Router,
-    private router: ActivatedRoute,
-    private http: HttpClient
-  ) {}
+  constructor(private authService: AuthService, private route: Router) {}
   ngOnInit() {
     this.logInForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -37,11 +31,9 @@ export class AdminComponent {
     let authObs: Observable<AuthResponseData>;
     if (email === 'idpuser@gmail.com' && password === 'IdpIndia@68') {
       authObs = this.authService.login(email, password);
-
       authObs.subscribe(
         (resData) => {
           console.log(resData);
-
           this.route.navigate(['busStatus']);
         },
         (errorMessage) => {

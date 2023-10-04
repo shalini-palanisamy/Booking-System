@@ -32,4 +32,19 @@ export class SeatsService {
         })
       );
   }
+  updateGender(item, value) {
+    item.CustGender = value;
+    this.http
+      .put(
+        'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
+          item.Busno +
+          '/' +
+          item.id +
+          '.json',
+        item
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
 }

@@ -14,6 +14,7 @@ export class BusSeatsComponent implements OnInit {
   TotalSeats = 0;
   seater = 0;
   sleeper = 0;
+
   constructor(
     private seatService: SeatsService,
     private route: Router,
@@ -62,7 +63,85 @@ export class BusSeatsComponent implements OnInit {
       }
     }
   }
-  getStyle(item: any, index: number) {
+  // getStyleSeater(item: any, index: number) {
+  //   let style: string = '';
+  //   if (item.BookingStatus === false) {
+  //     if (item.SeatNo.includes('W')) {
+  //       if (
+  //         this.Stucture[index + 1].BookingStatus &&
+  //         this.Stucture[index + 1].CustGender === 'female'
+  //       ) {
+  //         style = 'pink';
+  //       } else if (
+  //         this.Stucture[index + 1].BookingStatus &&
+  //         this.Stucture[index + 1].CustGender === 'male'
+  //       ) {
+  //         style = 'blue';
+  //       }
+  //     } else {
+  //       if (
+  //         this.Stucture[index - 1]?.BookingStatus &&
+  //         this.Stucture[index - 1]?.CustGender === 'female'
+  //       ) {
+  //         style = 'pink';
+  //       } else if (
+  //         this.Stucture[index - 1]?.BookingStatus &&
+  //         this.Stucture[index - 1]?.CustGender === 'male'
+  //       ) {
+  //         style = 'blue';
+  //       }
+  //     }
+  //   }
+  //   return style;
+  // }
+  // getStyleSleeper(item: any, index: number) {
+  //   let style: string = '';
+  //   if (item.BookingStatus === false) {
+  //     if (item.SeatNo.includes('W')) {
+  //       if (
+  //         this.Stucture[index + 1].BookingStatus &&
+  //         this.Stucture[index + 1].CustGender === 'female'
+  //       ) {
+  //         style = 'pink';
+  //       } else if (
+  //         this.Stucture[index + 1].BookingStatus &&
+  //         this.Stucture[index + 1].CustGender === 'male'
+  //       ) {
+  //         style = 'blue';
+  //       }
+  //     } else if (
+  //       item.SeatNo.includes('25') ||
+  //       item.SeatNo.includes('28') ||
+  //       item.SeatNo.includes('31') ||
+  //       item.SeatNo.includes('34') ||
+  //       item.SeatNo.includes('37')
+  //     ) {
+  //       if (
+  //         this.Stucture[index - 1]?.BookingStatus &&
+  //         this.Stucture[index - 1]?.CustGender === 'female'
+  //       ) {
+  //         style = 'pink';
+  //       } else if (
+  //         this.Stucture[index - 1]?.BookingStatus &&
+  //         this.Stucture[index - 1]?.CustGender === 'male'
+  //       ) {
+  //         style = 'blue';
+  //       }
+  //     }
+  //   }
+  //   return style;
+  // }
+  // Define a dictionary to cache the styles for each seat
+  styleCache: { [key: string]: string } = {};
+
+  getStyleSeater(item: any, index: number) {
+    const cacheKey = `seater_${index}`;
+
+    // Check if the style is already cached
+    if (this.styleCache[cacheKey]) {
+      return this.styleCache[cacheKey];
+    }
+
     let style: string = '';
 
     if (item.BookingStatus === false) {
@@ -72,11 +151,13 @@ export class BusSeatsComponent implements OnInit {
           this.Stucture[index + 1].CustGender === 'female'
         ) {
           style = 'pink';
+          this.seatService.updateGender(item, 'female');
         } else if (
           this.Stucture[index + 1].BookingStatus &&
           this.Stucture[index + 1].CustGender === 'male'
         ) {
           style = 'blue';
+          this.seatService.updateGender(item, 'male');
         }
       } else {
         if (
@@ -84,16 +165,77 @@ export class BusSeatsComponent implements OnInit {
           this.Stucture[index - 1]?.CustGender === 'female'
         ) {
           style = 'pink';
+          this.seatService.updateGender(item, 'female');
         } else if (
           this.Stucture[index - 1]?.BookingStatus &&
           this.Stucture[index - 1]?.CustGender === 'male'
         ) {
           style = 'blue';
+          this.seatService.updateGender(item, 'male');
         }
       }
     }
+
+    // Cache the style for this seat
+    this.styleCache[cacheKey] = style;
+
     return style;
   }
+
+  getStyleSleeper(item: any, index: number) {
+    const cacheKey = `sleeper_${index}`;
+
+    // Check if the style is already cached
+    if (this.styleCache[cacheKey]) {
+      return this.styleCache[cacheKey];
+    }
+
+    let style: string = '';
+
+    if (item.BookingStatus === false) {
+      if (item.SeatNo.includes('W')) {
+        if (
+          this.Stucture[index + 1].BookingStatus &&
+          this.Stucture[index + 1].CustGender === 'female'
+        ) {
+          style = 'pink';
+          this.seatService.updateGender(item, 'female');
+        } else if (
+          this.Stucture[index + 1].BookingStatus &&
+          this.Stucture[index + 1].CustGender === 'male'
+        ) {
+          style = 'blue';
+          this.seatService.updateGender(item, 'male');
+        }
+      } else if (
+        item.SeatNo.includes('25') ||
+        item.SeatNo.includes('28') ||
+        item.SeatNo.includes('31') ||
+        item.SeatNo.includes('34') ||
+        item.SeatNo.includes('37')
+      ) {
+        if (
+          this.Stucture[index - 1]?.BookingStatus &&
+          this.Stucture[index - 1]?.CustGender === 'female'
+        ) {
+          style = 'pink';
+          this.seatService.updateGender(item, 'female');
+        } else if (
+          this.Stucture[index - 1]?.BookingStatus &&
+          this.Stucture[index - 1]?.CustGender === 'male'
+        ) {
+          style = 'blue';
+          this.seatService.updateGender(item, 'male');
+        }
+      }
+    }
+
+    // Cache the style for this seat
+    this.styleCache[cacheKey] = style;
+
+    return style;
+  }
+
   CheckValue() {
     this.seatService.SelectedSeats = [...this.selectedItems];
     this.route.navigate(['../bookingSeat'], { relativeTo: this.router });

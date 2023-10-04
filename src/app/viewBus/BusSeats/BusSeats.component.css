@@ -55,6 +55,23 @@ input[type="checkbox"] {
   width: 20px;
   height: 20px;
 }
+.femaleval {
+  padding-top: 0px;
+  margin-top: 2px;
+  border: 3px solid pink;
+  width: 50px; /* Set the width and height as per your image size */
+  height: 75px;
+  border-radius: 4px;
+}
+.maleval {
+  padding-top: 0px;
+  margin-top: 2px;
+  border: 3px solid rgb(174, 174, 238);
+  width: 50px; /* Set the width and height as per your image size */
+  height: 75px;
+  border-radius: 4px;
+}
+
 .info {
   display: flex;
   gap: 10px;
@@ -72,38 +89,39 @@ h3 {
   height: 20px;
   background-color: #ccc;
 }
+
 /* Styling for the custom checkbox */
-.custom-checkbox {
+.custom-checkbox2 {
   display: inline-block;
   position: relative;
   padding-left: 30px; /* Adjust as needed */
   cursor: pointer;
 }
 
-.custom-checkbox input[type="checkbox"] {
+.custom-checkbox2 input[type="checkbox"] {
   display: none; /* Hide the actual checkbox */
 }
 
 /* Create the rectangular shape for the custom checkbox */
-.custom-checkbox .checkmark {
+.custom-checkbox2 .checkmark {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -5px;
+  left: 2px;
   height: 60px;
   width: 40px; /* Adjust the width to control the rectangle shape */
   background-color: white;
-  border: 1px solid #999;
-  border-radius: 4px; /* Adjust as needed */
+  border: 3px solid black;
+  border-radius: 6px; /* Adjust as needed */
 }
 
 /* Styling for the checkmark inside the checkbox */
-.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+.custom-checkbox2 input[type="checkbox"]:checked + .checkmark {
   background-color: rgb(210, 243, 160);
   border-color: rgb(210, 243, 160);
 }
 
 /* Hide the checkmark when not checked */
-.custom-checkbox input[type="checkbox"]:not(:checked) + .checkmark:after {
+.custom-checkbox2 input[type="checkbox"]:not(:checked) + .checkmark:after {
   display: none;
 }
 .container {
@@ -145,8 +163,8 @@ button {
   width: 600px;
   height: 800px;
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 0.5fr; /* Two columns */
-  grid-gap: 20px; /* Gap between columns */
+  grid-template-columns: 0.5fr 0.5fr 1fr; /* Two columns */
+  grid-gap: 50px; /* Gap between columns */
 }
 .left-column-seater label {
   margin-bottom: 0px;
@@ -183,6 +201,12 @@ button {
   display: grid;
   grid-template-columns: 0.5fr 0.5fr 1fr; /* Three columns in the right column */
   grid-gap: 30px; /* Gap between upper rows and columns */
+}
+.lower-sleeper p {
+  margin-top: 60px;
+}
+.right-column p {
+  margin-top: 60px;
 }
 .seatsSelected {
   display: table;

@@ -122,7 +122,13 @@ export class addSeatService {
       seatindex++
     ) {
       this.Seats.Busno = this.selectedBus.BusNo;
-      if (seatindex % 2 !== 0 && seatindex < 33)
+      if (
+        seatindex === 24 ||
+        seatindex === 27 ||
+        seatindex === 30 ||
+        seatindex === 33 ||
+        seatindex === 36
+      )
         this.Seats.SeatNo = '"' + seatindex + 'SLW' + '"';
       else this.Seats.SeatNo = '"' + seatindex + 'SL' + '"';
       this.Seats.BookingStatus = false;
@@ -165,3 +171,10 @@ export class addSeatService {
       .subscribe((res) => {});
   }
 }
+
+// Ganapathy Travels
+// Mettur Super Services(mss)
+// National Travels CHN
+// Vetri Travels
+// YBM Travels
+// (SBLT) Shri Travels (MAARA)

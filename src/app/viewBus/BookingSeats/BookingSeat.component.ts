@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { SeatsService } from '../BusSeats/Seats.servicce';
@@ -25,6 +27,8 @@ export class BookingSeatComponent implements OnInit {
   seatDataArray;
   paymentConfirm = false;
   BookingSummary;
+  upiIdForm: FormGroup;
+  showUpForm = false;
   constructor(
     private seatSerives: SeatsService,
     private fb: FormBuilder,
@@ -67,14 +71,23 @@ export class BookingSeatComponent implements OnInit {
       this.SubmitBooking.addControl('seat-' + (index + 1), seatForm);
       this.seatForms.push(seatForm);
     });
+    this.upiIdForm = this.fb.group({
+      upiId: ['', [Validators.required, this.upiIdValidator()]],
+    });
+  }
+  upiIdValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const upiIdPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      const valid = upiIdPattern.test(control.value);
+      return valid ? null : { invalidUpiId: { value: control.value } };
+    };
   }
   customNameValidator() {
     return (control: FormControl): { [key: string]: any } | null => {
-      const namePattern = /^[a-zA-Z\s]*$/; // Regex pattern to allow only letters and spaces
+      const namePattern = /^[a-zA-Z\s]*$/; 
       const value = control.value;
-
       if (!namePattern.test(value)) {
-        return { invalidName: true }; // Validation failed
+        return { invalidName: true }; 
       }
       return null;
     };
@@ -97,5 +110,8 @@ export class BookingSeatComponent implements OnInit {
   }
   BusList() {
     this.route.navigate(['viewBus']);
+  }
+  ShowUpId() {
+    this.showUpForm = true;
   }
 }

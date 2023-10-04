@@ -31,26 +31,34 @@
           />
         </div>
         <div class="date">
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="male"
-              class="form-control"
-              formControlName="gender"
-            />
-            Male
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="female"
-              class="form-control"
-              formControlName="gender"
-            />
-            Female
-          </label>
+          <div
+            *ngIf="formVal.CustGender === 'male' || formVal.CustGender === ''"
+          >
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                class="form-control"
+                formControlName="gender"
+              />
+              Male
+            </label>
+          </div>
+          <div
+            *ngIf="formVal.CustGender === 'female' || formVal.CustGender === ''"
+          >
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                class="form-control"
+                formControlName="gender"
+              />
+              Female
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -82,6 +90,28 @@
       <h3>Total Amount: {{ totalPrice }}</h3>
     </div>
     <button (click)="Onsubmit()" type="submit">Payment</button>
+    <button (click)="BusList()" class="buttonCancel">Cancel</button>
+    <!-- <div *ngIf="ShowUpId">
+      <form [formGroup]="upiIdForm">
+        <div class="form-group">
+          <label for="upiId">UPI ID</label>
+          <input type="text" id="upiId" formControlName="upiId" />
+          <div
+            *ngIf="upiIdForm.get('upiId').hasError('required')"
+            class="text-danger"
+          >
+            UPI ID is required.
+          </div>
+          <div
+            *ngIf="upiIdForm.get('upiId').hasError('invalidUpiId')"
+            class="text-danger"
+          >
+            Invalid UPI ID format.
+          </div>
+          <button (click)="Onsubmit()" type="submit">Payment</button>
+        </div>
+      </form>
+    </div> -->
   </div>
   <div *ngIf="paymentConfirm">
     <div class="tick">

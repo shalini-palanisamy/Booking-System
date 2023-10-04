@@ -21,7 +21,7 @@ export class AddBusComponent implements OnInit {
   ) {}
   BusToAdd = {
     BookedSeats: { seater: 0, sleeper: 0 },
-    AvailbleSeat: { seater: 18, sleeper: 15 },
+    AvailbleSeat: { seater: 18, sleeper: 20 },
     BusName: '',
     BusValue: '',
     BusNo: 0,

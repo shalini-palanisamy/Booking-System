@@ -17,8 +17,8 @@
               value.SeatType === 'seater' && value.SeatNo.includes('W') !== -1
             "
             [ngClass]="{
-              female: getStyle(value, i) === 'pink',
-              male: getStyle(value, i) === 'blue'
+              female: getStyleSeater(value, i) === 'pink',
+              male: getStyleSeater(value, i) === 'blue'
             }"
             class="seaterWindow-column"
             #checkboxesContainer
@@ -39,8 +39,8 @@
             "
             class="seater-column"
             [ngClass]="{
-              female: getStyle(value, i) === 'pink',
-              male: getStyle(value, i) === 'blue'
+              female: getStyleSeater(value, i) === 'pink',
+              male: getStyleSeater(value, i) === 'blue'
             }"
           >
             <label [class.disabled-checkbox]="value.BookingStatus">
@@ -64,7 +64,7 @@
             class="lowerSleeper-column"
           >
             <label
-              class="custom-checkbox"
+              class="custom-checkbox2"
               [class.disabled-checkbox]="value.BookingStatus"
             >
               <input
@@ -86,14 +86,14 @@
             *ngIf="
               value.SeatType === 'sleeper' && value.SeatPosition === 'upper'
             "
-            class="seater-column"
+            class="upper"
             [ngClass]="{
-              female: getStyle(value, i) === 'pink',
-              male: getStyle(value, i) === 'blue'
+              femaleval: getStyleSleeper(value, i) === 'pink',
+              maleval: getStyleSleeper(value, i) === 'blue'
             }"
           >
             <label
-              class="custom-checkbox"
+              class="custom-checkbox2"
               [class.disabled-checkbox]="value.BookingStatus"
             >
               <input

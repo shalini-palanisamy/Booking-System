@@ -69,3 +69,6 @@ small {
   display: inline-block;
   margin-right: 10px;
 }
+.buttonCancel {
+  margin-left: 10px;
+}

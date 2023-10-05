@@ -89,9 +89,7 @@
     <div>
       <h3>Total Amount: {{ totalPrice }}</h3>
     </div>
-    <button (click)="Onsubmit()" type="submit">Payment</button>
-    <button (click)="BusList()" class="buttonCancel">Cancel</button>
-    <!-- <div *ngIf="ShowUpId">
+    <div>
       <form [formGroup]="upiIdForm">
         <div class="form-group">
           <label for="upiId">UPI ID</label>
@@ -109,9 +107,10 @@
             Invalid UPI ID format.
           </div>
           <button (click)="Onsubmit()" type="submit">Payment</button>
+          <button (click)="BusList()" class="buttonCancel">Cancel</button>
         </div>
       </form>
-    </div> -->
+    </div>
   </div>
   <div *ngIf="paymentConfirm">
     <div class="tick">

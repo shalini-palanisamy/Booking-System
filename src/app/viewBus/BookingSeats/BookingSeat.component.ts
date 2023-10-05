@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { SeatsService } from '../BusSeats/Seats.servicce';
 import { BookingEditSerive } from './BookingEdit.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookingSeat',
@@ -28,13 +26,11 @@ export class BookingSeatComponent implements OnInit {
   paymentConfirm = false;
   BookingSummary;
   upiIdForm: FormGroup;
-  showUpForm = false;
   constructor(
     private seatSerives: SeatsService,
     private fb: FormBuilder,
     private BookingService: BookingEditSerive,
-    private route: Router,
-    private router: ActivatedRoute
+    private route: Router
   ) {}
   ngOnInit() {
     this.selectedSeats = this.seatSerives.SelectedSeats;
@@ -75,19 +71,26 @@ export class BookingSeatComponent implements OnInit {
       upiId: ['', [Validators.required, this.upiIdValidator()]],
     });
   }
-  upiIdValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const upiIdPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      const valid = upiIdPattern.test(control.value);
-      return valid ? null : { invalidUpiId: { value: control.value } };
+  upiIdValidator() {
+    return (control) => {
+      const upiId = control.value;
+      if (!upiId) {
+        return null;
+      }
+      const regex = /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+$/;
+      if (regex.test(upiId)) {
+        return null;
+      } else {
+        return { invalidUpiId: true };
+      }
     };
   }
   customNameValidator() {
     return (control: FormControl): { [key: string]: any } | null => {
-      const namePattern = /^[a-zA-Z\s]*$/; 
+      const namePattern = /^[a-zA-Z\s]*$/;
       const value = control.value;
       if (!namePattern.test(value)) {
-        return { invalidName: true }; 
+        return { invalidName: true };
       }
       return null;
     };
@@ -110,8 +113,5 @@ export class BookingSeatComponent implements OnInit {
   }
   BusList() {
     this.route.navigate(['viewBus']);
-  }
-  ShowUpId() {
-    this.showUpForm = true;
   }
 }

@@ -43,7 +43,7 @@
             {{ busValue.BookedSeats.seater + busValue.BookedSeats.sleeper }}
           </p>
         </div>
-        <div>
+        <div class="DisplaySeat">
           <table *ngIf="showtable && selectedBus === busValue.BusName">
             <tbody>
               <tr *ngFor="let seat of SeatDetails">

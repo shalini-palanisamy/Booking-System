@@ -132,3 +132,7 @@ input {
   border: none;
   color: white;
 }
+.DisplaySeat {
+  text-transform: capitalize;
+  font-size: 15px;
+}

@@ -1,7 +1,7 @@
 .container {
   padding: 5vb;
   padding-bottom: 0%;
-  background-color: rgb(231, 213, 174);
+  background-color: rgb(247, 233, 203);
   width: 50vb;
   height: auto;
   border-radius: 10px;
@@ -71,4 +71,13 @@ small {
 }
 .buttonCancel {
   margin-left: 10px;
+}
+#upiId {
+  width: 250px;
+  height: 25px;
+}
+.status {
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
 }

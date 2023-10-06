@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthResponseData, AuthService } from '../auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,11 +13,9 @@ export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   error = null;
   isLoading = false;
-  constructor(
-    private authService: AuthService,
-    private route: Router,
-    private router: ActivatedRoute
-  ) {}
+
+  constructor(private authService: AuthService, private route: Router) {}
+
   ngOnInit() {
     this.signInForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
@@ -26,8 +24,17 @@ export class SignInComponent implements OnInit {
         Validators.required,
         this.passwordFormField(),
       ]),
+      confirmPassword: new FormControl(null),
     });
+
+    this.signInForm
+      .get('confirmPassword')
+      .setValidators([
+        Validators.required,
+        this.matchConfirmPassword.bind(this),
+      ]);
   }
+
   Onsubmit() {
     if (!this.signInForm.valid) {
       return;
@@ -55,6 +62,7 @@ export class SignInComponent implements OnInit {
 
     this.signInForm.reset();
   }
+
   passwordFormField() {
     return (control) => {
       const password = control.value as string;
@@ -68,5 +76,12 @@ export class SignInComponent implements OnInit {
       }
       return null; // Password is strong
     };
+  }
+
+  matchConfirmPassword(control: FormControl): { [s: string]: boolean } {
+    if (control.value !== this.signInForm.get('password').value) {
+      return { passwordMismatch: true };
+    }
+    return null;
   }
 }

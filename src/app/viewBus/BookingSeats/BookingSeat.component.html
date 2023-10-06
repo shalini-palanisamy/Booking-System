@@ -4,6 +4,8 @@
       <div>
         <h3>Seat Number: {{ formVal.SeatNo }}/{{ formVal.SeatType }}</h3>
       </div>
+      <div *ngIf="formVal.CustGender === 'male'">Only for male</div>
+      <div *ngIf="formVal.CustGender === 'female'">Only for female</div>
       <div>Price: {{ formVal.price }}</div>
       <div class="form-group" [formGroupName]="'seat-' + (i + 1)">
         <input
@@ -20,6 +22,39 @@
             class="form-control"
             formControlName="name"
           />
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('name')
+                .hasError('required') &&
+              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.required }}
+          </div>
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('name')
+                .hasError('minlength') &&
+              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.minlength }}
+          </div>
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('name')
+                .hasError('invalidName') &&
+              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.invalidName }}
+          </div>
         </div>
         <div>
           <label for="age">Age</label>
@@ -29,36 +64,40 @@
             class="form-control"
             formControlName="age"
           />
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('age')
+                .hasError('required') &&
+              SubmitBooking.get('seat-' + (i + 1)).get('age').touched
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.required }}
+          </div>
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('age')
+                .hasError('min') &&
+              SubmitBooking.get('seat-' + (i + 1)).get('age').touched
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.min }}
+          </div>
         </div>
-        <div class="date">
-          <div
-            *ngIf="formVal.CustGender === 'male' || formVal.CustGender === ''"
+        <div class="date" *ngIf="formVal.CustGender === ''">
+          <label for="gender">Gender</label>
+          <select
+            id="gender"
+            name="gender"
+            class="form-control"
+            formControlName="gender"
           >
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="male"
-                class="form-control"
-                formControlName="gender"
-              />
-              Male
-            </label>
-          </div>
-          <div
-            *ngIf="formVal.CustGender === 'female' || formVal.CustGender === ''"
-          >
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                class="form-control"
-                formControlName="gender"
-              />
-              Female
-            </label>
-          </div>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </div>
       </div>
     </div>
@@ -95,7 +134,10 @@
           <label for="upiId">UPI ID</label>
           <input type="text" id="upiId" formControlName="upiId" />
           <div
-            *ngIf="upiIdForm.get('upiId').hasError('required')"
+            *ngIf="
+              upiIdForm.get('upiId').hasError('required') &&
+              upiIdForm.get('upiId').touched
+            "
             class="text-danger"
           >
             UPI ID is required.

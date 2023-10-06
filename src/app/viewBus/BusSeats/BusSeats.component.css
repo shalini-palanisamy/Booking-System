@@ -239,6 +239,7 @@ button {
   text-align: right;
 }
 .heading {
+  top: 100px;
   display: flex;
   justify-content: left;
   gap: 250px;

@@ -63,75 +63,6 @@ export class BusSeatsComponent implements OnInit {
       }
     }
   }
-  // getStyleSeater(item: any, index: number) {
-  //   let style: string = '';
-  //   if (item.BookingStatus === false) {
-  //     if (item.SeatNo.includes('W')) {
-  //       if (
-  //         this.Stucture[index + 1].BookingStatus &&
-  //         this.Stucture[index + 1].CustGender === 'female'
-  //       ) {
-  //         style = 'pink';
-  //       } else if (
-  //         this.Stucture[index + 1].BookingStatus &&
-  //         this.Stucture[index + 1].CustGender === 'male'
-  //       ) {
-  //         style = 'blue';
-  //       }
-  //     } else {
-  //       if (
-  //         this.Stucture[index - 1]?.BookingStatus &&
-  //         this.Stucture[index - 1]?.CustGender === 'female'
-  //       ) {
-  //         style = 'pink';
-  //       } else if (
-  //         this.Stucture[index - 1]?.BookingStatus &&
-  //         this.Stucture[index - 1]?.CustGender === 'male'
-  //       ) {
-  //         style = 'blue';
-  //       }
-  //     }
-  //   }
-  //   return style;
-  // }
-  // getStyleSleeper(item: any, index: number) {
-  //   let style: string = '';
-  //   if (item.BookingStatus === false) {
-  //     if (item.SeatNo.includes('W')) {
-  //       if (
-  //         this.Stucture[index + 1].BookingStatus &&
-  //         this.Stucture[index + 1].CustGender === 'female'
-  //       ) {
-  //         style = 'pink';
-  //       } else if (
-  //         this.Stucture[index + 1].BookingStatus &&
-  //         this.Stucture[index + 1].CustGender === 'male'
-  //       ) {
-  //         style = 'blue';
-  //       }
-  //     } else if (
-  //       item.SeatNo.includes('25') ||
-  //       item.SeatNo.includes('28') ||
-  //       item.SeatNo.includes('31') ||
-  //       item.SeatNo.includes('34') ||
-  //       item.SeatNo.includes('37')
-  //     ) {
-  //       if (
-  //         this.Stucture[index - 1]?.BookingStatus &&
-  //         this.Stucture[index - 1]?.CustGender === 'female'
-  //       ) {
-  //         style = 'pink';
-  //       } else if (
-  //         this.Stucture[index - 1]?.BookingStatus &&
-  //         this.Stucture[index - 1]?.CustGender === 'male'
-  //       ) {
-  //         style = 'blue';
-  //       }
-  //     }
-  //   }
-  //   return style;
-  // }
-  // Define a dictionary to cache the styles for each seat
   styleCache: { [key: string]: string } = {};
 
   getStyleSeater(item: any, index: number) {
@@ -238,6 +169,7 @@ export class BusSeatsComponent implements OnInit {
 
   CheckValue() {
     this.seatService.SelectedSeats = [...this.selectedItems];
+    this.seatService.SeatStucture = this.Stucture;
     this.route.navigate(['../bookingSeat'], { relativeTo: this.router });
   }
 }

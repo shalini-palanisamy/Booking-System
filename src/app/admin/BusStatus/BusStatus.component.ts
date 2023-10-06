@@ -17,6 +17,7 @@ export class BusStatusComponent implements OnInit {
     private authSerive: AuthService,
     private route: Router
   ) {}
+  cancelticket = false;
   ngOnInit(): void {
     this.http
       .get('https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json')
@@ -55,6 +56,18 @@ export class BusStatusComponent implements OnInit {
     this.SeatView.SelectedBus = bus;
     this.SeatView.OnFetch(bus).subscribe((res) => {
       this.SeatDetails = res;
+      const seatNumbers = this.SeatDetails.map((item) => {
+        const seatNumber = parseInt(item.SeatNo.replace(/\D/g, ''), 10);
+        return seatNumber;
+      });
+
+      // Sort the this.structure array based on the parsed seat numbers
+      this.SeatDetails.sort((a, b) => {
+        const seatNumberA = seatNumbers[this.SeatDetails.indexOf(a)];
+        const seatNumberB = seatNumbers[this.SeatDetails.indexOf(b)];
+        return seatNumberA - seatNumberB;
+      });
+      console.log(this.SeatDetails);
     });
   }
 
@@ -81,6 +94,14 @@ export class BusStatusComponent implements OnInit {
         index.SeatNo ===
         '"' + this.CancelForm.value.SeatName.toUpperCase() + '"'
       ) {
+        let extractedNumber = 0;
+        this.cancelticket = true;
+        const match = index.SeatNo.match(/\d+/); // This regex matches one or more digits
+        if (match) {
+          extractedNumber = parseInt(match[0], 10); // Convert the matched string to an integer
+          console.log(extractedNumber); // This will print 20 to the console
+        }
+        this.SeatView.cancellationAdjust(this.SeatDetails, extractedNumber - 1,index);
         this.SeatView.cancellation(index);
         this.SeatView.OnFetch(this.SeatView.SelectedBus.BusNo).subscribe(
           (res) => {
@@ -88,10 +109,13 @@ export class BusStatusComponent implements OnInit {
             console.log(this.SeatDetails);
           }
         );
+        break;
       }
     }
     this.CancelForm.reset();
-    alert('Ticket had been cancelled..');
+    if (this.cancelticket) alert('Ticket had been cancelled..');
+    else
+      alert('Seat Number entryed was not valid or this seat is not booked...');
   }
 
   OnLogout() {

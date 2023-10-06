@@ -1,6 +1,6 @@
-<div>
-  <button (click)="Addbus()">Add Bus</button>
-  <button (click)="OnLogout()" class="value">Logout</button>
+<div class="header">
+  <button (click)="Addbus()">Manage Bus</button>
+  <button (click)="OnLogout()" id="value">Logout</button>
 </div>
 
 <div class="container">
@@ -72,14 +72,6 @@
                   formControlName="SeatName"
                   (click)="$event.stopPropagation()"
                 />
-                <small
-                  *ngIf="
-                    !CancelForm.get('SeatName').valid &&
-                    CancelForm.get('SeatName').touched
-                  "
-                >
-                  Please enter valid email*
-                </small>
               </div>
             </div>
             <button type="submit" (click)="$event.stopPropagation()">
@@ -150,14 +142,6 @@
                   formControlName="SeatName"
                   (click)="$event.stopPropagation()"
                 />
-                <small
-                  *ngIf="
-                    !CancelForm.get('SeatName').valid &&
-                    CancelForm.get('SeatName').touched
-                  "
-                >
-                  Please enter valid email*
-                </small>
               </div>
             </div>
             <button type="submit" (click)="$event.stopPropagation()">

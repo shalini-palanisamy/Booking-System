@@ -8,7 +8,4 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HeaderComponent {
   constructor(private authSerive: AuthService) {}
-  OnLogout() {
-    this.authSerive.logout();
-  }
 }

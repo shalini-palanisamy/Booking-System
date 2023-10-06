@@ -3,8 +3,8 @@
   position: absolute;
   top: 20%;
   left: 35%;
-  width: 25vw; /* Changed from 50vb to 50vw */
-  height: 55vh;
+  width: 350px; /* Changed from 50vb to 50vw */
+  height: 400px;
   background-color: rgb(245, 229, 195);
   border-radius: 5px;
 }

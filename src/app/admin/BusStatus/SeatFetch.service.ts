@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { SeatsService } from 'src/app/viewBus/BusSeats/Seats.servicce';
 @Injectable({ providedIn: 'root' })
 export class SeatFetchService {
   SelectedBus;
   TotalBus;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private seatService: SeatsService) {}
   OnFetch(Bus) {
     return this.http
       .get(
@@ -29,6 +30,7 @@ export class SeatFetchService {
   cancellation(data) {
     console.log(data);
     console.log(this.SelectedBus);
+
     if (data.SeatType === 'seater') {
       this.http
         .put(
@@ -65,7 +67,6 @@ export class SeatFetchService {
         )
         .subscribe((res) => {});
     }
-
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
@@ -106,5 +107,42 @@ export class SeatFetchService {
         '""'
       )
       .subscribe((res) => {});
+  }
+  cancellationAdjust(Stucture, index, value) {
+    console.log(Stucture);
+    console.log(index);
+    if (value.BookingStatus === true) {
+      if (value.SeatNo.includes('W')) {
+        if (
+          (Stucture[index + 1].BookingStatus === false &&
+            Stucture[index + 1].CustGender === 'female') ||
+          Stucture[index + 1].CustGender === 'male'
+        ) {
+          this.seatService.updateGender(Stucture[index + 1], '');
+        }
+      } else if (
+        value.SeatNo.includes('25') ||
+        value.SeatNo.includes('28') ||
+        value.SeatNo.includes('31') ||
+        value.SeatNo.includes('34') ||
+        value.SeatNo.includes('37')
+      ) {
+        if (
+          (Stucture[index - 1]?.BookingStatus === false &&
+            Stucture[index - 1]?.CustGender === 'female') ||
+          Stucture[index - 1]?.CustGender === 'male'
+        ) {
+          this.seatService.updateGender(Stucture[index - 1], '');
+        }
+      } else {
+        if (
+          (Stucture[index - 1]?.BookingStatus === false &&
+            Stucture[index - 1]?.CustGender === 'female') ||
+          Stucture[index - 1]?.CustGender === 'male'
+        ) {
+          this.seatService.updateGender(Stucture[index - 1], '');
+        }
+      }
+    }
   }
 }

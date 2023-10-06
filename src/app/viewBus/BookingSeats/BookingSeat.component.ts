@@ -71,6 +71,13 @@ export class BookingSeatComponent implements OnInit {
       upiId: ['', [Validators.required, this.upiIdValidator()]],
     });
   }
+  errorMessages = {
+    required: 'This field is required.',
+    minlength: 'Minimum length should be 3 characters.',
+    min: 'Minimum age is 5.',
+    invalidName: 'Invalid name format (only letters and spaces).',
+    invalidUpiId: 'Invalid UPI ID format.',
+  };
   upiIdValidator() {
     return (control) => {
       const upiId = control.value;

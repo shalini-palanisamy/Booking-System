@@ -3,7 +3,7 @@
     <app-loading></app-loading>
   </div>
   <form [formGroup]="signInForm" (ngSubmit)="Onsubmit()" *ngIf="!isLoading">
-    <h2>SignUp</h2>
+    <h2>SignIn</h2>
     <div class="form-group">
       <div>
         <label for="">Name*</label>
@@ -57,12 +57,31 @@
           >Password is not strong enough.</small
         >
       </div>
+      <div>
+        <label for="confirmPassword">Confirm Password*</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+        />
+        <small
+          *ngIf="
+            signInForm.get('confirmPassword').hasError('required') &&
+            signInForm.get('confirmPassword').touched
+          "
+          >Password is required.</small
+        >
+        <small
+          *ngIf="signInForm.get('confirmPassword').hasError('passwordMismatch')"
+          >Password must matches with the created password</small
+        >
+      </div>
       <button
         class="btn btn-primary"
         type="submit"
         [disabled]="!signInForm.valid"
       >
-        SignUp
+        SignIn
       </button>
     </div>
     <div class="error">{{ error }}</div>

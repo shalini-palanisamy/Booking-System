@@ -166,7 +166,6 @@ export class BusSeatsComponent implements OnInit {
 
     return style;
   }
-
   CheckValue() {
     this.seatService.SelectedSeats = [...this.selectedItems];
     this.seatService.SeatStucture = this.Stucture;

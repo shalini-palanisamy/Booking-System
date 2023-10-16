@@ -34,13 +34,14 @@ export class BookingSeatComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.selectedSeats = this.seatSerives.SelectedSeats;
+    console.log('Seats:');
+    console.log(this.selectedSeats);
     this.selectedBus = this.seatSerives.selectedBus;
     this.totalPrice = this.selectedSeats.reduce(
       (total, seat) => total + seat.price,
       0
     );
     this.SubmitBooking = this.fb.group({});
-
     // Create a form group for each selected seat
     this.selectedSeats.forEach((seat, index) => {
       const seatForm = this.fb.group({
@@ -60,7 +61,7 @@ export class BookingSeatComponent implements OnInit {
             Validators.min(5), // Minimum age of 5
           ],
         ],
-        gender: ['', Validators.required],
+        gender: [seat.CustGender],
       });
 
       // Add the seatForm to the SubmitBooking form group with the unique name

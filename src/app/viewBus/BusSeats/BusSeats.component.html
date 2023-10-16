@@ -78,6 +78,7 @@
         </div>
       </ng-container>
     </div>
+    <div class="vertical-line"></div>
     <div class="right-column">
       <ng-container *ngFor="let value of Stucture; let i = index">
         <div
@@ -85,7 +86,7 @@
           class="upper"
           [ngClass]="{
             femaleval: getStyleSleeper(value, i) === 'pink',
-            maleval: getStyleSleeper(value, i) === 'blue'
+            maleval: getStyleSleeper(value, i) === 'blue',             
           }"
         >
           <label
@@ -102,6 +103,24 @@
           </label>
           <p>Rs.{{ value.price }}</p>
         </div>
+        <div
+          *ngIf="
+            value.SeatNo.includes('25') ||
+            value.SeatNo.includes('28') ||
+            value.SeatNo.includes('31') ||
+            value.SeatNo.includes('34') ||
+            value.SeatNo.includes('37')
+          "
+        ></div>
+        <div
+          *ngIf="
+            value.SeatNo.includes('25') ||
+            value.SeatNo.includes('28') ||
+            value.SeatNo.includes('31') ||
+            value.SeatNo.includes('34') ||
+            value.SeatNo.includes('37')
+          "
+        ></div>
       </ng-container>
     </div>
   </div>

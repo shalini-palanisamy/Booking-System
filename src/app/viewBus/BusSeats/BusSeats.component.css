@@ -160,10 +160,10 @@ button {
   background-color: rgb(250, 246, 238);
   padding: 30px;
   border-radius: 10px;
-  width: 600px;
-  height: 800px;
+  width: 700px;
+  height: 900px;
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 1fr; /* Two columns */
+  grid-template-columns: 0.5fr 1fr 1fr; /* Two columns */
   grid-gap: 50px; /* Gap between columns */
 }
 .left-column-seater label {
@@ -173,9 +173,12 @@ button {
   grid-row: 1 / span 2; /* Lower seater divided into 2 rows */
   display: grid;
   grid-template-columns: 0.5fr 0.5fr; /* Two columns in the left column */
-  grid-gap: 5px; /* Gap between columns */
+  grid-gap: 10px; /* Gap between columns */
 }
-
+.vertical-line {
+  border-left: 2px solid rgb(190, 166, 113); /* Change the color and width as needed */
+  height: 700px; /* Adjust the height of the line */
+}
 .seaterWindow-column,
 .seater-column {
   display: grid;
@@ -195,11 +198,12 @@ button {
 }
 .lowerSleeper-column {
   margin-bottom: 50px;
+  margin-left: 50px;
 }
 .right-column {
   grid-column: 4 / span 2; /* Upper divided into 3 columns */
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 1fr; /* Three columns in the right column */
+  grid-template-columns: 0.5fr 0.5fr 1fr 1fr 1fr; /* Three columns in the right column */
   grid-gap: 30px; /* Gap between upper rows and columns */
 }
 .lower-sleeper p {
@@ -215,7 +219,6 @@ button {
   background-color: rgb(250, 246, 238);
   border-radius: 10px;
 }
-
 .seatsSelected div {
   padding: 5px;
 }

@@ -5,8 +5,10 @@
   left: 35%;
   width: 350px; /* Changed from 50vb to 50vw */
   height: 400px;
-  background-color: rgb(245, 229, 195);
-  border-radius: 5px;
+  background-color: white; /* Set the background color to white */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Button Styles */
@@ -18,7 +20,7 @@ button {
   width: 50%;
   height: 5vh;
   border: none;
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -36,7 +38,7 @@ button {
 
 /* Active Button Styles */
 button:active {
-  border-bottom: 2px solid rgb(245, 229, 195);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Sign-In Section Styles */
@@ -56,5 +58,5 @@ p {
 }
 
 .renderSignIn a:hover {
-  color: rgb(190, 166, 113);
+  color: rgba(0, 0, 0, 0.1);
 }

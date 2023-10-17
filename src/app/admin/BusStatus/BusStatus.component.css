@@ -27,17 +27,18 @@
   margin: 30px;
   width: 750px;
   padding: 20px;
-  background-color: rgb(250, 246, 238);
-  border-radius: 10px;
-  border: 1px solid rgb(150, 126, 76);
+  background-color: white; /* Set the background color to white */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .Price {
-  color: rgb(150, 126, 76);
+  color: black;
   font-weight: bolder;
   font-size: 18px;
 }
 h3 {
-  color: rgb(150, 126, 76);
+  color: rgb(82, 79, 79);
   font-weight: bolder;
 }
 .AvaSeats {
@@ -66,10 +67,10 @@ button {
   width: auto;
   height: 4vh;
   border-radius: 5px;
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   color: white;
   font-weight: bold;
-  border: 1px solid rgb(190, 166, 113);
+  border: 1px solid rgb(128, 126, 126);
   margin-top: 5vb;
   cursor: pointer;
 }
@@ -84,7 +85,7 @@ input {
   font-size: 15px;
 }
 .header {
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   position: fixed;
   top: 0;
   left: 0;
@@ -98,7 +99,7 @@ input {
 }
 .header button {
   margin: 20px;
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   border: none;
   color: white;
 }

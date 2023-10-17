@@ -1,3 +1,24 @@
+header {
+  background-color: rgb(128, 126, 126);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+header * {
+  display: inline;
+}
+header li a {
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+}
+header li {
+  margin: 20px;
+}
 .container {
   margin: 0px;
   padding: 0px;
@@ -27,21 +48,22 @@
   margin: 30px;
   width: 750px;
   padding: 20px;
-  background-color: rgb(250, 246, 238);
-  border-radius: 10px;
-  border: 1px solid rgb(150, 126, 76);
+  background-color: white; /* Set the background color to white */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .Price {
-  color: rgb(150, 126, 76);
+  color: black;
   font-weight: bolder;
   font-size: 18px;
 }
 h3 {
-  color: rgb(150, 126, 76);
+  color: rgb(82, 79, 79);
   font-weight: bolder;
 }
 .Rating {
-  background-color: rgb(150, 126, 76);
+  background-color: black;
   width: 23px;
   height: 20px;
   border-radius: 2px;
@@ -55,14 +77,11 @@ h3 {
 .contentval:hover {
   transform: scale(1.05); /* Adjust the scale factor as desired */
 }
-button {
-  padding: 4px;
-  margin-top: 20px;
-  margin-left: 90%;
-  background-color: rgb(190, 166, 113);
+header button {
+  margin-left: 900px;
+  background-color: rgb(128, 126, 126);
   border: none;
   color: white;
-  width: 60px;
-  height: 40px;
-  border-radius: 5px;
+  height: 20px;
+  margin-top: 0px;
 }

@@ -1,10 +1,35 @@
+header {
+  background-color: rgb(128, 126, 126);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+header * {
+  display: inline;
+}
+header li a {
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+}
+header li {
+  margin: 20px;
+}
+
 .container {
-  padding: 5vb;
+  margin-top: 100px;
+  padding: 4vb;
   padding-bottom: 0%;
-  background-color: rgb(247, 233, 203);
   width: 50vb;
   height: auto;
-  border-radius: 10px;
+  background-color: white; /* Set the background color to white */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .form-group label {
   display: block;
@@ -19,17 +44,18 @@
   width: 250px;
   height: 30px;
   border-radius: 5px;
-  border: 2px solid rgb(190, 166, 113);
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }
 button {
   width: auto;
   height: 4vh;
   border-radius: 5px;
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   color: white;
   font-weight: bold;
-  border: 1px solid rgb(190, 166, 113);
+  border: 1px solid rgb(128, 126, 126);
   margin-top: 5vb;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 input.ng-invalid.ng-touched {
@@ -40,14 +66,14 @@ small {
 }
 .error {
   margin-top: 5px;
-  color: rgb(190, 166, 113);
+  color: rgba(0, 0, 0, 0.1);
   font-weight: bolder;
 }
 
 #gender {
   width: 250px; /* Set the width of the select element */
   padding: 5px; /* Add some padding for better appearance */
-  border: 2px solid rgb(190, 166, 113); /* Add a border */
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Add a border */
   border-radius: 4px; /* Add rounded corners */
   background-color: #fff; /* Background color */
   color: #333; /* Text color */
@@ -68,4 +94,12 @@ small {
   font-weight: bold;
   font-size: 15px;
   text-transform: uppercase;
+}
+header button {
+  margin-left: 900px;
+  background-color: rgb(128, 126, 126);
+  border: none;
+  color: white;
+  height: 20px;
+  margin-top: 0px;
 }

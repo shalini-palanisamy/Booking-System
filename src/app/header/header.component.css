@@ -1,5 +1,5 @@
 header {
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +21,7 @@ header li {
 }
 header button {
   margin-left: 900px;
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   border: none;
   color: white;
 }

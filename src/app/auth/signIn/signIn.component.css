@@ -3,12 +3,14 @@
   top: 10%;
   left: 35%;
   width: 400px;
-  background-color: rgb(245, 229, 195);
   height: 500px;
-  border-radius: 5px;
+  background-color: white; /* Set the background color to white */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 h2 {
-  color: rgb(160, 145, 114);
+  color: black;
   text-align: center;
 }
 .form-group {
@@ -27,23 +29,23 @@ h2 {
   width: 280px;
   height: 35px;
   border-radius: 5px;
-  border: 2px solid rgb(190, 166, 113);
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }
 button {
   width: 8vw;
   height: 5vh;
   border-radius: 5px;
-  background-color: rgb(190, 166, 113);
+  background-color: rgb(128, 126, 126);
   color: white;
   font-weight: bold;
-  border: 1px solid rgb(190, 166, 113);
+  border: 1px solid rgb(128, 126, 126);
   margin-top: 5vb;
   cursor: pointer;
 }
 button:hover {
   color: black;
-  border: 1px solid rgb(245, 229, 195);
-  background-color: rgb(245, 229, 195); /* Background color on hover */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1); /* Background color on hover */
 }
 input.ng-invalid.ng-touched {
   border: red 1px solid;
@@ -59,6 +61,6 @@ small {
 .error {
   padding: 10px;
   margin-left: 5vb;
-  color: red;
+  color: rgb(128, 126, 126);
   font-weight: bolder;
 }

@@ -8,6 +8,7 @@ import {
 import { SeatsService } from '../BusSeats/Seats.servicce';
 import { BookingEditSerive } from './BookingEdit.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-bookingSeat',
@@ -30,7 +31,8 @@ export class BookingSeatComponent implements OnInit {
     private seatSerives: SeatsService,
     private fb: FormBuilder,
     private BookingService: BookingEditSerive,
-    private route: Router
+    private route: Router,
+    private authSerive: AuthService
   ) {}
   ngOnInit() {
     this.selectedSeats = this.seatSerives.SelectedSeats;
@@ -122,5 +124,8 @@ export class BookingSeatComponent implements OnInit {
   }
   BusList() {
     this.route.navigate(['viewBus']);
+  }
+  OnLogout() {
+    this.authSerive.logout();
   }
 }

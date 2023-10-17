@@ -1,3 +1,12 @@
+<header>
+  <nav>
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/viewBus">Ticket Booking</a></li>
+      <button (click)="OnLogout()" class="loging">Logout</button>
+    </ul>
+  </nav>
+</header>
 <div class="container">
   <form [formGroup]="SubmitBooking" (ngSubmit)="OnShow()" *ngIf="!showConfirm">
     <div class="form" *ngFor="let formVal of selectedSeats; let i = index">

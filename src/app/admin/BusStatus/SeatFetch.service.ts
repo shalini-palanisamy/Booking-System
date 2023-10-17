@@ -111,14 +111,16 @@ export class SeatFetchService {
   cancellationAdjust(Stucture, index, value) {
     console.log(Stucture);
     console.log(index);
+    console.log(value);
     if (value.BookingStatus === true) {
       if (value.SeatNo.includes('W')) {
-        if (
-          (Stucture[index + 1].BookingStatus === false &&
-            Stucture[index + 1].CustGender === 'female') ||
-          Stucture[index + 1].CustGender === 'male'
-        ) {
-          this.seatService.updateGender(Stucture[index + 1], '');
+        if (Stucture[index + 1].BookingStatus === false) {
+          if (
+            Stucture[index + 1].CustGender === 'female' ||
+            Stucture[index + 1].CustGender === 'male'
+          ) {
+            this.seatService.updateGender(Stucture[index + 1], '');
+          }
         }
       } else if (
         value.SeatNo.includes('25') ||
@@ -127,20 +129,22 @@ export class SeatFetchService {
         value.SeatNo.includes('34') ||
         value.SeatNo.includes('37')
       ) {
-        if (
-          (Stucture[index - 1]?.BookingStatus === false &&
-            Stucture[index - 1]?.CustGender === 'female') ||
-          Stucture[index - 1]?.CustGender === 'male'
-        ) {
-          this.seatService.updateGender(Stucture[index - 1], '');
+        if (Stucture[index - 1].BookingStatus === false) {
+          if (
+            Stucture[index - 1].CustGender === 'female' ||
+            Stucture[index - 1].CustGender === 'male'
+          ) {
+            this.seatService.updateGender(Stucture[index - 1], '');
+          }
         }
       } else {
-        if (
-          (Stucture[index - 1]?.BookingStatus === false &&
-            Stucture[index - 1]?.CustGender === 'female') ||
-          Stucture[index - 1]?.CustGender === 'male'
-        ) {
-          this.seatService.updateGender(Stucture[index - 1], '');
+        if (Stucture[index - 1].BookingStatus === false) {
+          if (
+            Stucture[index - 1].CustGender === 'female' ||
+            Stucture[index - 1].CustGender === 'male'
+          ) {
+            this.seatService.updateGender(Stucture[index - 1], '');
+          }
         }
       }
     }

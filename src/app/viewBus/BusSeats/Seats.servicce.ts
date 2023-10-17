@@ -10,8 +10,6 @@ export class SeatsService {
   constructor(private http: HttpClient) {}
 
   OnFetchBus() {
-    console.log(this.selectedBus);
-    console.log(this.selectedBus.BusNo + 'UpdateGender');
     const number = this.selectedBus.BusNo;
     return this.http
       .get(
@@ -34,7 +32,6 @@ export class SeatsService {
   }
   updateGender(item, value) {
     item.CustGender = value;
-    console.log(item.BusNo + 'UpdateGender');
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +

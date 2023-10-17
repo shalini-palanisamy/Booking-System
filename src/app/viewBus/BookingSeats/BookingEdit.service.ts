@@ -23,7 +23,7 @@ export class BookingEditSerive {
           else if (seat.SeatType === 'sleeper') ++this.sleeperCount;
           this.value = {
             BookingStatus: true,
-            BusNo: seat.Busno,
+            Busno: seat.Busno,
             SeatNo: seat.SeatNo,
             SeatPosition: seat.SeatPosition,
             SeatType: seat.SeatType,

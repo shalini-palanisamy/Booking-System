@@ -117,6 +117,7 @@ export class BookingSeatComponent implements OnInit {
     this.paymentConfirm = true;
     this.BookingSummary = this.BookingService.UpdatedData;
     console.log(this.BookingSummary);
+    this.BookingSummary.splice(0, this.BookingSummary.length);
     // this.route.navigate(['../bookingStatus'], { relativeTo: this.router });
   }
   BusList() {

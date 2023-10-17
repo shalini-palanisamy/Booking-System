@@ -92,13 +92,13 @@ export class BusSeatsComponent implements OnInit {
         }
       } else {
         if (
-          this.Stucture[index - 1]?.BookingStatus &&
+          this.Stucture[index - 1].BookingStatus &&
           this.Stucture[index - 1]?.CustGender === 'female'
         ) {
           style = 'pink';
           this.seatService.updateGender(item, 'female');
         } else if (
-          this.Stucture[index - 1]?.BookingStatus &&
+          this.Stucture[index - 1].BookingStatus &&
           this.Stucture[index - 1]?.CustGender === 'male'
         ) {
           style = 'blue';
@@ -169,6 +169,8 @@ export class BusSeatsComponent implements OnInit {
   CheckValue() {
     this.seatService.SelectedSeats = [...this.selectedItems];
     this.seatService.SeatStucture = this.Stucture;
-    this.route.navigate(['../bookingSeat'], { relativeTo: this.router });
+    if (this.selectedItems.length)
+      this.route.navigate(['../bookingSeat'], { relativeTo: this.router });
+    else alert('No seats are selected...');
   }
 }

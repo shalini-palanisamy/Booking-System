@@ -26,7 +26,8 @@ input[type="checkbox"] {
 /* Style the custom checkbox when it's checked */
 input[type="checkbox"]:checked + .custom-checkbox::before {
   /* background-image: url("sofaselected.png"); Replace with your checked image URL */
-  background-color: rgb(210, 243, 160);
+  background-color: rgb(223, 243, 192);
+
   border-radius: 4px;
 }
 
@@ -116,8 +117,8 @@ h3 {
 
 /* Styling for the checkmark inside the checkbox */
 .custom-checkbox2 input[type="checkbox"]:checked + .checkmark {
-  background-color: rgb(210, 243, 160);
-  border-color: rgb(210, 243, 160);
+  background-color: rgb(223, 243, 192);
+  border-color: rgb(223, 243, 192);
 }
 
 /* Hide the checkmark when not checked */

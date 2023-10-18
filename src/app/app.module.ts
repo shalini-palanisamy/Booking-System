@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './auth/signIn/signIn.component';
 import { LogInComponent } from './auth/logIn/logIn.component';
 import { AuthComponent } from './auth/auth.component';
-import { HeaderComponent } from './header/header.component';
 import { LoadingSpinnerComponent } from './loadingSpinner/loadingSpinner.component';
 import { ViewBusComponent } from './viewBus/viewBus.component';
 import { SearchComponent } from './viewBus/search/search.component';
@@ -24,9 +23,8 @@ import { AddBusComponent } from './admin/addBus/addBus.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
-  { path: '', component: HeaderComponent },
   {
-    path: 'auth',
+    path: '',
     component: AuthComponent,
     children: [{ path: 'logIn', component: LogInComponent }],
   },
@@ -56,7 +54,6 @@ const appRoutes: Routes = [
     LogInComponent,
     SignInComponent,
     AuthComponent,
-    HeaderComponent,
     LoadingSpinnerComponent,
     ViewBusComponent,
     SearchComponent,

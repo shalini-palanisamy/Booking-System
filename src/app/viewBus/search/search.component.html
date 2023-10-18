@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="searchForm" (ngSubmit)="OnShow()">
+  <form [formGroup]="searchForm" (ngSubmit)="toEmitUserData()">
     <div class="form">
       <div class="col1">
         <div>
@@ -10,6 +10,13 @@
             class="form-control"
             formControlName="fromLoc"
           />
+          <small
+            *ngIf="
+              searchForm.get('fromLoc').hasError('required') &&
+              searchForm.get('fromLoc').touched
+            "
+            >Please enter the required field*</small
+          >
         </div>
         <div>
           <label for="ToLocation">To</label>
@@ -19,6 +26,13 @@
             class="form-control"
             formControlName="toLoc"
           />
+          <small
+            *ngIf="
+              searchForm.get('toLoc').hasError('required') &&
+              searchForm.get('toLoc').touched
+            "
+            >Please enter the required field*</small
+          >
         </div>
       </div>
       <button type="submit" [disabled]="!searchForm.valid">Search</button>

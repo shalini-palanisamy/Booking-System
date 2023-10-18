@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
+  // Implement the CanActivate interface to protect routes.
   canActivate(
     route: ActivatedRouteSnapshot,
     router: RouterStateSnapshot
@@ -26,17 +27,15 @@ export class AuthGuard implements CanActivate {
     return this.authService.user.pipe(
       take(1),
       map((user) => {
+        // Check if the user is authenticated (logged in).
         const isAuth = !!user;
         if (isAuth) {
-          return true;
+          return true; // Allow access to the route.
+        } else {
+          // If not authenticated, redirect to the main page.
+          return this.router.createUrlTree(['']);
         }
-        return this.router.createUrlTree(['']);
       })
-      // tap(isAuth => {
-      //   if (!isAuth) {
-      //     this.router.navigate(['/auth']);
-      //   }
-      // })
     );
   }
 }

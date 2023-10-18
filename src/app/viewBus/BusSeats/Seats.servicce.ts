@@ -4,17 +4,16 @@ import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SeatsService {
-  selectedBus;
-  SeatStucture;
-  SelectedSeats;
+  selectedBus; //to hold the data of the bus which has been selected by the user for booking seats
+  seatStucture; //to hold the seat details of a selected bus to display seat layout
+  selectedSeats; //to hold the selected seat info
   constructor(private http: HttpClient) {}
 
-  OnFetchBus() {
-    const number = this.selectedBus.BusNo;
+  fetchSeatInfo() {
     return this.http
       .get(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          number +
+          this.selectedBus.BusNo +
           '.json'
       )
       .pipe(
@@ -28,11 +27,11 @@ export class SeatsService {
 
           return dataEntryed;
         })
-      );
-  }
+      ); //http request to firebase DB to fetch the seat info of specific bus
+  } //fetch and formate the seat information from DB
 
   updateGender(item, value) {
-    item.CustGender = value;
+    item.CustGender = value; //update the gender locally
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
@@ -42,9 +41,6 @@ export class SeatsService {
           '.json',
         item
       )
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe((res) => {}); //update the seat info in DB with locally updated object
   }
-  
-}
+} //update the gender property of the seat object while cancelling or booking

@@ -1,6 +1,6 @@
 <div class="header">
   <div>
-    <h3>{{ BusDetails.BusName }}</h3>
+    <h3>{{ busDetails.BusName }}</h3>
   </div>
 </div>
 <div class="helpText">
@@ -29,7 +29,7 @@
   <div class="content">
     <div class="left-column-seater">
       <!-- "Lower" seats -->
-      <div *ngFor="let value of Stucture; let i = index" class="empty">
+      <div *ngFor="let value of fetchedSeatInfo; let i = index" class="empty">
         <div
           *ngIf="
             value.SeatType === 'seater' && value.SeatNo.includes('W') !== -1
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="lower-sleeper">
-      <ng-container *ngFor="let value of Stucture; let i = index">
+      <ng-container *ngFor="let value of fetchedSeatInfo; let i = index">
         <div
           *ngIf="value.SeatType === 'sleeper' && value.SeatPosition === 'lower'"
           class="lowerSleeper-column"
@@ -98,7 +98,7 @@
     </div>
     <div class="vertical-line"></div>
     <div class="right-column">
-      <ng-container *ngFor="let value of Stucture; let i = index">
+      <ng-container *ngFor="let value of fetchedSeatInfo; let i = index">
         <div
           *ngIf="value.SeatType === 'sleeper' && value.SeatPosition === 'upper'"
           class="upper"
@@ -153,8 +153,8 @@
     </div>
     <div class="table-row">
       <div class="table-cell"><p>TOTAL SEATS:</p></div>
-      <div class="table-cell">{{ TotalSeats }}</div>
+      <div class="table-cell">{{ totalSeats }}</div>
     </div>
-    <div><button type="submit" (click)="CheckValue()">Confirm</button></div>
+    <div><button type="submit" (click)="confirmSeats()">Confirm Seats</button></div>
   </div>
 </div>

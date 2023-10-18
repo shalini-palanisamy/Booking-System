@@ -6,14 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
-  logInRenderUser = true;
-  logInRenderAdmin = false;
+  logInRenderUser = true; // Indicates if the user login form should be displayed.
+  logInRenderAdmin = false; // Indicates if the admin login form should be displayed.
 
-  OnUser() {
+  // Switch to the user login form.
+  user() {
     this.logInRenderUser = true;
     this.logInRenderAdmin = false;
   }
-  OnAdmin() {
+
+  // Switch to the admin login form.
+  admin() {
     this.logInRenderAdmin = true;
     this.logInRenderUser = false;
   }

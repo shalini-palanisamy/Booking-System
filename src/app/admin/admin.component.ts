@@ -37,7 +37,7 @@ export class AdminComponent implements OnInit {
 
     let authObs: Observable<AuthResponseData>;
     if (email === 'idpuser@gmail.com' && password === 'IdpIndia@68') {
-      authObs = this.authService.login(email, password);
+      authObs = this.authService.logIn(email, password);
       authObs.subscribe(
         (resData) => {
           console.log(resData);

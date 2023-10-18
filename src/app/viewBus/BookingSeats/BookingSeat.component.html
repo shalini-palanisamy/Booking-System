@@ -3,12 +3,16 @@
     <ul>
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/viewBus">Ticket Booking</a></li>
-      <button (click)="OnLogout()" class="">Logout</button>
+      <button (click)="logout()" class="">Logout</button>
     </ul>
   </nav>
 </header>
 <div class="container">
-  <form [formGroup]="SubmitBooking" (ngSubmit)="OnShow()" *ngIf="!showConfirm">
+  <form
+    [formGroup]="submitBooking"
+    (ngSubmit)="bookingTickets()"
+    *ngIf="!showConfirm"
+  >
     <div class="form" *ngFor="let formVal of selectedSeats; let i = index">
       <div>
         <h3>Seat Number: {{ formVal.SeatNo }}/{{ formVal.SeatType }}</h3>
@@ -33,10 +37,11 @@
           />
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('name')
                 .hasError('required') &&
-              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+              submitBooking.get('seat-' + (i + 1)).get('name').touched
             "
             class="text-danger"
           >
@@ -44,10 +49,11 @@
           </div>
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('name')
                 .hasError('minlength') &&
-              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+              submitBooking.get('seat-' + (i + 1)).get('name').touched
             "
             class="text-danger"
           >
@@ -55,10 +61,11 @@
           </div>
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('name')
                 .hasError('maxlength') &&
-              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+              submitBooking.get('seat-' + (i + 1)).get('name').touched
             "
             class="text-danger"
           >
@@ -66,10 +73,11 @@
           </div>
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('name')
                 .hasError('invalidName') &&
-              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+              submitBooking.get('seat-' + (i + 1)).get('name').touched
             "
             class="text-danger"
           >
@@ -81,10 +89,11 @@
           <input name="age" class="form-control" formControlName="age" />
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('age')
                 .hasError('required') &&
-              SubmitBooking.get('seat-' + (i + 1)).get('age').touched
+              submitBooking.get('seat-' + (i + 1)).get('age').touched
             "
             class="text-danger"
           >
@@ -92,7 +101,8 @@
           </div>
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('age')
                 .hasError('pattern')
             "
@@ -103,10 +113,11 @@
 
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('age')
                 .hasError('max') &&
-              SubmitBooking.get('seat-' + (i + 1)).get('age').touched
+              submitBooking.get('seat-' + (i + 1)).get('age').touched
             "
             class="text-danger"
           >
@@ -114,10 +125,11 @@
           </div>
           <div
             *ngIf="
-              SubmitBooking.get('seat-' + (i + 1))
+              submitBooking
+                .get('seat-' + (i + 1))
                 .get('age')
                 .hasError('min') &&
-              SubmitBooking.get('seat-' + (i + 1)).get('age').touched
+              submitBooking.get('seat-' + (i + 1)).get('age').touched
             "
             class="text-danger"
           >
@@ -165,8 +177,8 @@
     <div>
       <h3>Total Amount: {{ totalPrice }}</h3>
     </div>
-    <button (click)="Onsubmit()" type="submit">Payment</button>
-    <button (click)="BusList()" class="buttonCancel">Cancel</button>
+    <button (click)="paymentPage()" type="submit">Payment</button>
+    <button (click)="busList()" class="buttonCancel">Cancel</button>
   </div>
   <div *ngIf="paymentConfirm">
     <div class="tick">
@@ -177,7 +189,7 @@
         height="100px"
       />
     </div>
-    <div *ngFor="let value of BookingSummary" class="status">
+    <div *ngFor="let value of bookingSummary" class="status">
       <div>
         <h3>{{ value.SeatNo }}</h3>
       </div>
@@ -207,11 +219,6 @@
       </div>
       <hr />
     </div>
-    <button (click)="BusList()">Go To BusList</button>
-  </div>
-  <div class="error" *ngIf="ShowError">
-    Your input doesn't satisfied the validations that name should contain
-    minimum of 3 characters and not allow numbers and special characters or
-    Minimum age should be 5
+    <button (click)="busList()">Go To BusList</button>
   </div>
 </div>

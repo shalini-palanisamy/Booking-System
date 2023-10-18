@@ -7,21 +7,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  searchForm: FormGroup;
-  isLoading = false;
+  searchForm: FormGroup; //formgroup variable name for searching a bus
 
-  @Output() searchElement = new EventEmitter<object>();
+  @Output() searchElement = new EventEmitter<object>(); //searchElement is the eventEmitter which is used to pass the data from child component to parent
 
   ngOnInit() {
     this.searchForm = new FormGroup({
       fromLoc: new FormControl(null, [Validators.required]),
       toLoc: new FormControl(null, [Validators.required]),
-    });
+    }); //Creating controls for reactive form
   }
 
-  OnShow() {
-    console.log(this.searchForm.value);
+  toEmitUserData() {
     this.searchElement.emit(this.searchForm.value);
-  }
-  
+  } //to emit the value from user through form to parent component
 }

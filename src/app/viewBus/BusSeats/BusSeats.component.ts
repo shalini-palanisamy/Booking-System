@@ -8,10 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./BusSeats.component.css'],
 })
 export class BusSeatsComponent implements OnInit {
-  Stucture;
-  BusDetails;
-  selectedItems: any[] = [];
-  TotalSeats = 0;
+  fetchedSeatInfo; //hold the seat information of the selected bus
+  busDetails; //hold the selected bus information
+  selectedSeats: any[] = []; //array to hold the seats selected by the user
+  totalSeats = 0;
   seater = 0;
   sleeper = 0;
   styleCache: { [key: string]: string } = {};
@@ -23,159 +23,192 @@ export class BusSeatsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.Onfetch();
+    this.fetchSeatStructure();
   }
 
-  Onfetch() {
-    this.seatService.OnFetchBus().subscribe((res) => {
-      this.Stucture = res;
-      console.log(this.Stucture);
-      const seatNumbers = this.Stucture.map((item) => {
-        const seatNumber = parseInt(item.SeatNo.replace(/\D/g, ''), 10);
-        return seatNumber;
+  fetchSeatStructure() {
+    // Subscribe to the seatService to fetch seat information
+    this.seatService.fetchSeatInfo().subscribe((res) => {
+      // Store the fetched seat information in this.fetchedSeatInfo
+      this.fetchedSeatInfo = res;
+
+      // Extract seat numbers from SeatNo and parse them into an array
+      const seatNumbers = this.fetchedSeatInfo.map((item) => {
+        return parseInt(item.SeatNo.replace(/\D/g, ''), 10); //remove any non-numeric characters from SeatNo and parse them into an array
       });
 
-      // Sort the this.structure array based on the parsed seat numbers
-      this.Stucture.sort((a, b) => {
-        const seatNumberA = seatNumbers[this.Stucture.indexOf(a)];
-        const seatNumberB = seatNumbers[this.Stucture.indexOf(b)];
-        return seatNumberA - seatNumberB;
-      });
+      // Sort the this.fetchedSeatInfo array based on the parsed seat numbers. The sorting logic is provided as a callback function.
+      // This function takes two parameters, seat1 and seat2, which represent two elements from this.fetchedSeatInfo that are being compared during the sorting process.
+      this.fetchedSeatInfo = this.fetchedSeatInfo.sort(
+        (seat1, seat2) =>
+          seatNumbers[this.fetchedSeatInfo.indexOf(seat1)] - //indexOf is used to find the index of elements
+          seatNumbers[this.fetchedSeatInfo.indexOf(seat2)]
+        //These seat numbers are subtracted to determine the order of the seats
+      );
 
-      console.log(this.Stucture);
-      this.BusDetails = this.seatService.selectedBus;
+      // Store selected bus details in this.busDetails to use them in DOM
+      this.busDetails = this.seatService.selectedBus;
     });
   }
 
   onCheckboxChange(event: any, index: number) {
+    // Check if the checkbox is checked
     if (event.target.checked) {
-      if (this.selectedItems.length < 5) {
-        if (this.Stucture[index].SeatType === 'seater') ++this.seater;
-        else ++this.sleeper;
-        ++this.TotalSeats;
-        this.selectedItems.push(this.Stucture[index]);
+      // Check if the number of selected seats is less than 5
+      if (this.selectedSeats.length < 5) {
+        // Check the type of the selected seat (seater or sleeper) and update counters
+        if (this.fetchedSeatInfo[index].SeatType === 'seater') {
+          ++this.seater; // Increment the seater count
+        } else {
+          ++this.sleeper; // Increment the sleeper count
+        }
+        ++this.totalSeats; // Increment the total selected seats count
+
+        this.selectedSeats.push(this.fetchedSeatInfo[index]); // Add the selected seat to the 'selectedSeats' array
       } else {
+        // Alert the user that they can book only 5 seats
         alert('One Can Book only 5 seats');
       }
     } else {
-      const selectedIndex = this.selectedItems.indexOf(this.Stucture[index]);
-      if (selectedIndex !== -1) {
-        if (this.Stucture[index].SeatType === 'seater') --this.seater;
-        else --this.sleeper;
-        --this.TotalSeats;
-        this.selectedItems.splice(selectedIndex, 1);
+      // The checkbox is unchecked
+      // Check if the selected seat was found
+      if (this.selectedSeats.indexOf(this.fetchedSeatInfo[index]) !== -1) {
+        // Check the type of the selected seat (seater or sleeper) and update counters
+        if (this.fetchedSeatInfo[index].SeatType === 'seater') {
+          --this.seater; // Decrement the seater count
+        } else {
+          --this.sleeper; // Decrement the sleeper count
+        }
+        --this.totalSeats; // Decrement the total selected seats count
+        this.selectedSeats.splice(
+          this.selectedSeats.indexOf(this.fetchedSeatInfo[index]),
+          1
+        ); // Remove the selected seat from the 'selectedSeats' array
       }
     }
   }
 
   getStyleSeater(item: any, index: number) {
-    const cacheKey = `seater_${index}`;
+    const cacheKey = `seater_${index}`; //creating a unique cache key based on the index parameter, seater_ - string prefix and ${index} - numerical value passed as a parameter
 
-    // Check if the style is already cached
+    // Check if the style is already cached, and return it if found
     if (this.styleCache[cacheKey]) {
       return this.styleCache[cacheKey];
     }
 
+    // Initialize the style to an empty string
     let style: string = '';
 
+    // Check if the seat is available for booking
     if (item.BookingStatus === false) {
+      // Check if the seat number contains 'W' (window seat)
       if (item.SeatNo.includes('W')) {
+        // Check if the adjacent seat is booked by a female passenger
         if (
-          this.Stucture[index + 1].BookingStatus &&
-          this.Stucture[index + 1].CustGender === 'female'
+          this.fetchedSeatInfo[index + 1].BookingStatus &&
+          this.fetchedSeatInfo[index + 1].CustGender === 'female'
         ) {
-          style = 'pink';
+          style = 'pink'; // Apply pink style for a female passenger
           this.seatService.updateGender(item, 'female');
         } else if (
-          this.Stucture[index + 1].BookingStatus &&
-          this.Stucture[index + 1].CustGender === 'male'
+          this.fetchedSeatInfo[index + 1].BookingStatus &&
+          this.fetchedSeatInfo[index + 1].CustGender === 'male'
         ) {
-          style = 'blue';
+          style = 'blue'; // Apply blue style for a male passenger
           this.seatService.updateGender(item, 'male');
         }
       } else {
+        // The seat is not a window seat; check the status of the adjacent seat
         if (
-          this.Stucture[index - 1].BookingStatus &&
-          this.Stucture[index - 1]?.CustGender === 'female'
+          this.fetchedSeatInfo[index - 1].BookingStatus &&
+          this.fetchedSeatInfo[index - 1]?.CustGender === 'female'
         ) {
-          style = 'pink';
+          style = 'pink'; // Apply pink style for a female passenger
           this.seatService.updateGender(item, 'female');
         } else if (
-          this.Stucture[index - 1].BookingStatus &&
-          this.Stucture[index - 1]?.CustGender === 'male'
+          this.fetchedSeatInfo[index - 1].BookingStatus &&
+          this.fetchedSeatInfo[index - 1]?.CustGender === 'male'
         ) {
-          style = 'blue';
+          style = 'blue'; // Apply blue style for a male passenger
           this.seatService.updateGender(item, 'male');
         }
       }
     }
 
-    // Cache the style for this seat
+    // Cache the calculated style for future use
     this.styleCache[cacheKey] = style;
 
+    // Return the determined style for the seat
     return style;
-  }
+  } //ensures that the style for each seat is stored separately.
 
   getStyleSleeper(item: any, index: number) {
     const cacheKey = `sleeper_${index}`;
 
-    // Check if the style is already cached
+    // Check if the style is already cached, and return it if found
     if (this.styleCache[cacheKey]) {
       return this.styleCache[cacheKey];
     }
 
+    // Initialize the style to an empty string
     let style: string = '';
 
+    // Check if the seat is available for booking
     if (item.BookingStatus === false) {
+      // Check if the seat number contains 'W' (window seat)
       if (item.SeatNo.includes('W')) {
-        if (
-          this.Stucture[index + 1].BookingStatus &&
-          this.Stucture[index + 1].CustGender === 'female'
-        ) {
-          style = 'pink';
-          this.seatService.updateGender(item, 'female');
-        } else if (
-          this.Stucture[index + 1].BookingStatus &&
-          this.Stucture[index + 1].CustGender === 'male'
-        ) {
-          style = 'blue';
-          this.seatService.updateGender(item, 'male');
+        // Check if the adjacent seat is booked by a female or male passenger
+        if (this.fetchedSeatInfo[index + 1].BookingStatus) {
+          if (this.fetchedSeatInfo[index + 1].CustGender === 'female') {
+            style = 'pink'; // Apply pink style for a female passenger
+            this.seatService.updateGender(item, 'female');
+          } else if (this.fetchedSeatInfo[index + 1].CustGender === 'male') {
+            style = 'blue'; // Apply blue style for a male passenger
+            this.seatService.updateGender(item, 'male');
+          }
         }
       } else if (
+        // Check if the seat number contains specific values
         item.SeatNo.includes('25') ||
         item.SeatNo.includes('28') ||
         item.SeatNo.includes('31') ||
         item.SeatNo.includes('34') ||
         item.SeatNo.includes('37')
       ) {
-        if (
-          this.Stucture[index - 1]?.BookingStatus &&
-          this.Stucture[index - 1]?.CustGender === 'female'
-        ) {
-          style = 'pink';
-          this.seatService.updateGender(item, 'female');
-        } else if (
-          this.Stucture[index - 1]?.BookingStatus &&
-          this.Stucture[index - 1]?.CustGender === 'male'
-        ) {
-          style = 'blue';
-          this.seatService.updateGender(item, 'male');
+        // Check if the adjacent seat is booked by a female or male passenger
+        if (this.fetchedSeatInfo[index - 1]?.BookingStatus) {
+          if (this.fetchedSeatInfo[index - 1]?.CustGender === 'female') {
+            style = 'pink'; // Apply pink style for a female passenger
+            this.seatService.updateGender(item, 'female');
+          } else if (this.fetchedSeatInfo[index - 1]?.CustGender === 'male') {
+            style = 'blue'; // Apply blue style for a male passenger
+            this.seatService.updateGender(item, 'male');
+          }
         }
       }
     }
 
-    // Cache the style for this seat
+    // Cache the calculated style for future use
     this.styleCache[cacheKey] = style;
 
+    // Return the determined style for the sleeper seat
     return style;
   }
 
-  CheckValue() {
-    this.seatService.SelectedSeats = [...this.selectedItems];
-    this.seatService.SeatStucture = this.Stucture;
-    if (this.selectedItems.length)
+  confirmSeats() {
+    // Copy the selected seats to the service for booking
+    this.seatService.selectedSeats = [...this.selectedSeats];
+
+    // Copy the seat structure to the service for booking
+    this.seatService.seatStucture = this.fetchedSeatInfo;
+
+    // Check if at least one seat is selected
+    if (this.selectedSeats.length) {
+      // Navigate to the bookingSeat component
       this.route.navigate(['../bookingSeat'], { relativeTo: this.router });
-    else alert('No seats are selected...');
+    } else {
+      // Alert the user that no seats are selected
+      alert('No seats are selected...');
+    }
   }
-  
 }

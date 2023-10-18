@@ -18,12 +18,16 @@ export interface AuthResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  // A subject to hold the currently authenticated user.
   user = new BehaviorSubject<User>(null);
+
+  // A timer to keep track of the token expiration.
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(email: string, password: string) {
+  // Method for user registration (signup).
+  signUp(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
         'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyA7MWws23nc1S9_w5CTKss9mR6mArtC5I8',
@@ -46,7 +50,8 @@ export class AuthService {
       );
   }
 
-  login(email: string, password: string) {
+  // Method for user login.
+  logIn(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
         'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyA7MWws23nc1S9_w5CTKss9mR6mArtC5I8',
@@ -69,7 +74,7 @@ export class AuthService {
       );
   }
 
-  logout() {
+  logOut() {
     this.user.next(null);
     this.router.navigate(['']);
     localStorage.removeItem('userData');
@@ -78,7 +83,7 @@ export class AuthService {
     }
     this.tokenExpirationTimer = null;
   }
-
+  // Helper method to handle user authentication.
   private handleAuthentication(
     email: string,
     userId: string,
@@ -91,6 +96,7 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
+  // Helper method to handle HTTP error responses.
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'Invalid email or password';
     return throwError(errorMessage);

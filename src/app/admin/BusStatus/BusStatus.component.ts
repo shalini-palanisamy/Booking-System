@@ -123,7 +123,7 @@ export class BusStatusComponent implements OnInit {
   }
 
   OnLogout() {
-    this.authSerive.logout();
+    this.authSerive.logOut();
   }
   Addbus() {
     this.route.navigate(['addBus']);

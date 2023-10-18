@@ -11,9 +11,9 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./viewBus.component.css'],
 })
 export class ViewBusComponent implements OnInit {
-  searchStatus = false;
-  BusesView;
-  searchBus;
+  searchStatus = false; //to trace the status of the searching function
+  busesFetched; //To hold the buses details
+  searchResult; //To hold the buses which has been searched
 
   constructor(
     private http: HttpClient,
@@ -24,6 +24,7 @@ export class ViewBusComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //To fetch the Bus details as an object of array from database
     this.http
       .get('https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json')
       .pipe(
@@ -38,36 +39,34 @@ export class ViewBusComponent implements OnInit {
         })
       )
       .subscribe((res) => {
-        this.BusesView = res;
-        console.log(this.BusesView);
-      });
+        this.busesFetched = res;
+      }); //subscribe the http request to get the response
   }
 
-  returnBus(searchValue) {
-    this.searchBus = [];
+  extractedBuses(searchValue) {
+    this.searchResult = [];
     this.searchStatus = true;
-    searchValue.fromLoc = searchValue.fromLoc.toLowerCase();
+    //searchValue will holds the input from the user for from and to location
+    searchValue.fromLoc = searchValue.fromLoc.toLowerCase(); //this will convert the string to lowerCase to preform validation
     searchValue.toLoc = searchValue.toLoc.toLowerCase();
-    for (let index of this.BusesView) {
-      let val = index.FromLocation.toLowerCase();
-      let val2 = index.ToLocation.toLowerCase();
+    for (let index of this.busesFetched) {
+      let fromLoc = index.FromLocation.toLowerCase();
+      let toLoc = index.ToLocation.toLowerCase();
       if (
-        val.includes(searchValue.fromLoc) &&
-        val2.includes(searchValue.toLoc)
+        fromLoc.includes(searchValue.fromLoc) &&
+        toLoc.includes(searchValue.toLoc)
       ) {
-        this.searchBus.push(index);
+        this.searchResult.push(index); //if the user input matches with the object property the object get pushed into the searchBus array
       }
-    }
-  }
+    } //To iterate the array of object fetched from DB which find the matches for the user input
+  } //this method is used to extract the searched bus and push them in an array to display them in DOM
 
-  OnShowItem(busValue) {
-    this.busSelectedService.selectedBus = busValue;
-    console.log(this.busSelectedService.selectedBus);
-    this.route.navigate(['../busSeats'], { relativeTo: this.router });
-  }
+  passSelectedBusData(busValue) {
+    this.busSelectedService.selectedBus = busValue; //Updating service variable with the selected bus object
+    this.route.navigate(['../busSeats'], { relativeTo: this.router }); //navigating to seat components
+  } //This method is to navigate for seat component with selected bus data
 
-  OnLogout() {
-    this.authSerive.logout();
+  logOut() {
+    this.authSerive.logOut(); //call the auth service logout method
   }
-  
 }

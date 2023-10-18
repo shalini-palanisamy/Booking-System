@@ -3,18 +3,18 @@
     <ul>
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/viewBus">Ticket Booking</a></li>
-      <button (click)="OnLogout()" class="loging">Logout</button>
+      <button (click)="logOut()" class="loging">Logout</button>
     </ul>
   </nav>
 </header>
 <div class="container">
   <div class="search">
-    <app-search (searchElement)="returnBus($event)"></app-search>
+    <app-search (searchElement)="extractedBuses($event)"></app-search>
   </div>
   <div class="content">
     <div *ngIf="searchStatus === false">
-      <div *ngFor="let busValue of BusesView" class="contentval">
-        <div class="items" (click)="OnShowItem(busValue)">
+      <div *ngFor="let busValue of busesFetched" class="contentval">
+        <div class="items" (click)="passSelectedBusData(busValue)">
           <div class="firLine">
             <h3 class="busName">{{ busValue.BusName }}</h3>
             <p class="Price">Rs.{{ busValue.Price }}</p>
@@ -42,8 +42,8 @@
       </div>
     </div>
     <div *ngIf="searchStatus">
-      <div *ngFor="let busValue of searchBus" class="contentval">
-        <div class="items" (click)="OnShowItem(busValue)">
+      <div *ngFor="let busValue of searchResult" class="contentval">
+        <div class="items" (click)="passSelectedBusData(busValue)">
           <div class="firLine">
             <h3 class="busName">{{ busValue.BusName }}</h3>
             <p class="Price">Rs.{{ busValue.Price }}</p>

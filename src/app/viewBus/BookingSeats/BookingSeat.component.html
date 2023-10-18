@@ -3,7 +3,7 @@
     <ul>
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/viewBus">Ticket Booking</a></li>
-      <button (click)="OnLogout()" class="loging">Logout</button>
+      <button (click)="OnLogout()" class="">Logout</button>
     </ul>
   </nav>
 </header>
@@ -57,6 +57,17 @@
             *ngIf="
               SubmitBooking.get('seat-' + (i + 1))
                 .get('name')
+                .hasError('maxlength') &&
+              SubmitBooking.get('seat-' + (i + 1)).get('name').touched
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.maxlength }}
+          </div>
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('name')
                 .hasError('invalidName') &&
               SubmitBooking.get('seat-' + (i + 1)).get('name').touched
             "
@@ -67,12 +78,7 @@
         </div>
         <div>
           <label for="age">Age</label>
-          <input
-            type="number"
-            name="age"
-            class="form-control"
-            formControlName="age"
-          />
+          <input name="age" class="form-control" formControlName="age" />
           <div
             *ngIf="
               SubmitBooking.get('seat-' + (i + 1))
@@ -83,6 +89,28 @@
             class="text-danger"
           >
             {{ errorMessages.required }}
+          </div>
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('age')
+                .hasError('pattern')
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.pattern }}
+          </div>
+
+          <div
+            *ngIf="
+              SubmitBooking.get('seat-' + (i + 1))
+                .get('age')
+                .hasError('max') &&
+              SubmitBooking.get('seat-' + (i + 1)).get('age').touched
+            "
+            class="text-danger"
+          >
+            {{ errorMessages.maxAge }}
           </div>
           <div
             *ngIf="
@@ -137,31 +165,8 @@
     <div>
       <h3>Total Amount: {{ totalPrice }}</h3>
     </div>
-    <div>
-      <form [formGroup]="upiIdForm">
-        <div class="form-group">
-          <label for="upiId">UPI ID</label>
-          <input type="text" id="upiId" formControlName="upiId" />
-          <div
-            *ngIf="
-              upiIdForm.get('upiId').hasError('required') &&
-              upiIdForm.get('upiId').touched
-            "
-            class="text-danger"
-          >
-            UPI ID is required.
-          </div>
-          <div
-            *ngIf="upiIdForm.get('upiId').hasError('invalidUpiId')"
-            class="text-danger"
-          >
-            Invalid UPI ID format.
-          </div>
-          <button (click)="Onsubmit()" type="submit">Payment</button>
-          <button (click)="BusList()" class="buttonCancel">Cancel</button>
-        </div>
-      </form>
-    </div>
+    <button (click)="Onsubmit()" type="submit">Payment</button>
+    <button (click)="BusList()" class="buttonCancel">Cancel</button>
   </div>
   <div *ngIf="paymentConfirm">
     <div class="tick">

@@ -18,9 +18,19 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.signInForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.email, Validators.required]),
+      name: new FormControl(null, [
+        Validators.maxLength(15),
+        Validators.required, // Required validation
+        Validators.minLength(3), // Minimum length of 3 characters
+        this.customNameValidator(), // Custom name validation function
+      ]),
+      email: new FormControl(null, [
+        Validators.email,
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
       password: new FormControl(null, [
+        Validators.maxLength(20),
         Validators.required,
         this.passwordFormField(),
       ]),
@@ -33,6 +43,24 @@ export class SignInComponent implements OnInit {
         Validators.required,
         this.matchConfirmPassword.bind(this),
       ]);
+    this.signInForm.get('password').valueChanges.subscribe(() => {
+      this.signInForm.get('confirmPassword').updateValueAndValidity();
+    });
+
+    this.signInForm.get('confirmPassword').valueChanges.subscribe(() => {
+      this.signInForm.get('confirmPassword').updateValueAndValidity();
+    });
+  }
+
+  customNameValidator() {
+    return (control: FormControl): { [key: string]: any } | null => {
+      const namePattern = /^[a-zA-Z\s]*$/;
+      const value = control.value;
+      if (!namePattern.test(value)) {
+        return { invalidName: true };
+      }
+      return null;
+    };
   }
 
   Onsubmit() {

@@ -72,7 +72,18 @@ input[type="checkbox"] {
   height: 75px;
   border-radius: 4px;
 }
-
+.helpText {
+  background-color: white; /* Set the background color to white */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  height: 200px;
+  margin-left: 150px;
+  margin-top: 20px;
+}
 .info {
   display: flex;
   gap: 10px;
@@ -90,7 +101,11 @@ h3 {
   height: 20px;
   background-color: #ccc;
 }
-
+.selected {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(223, 243, 192);
+}
 /* Styling for the custom checkbox */
 .custom-checkbox2 {
   display: inline-block;
@@ -125,6 +140,7 @@ h3 {
 .custom-checkbox2 input[type="checkbox"]:not(:checked) + .checkmark:after {
   display: none;
 }
+
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -134,22 +150,24 @@ h3 {
   grid-column-end: 2;
 }
 button {
-  width: 8vw;
+  width: 300px;
   height: 5vh;
   border-radius: 5px;
-  background-color: rgb(128, 126, 126);
+  background-color: rgb(131, 204, 20);
   color: white;
   font-weight: bold;
-  border: 1px solid rgb(128, 126, 126);
+  border: 1px solid rgb(131, 204, 20);
   margin-top: 5vb;
   cursor: pointer;
   margin-top: 0px;
 }
 .disabled-checkbox .custom-checkbox {
   background-color: #ccc;
+  cursor: not-allowed;
 }
 .disabled-checkbox .checkmark {
   background-color: #ccc;
+  cursor: not-allowed;
 }
 .container {
   display: flex;
@@ -234,7 +252,7 @@ button {
 
 .table-cell {
   display: table-cell;
-  padding: 5px 10px;
+  padding: 5px 15px;
 }
 
 /* Style the first column differently if needed */

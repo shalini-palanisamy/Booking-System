@@ -20,8 +20,15 @@ export class LogInComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.logInForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(50),
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(20),
+      ]),
     });
   }
   Onsubmit() {
@@ -47,12 +54,13 @@ export class LogInComponent implements OnInit {
           console.log(errorMessage);
           this.error = errorMessage;
           this.isLoading = false;
+          this.logInForm.reset();
+          this.logInForm.get('password').markAsUntouched();
         }
       );
     } else {
       this.error = 'Invalid User';
       this.isLoading = false;
     }
-    this.logInForm.reset();
   }
 }

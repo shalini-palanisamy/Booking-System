@@ -30,6 +30,7 @@ export class SeatsService {
         })
       );
   }
+
   updateGender(item, value) {
     item.CustGender = value;
     this.http
@@ -45,4 +46,5 @@ export class SeatsService {
         console.log(res);
       });
   }
+  
 }

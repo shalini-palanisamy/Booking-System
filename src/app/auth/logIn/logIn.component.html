@@ -14,10 +14,17 @@
         />
         <small
           *ngIf="
-            !logInForm.get('email').valid && logInForm.get('email').touched
+            logInForm.get('email').hasError('required') &&
+            logInForm.get('email').touched
           "
         >
-          Please enter valid email*
+          Email is required.
+        </small>
+        <small *ngIf="logInForm.get('email').hasError('email')">
+          Please enter a valid email address.
+        </small>
+        <small *ngIf="logInForm.get('email').hasError('maxlength')">
+          Email cannot exceed 50 characters.
         </small>
       </div>
       <div class="pass">
@@ -31,14 +38,20 @@
         />
         <small
           *ngIf="
-            !logInForm.get('password').valid &&
+            logInForm.get('password').hasError('required') &&
             logInForm.get('password').touched
           "
         >
           Please enter the required field*
         </small>
       </div>
-      <button class="btn btn-primary" type="submit">LogIn</button>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!logInForm.valid"
+      >
+        LogIn
+      </button>
     </div>
     <div class="error">{{ error }}</div>
   </form>

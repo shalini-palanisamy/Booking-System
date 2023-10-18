@@ -42,7 +42,6 @@ small {
 }
 .error {
   margin-top: 5px;
-  color: rgba(0, 0, 0, 0.1);
+  color: red;
   font-weight: bolder;
-  color: rgb(128, 126, 126);
 }

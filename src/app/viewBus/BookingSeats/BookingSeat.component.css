@@ -58,6 +58,10 @@ button {
   margin-bottom: 5px;
   cursor: pointer;
 }
+button:disabled {
+  background-color: black;
+  cursor: not-allowed;
+}
 input.ng-invalid.ng-touched {
   border: red 1px solid;
 }

@@ -3,6 +3,24 @@
     <h3>{{ BusDetails.BusName }}</h3>
   </div>
 </div>
+<div class="helpText">
+  <div class="info">
+    <div class="Booked"></div>
+    <p>Booked</p>
+  </div>
+  <div class="info">
+    <div class="femalecolor"></div>
+    <p>Only for female</p>
+  </div>
+  <div class="info">
+    <div class="malecolor"></div>
+    <p>Only for male</p>
+  </div>
+  <div class="info">
+    <div class="selected"></div>
+    <p>Selected Seats</p>
+  </div>
+</div>
 <div class="heading">
   <div><h4>Lower</h4></div>
   <div><h4>Upper</h4></div>
@@ -126,31 +144,17 @@
   </div>
   <div class="seatsSelected">
     <div class="table-row">
-      <div class="table-cell"><p>Seater:</p></div>
+      <div class="table-cell"><p>SEATER:</p></div>
       <div class="table-cell">{{ seater }}</div>
     </div>
     <div class="table-row">
-      <div class="table-cell"><p>Sleeper:</p></div>
+      <div class="table-cell"><p>SLEEPER:</p></div>
       <div class="table-cell">{{ sleeper }}</div>
     </div>
     <div class="table-row">
-      <div class="table-cell"><p>Total Seats:</p></div>
+      <div class="table-cell"><p>TOTAL SEATS:</p></div>
       <div class="table-cell">{{ TotalSeats }}</div>
     </div>
     <div><button type="submit" (click)="CheckValue()">Confirm</button></div>
-    <div>
-      <div class="info">
-        <div class="Booked"></div>
-        <p>Booked</p>
-      </div>
-      <div class="info">
-        <div class="femalecolor"></div>
-        <p>Only for female</p>
-      </div>
-      <div class="info">
-        <div class="malecolor"></div>
-        <p>Only for male</p>
-      </div>
-    </div>
   </div>
 </div>

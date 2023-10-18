@@ -106,7 +106,7 @@
           Please enter the required field*
         </small>
       </div>
-      <button type="submit">Add Bus</button>
+      <button type="submit" [disabled]="!AddBusForm.valid">Add Bus</button>
     </div>
   </form>
 </div>

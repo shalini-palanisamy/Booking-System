@@ -171,10 +171,3 @@ export class addSeatService {
       .subscribe((res) => {});
   }
 }
-
-// Ganapathy Travels
-// Mettur Super Services(mss)
-// National Travels CHN
-// Vetri Travels
-// YBM Travels
-// (SBLT) Shri Travels (MAARA)

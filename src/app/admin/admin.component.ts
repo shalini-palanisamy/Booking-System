@@ -16,8 +16,15 @@ export class AdminComponent implements OnInit {
   constructor(private authService: AuthService, private route: Router) {}
   ngOnInit() {
     this.logInForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(50),
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(20),
+      ]),
     });
   }
   Onsubmit() {
@@ -38,12 +45,15 @@ export class AdminComponent implements OnInit {
         },
         (errorMessage) => {
           console.log(errorMessage);
+          this.logInForm.reset();
+          this.logInForm.get('password').markAsUntouched();
         }
       );
     } else {
+      this.logInForm.reset();
+      this.logInForm.get('password').markAsUntouched();
       alert('Invalid User');
     }
-    this.logInForm.reset();
     // this.http
     //   .get(
     //     'https://ebusticketbooking-default-rtdb.firebaseio.com/Admin/-NfKDIcNtwH4ta-aU1zc.json'

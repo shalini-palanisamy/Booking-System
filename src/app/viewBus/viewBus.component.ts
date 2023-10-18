@@ -14,6 +14,7 @@ export class ViewBusComponent implements OnInit {
   searchStatus = false;
   BusesView;
   searchBus;
+
   constructor(
     private http: HttpClient,
     private route: Router,
@@ -21,6 +22,7 @@ export class ViewBusComponent implements OnInit {
     private busSelectedService: SeatsService,
     private authSerive: AuthService
   ) {}
+
   ngOnInit() {
     this.http
       .get('https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json')
@@ -40,6 +42,7 @@ export class ViewBusComponent implements OnInit {
         console.log(this.BusesView);
       });
   }
+
   returnBus(searchValue) {
     this.searchBus = [];
     this.searchStatus = true;
@@ -56,12 +59,15 @@ export class ViewBusComponent implements OnInit {
       }
     }
   }
+
   OnShowItem(busValue) {
     this.busSelectedService.selectedBus = busValue;
     console.log(this.busSelectedService.selectedBus);
     this.route.navigate(['../busSeats'], { relativeTo: this.router });
   }
+
   OnLogout() {
     this.authSerive.logout();
   }
+  
 }

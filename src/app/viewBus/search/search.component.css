@@ -16,9 +16,9 @@
 .form div {
   margin: 5px;
 }
-.col1 {
+/* .col1 {
   display: flex;
-}
+} */
 .date {
   margin: 50px;
 }
@@ -34,4 +34,9 @@ button {
   background-color: black;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
+}
+button:disabled {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
 }

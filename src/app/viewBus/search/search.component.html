@@ -21,17 +21,7 @@
           />
         </div>
       </div>
-      <div class="date">
-        <label for="date">Date</label>
-        <input
-          type="date"
-          name="date"
-          placeholder=" "
-          class="form-control"
-          formControlName="date"
-        />
-      </div>
-      <button type="submit">Search</button>
+      <button type="submit" [disabled]="!searchForm.valid">Search</button>
     </div>
   </form>
 </div>

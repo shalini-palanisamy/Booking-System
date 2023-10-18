@@ -13,7 +13,9 @@ export class BookingEditSerive {
   seaterCount = 0;
   sleeperCount = 0;
   EditBus;
+
   constructor(private SeatService: SeatsService, private http: HttpClient) {}
+
   OnEditData() {
     for (let index of this.FormData) {
       this.SeatService.SelectedSeats.find((seat) => {

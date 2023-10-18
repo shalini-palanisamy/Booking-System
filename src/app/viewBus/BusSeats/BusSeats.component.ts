@@ -14,15 +14,18 @@ export class BusSeatsComponent implements OnInit {
   TotalSeats = 0;
   seater = 0;
   sleeper = 0;
+  styleCache: { [key: string]: string } = {};
 
   constructor(
     private seatService: SeatsService,
     private route: Router,
     private router: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
     this.Onfetch();
   }
+
   Onfetch() {
     this.seatService.OnFetchBus().subscribe((res) => {
       this.Stucture = res;
@@ -43,6 +46,7 @@ export class BusSeatsComponent implements OnInit {
       this.BusDetails = this.seatService.selectedBus;
     });
   }
+
   onCheckboxChange(event: any, index: number) {
     if (event.target.checked) {
       if (this.selectedItems.length < 5) {
@@ -63,7 +67,6 @@ export class BusSeatsComponent implements OnInit {
       }
     }
   }
-  styleCache: { [key: string]: string } = {};
 
   getStyleSeater(item: any, index: number) {
     const cacheKey = `seater_${index}`;
@@ -166,6 +169,7 @@ export class BusSeatsComponent implements OnInit {
 
     return style;
   }
+
   CheckValue() {
     this.seatService.SelectedSeats = [...this.selectedItems];
     this.seatService.SeatStucture = this.Stucture;
@@ -173,4 +177,5 @@ export class BusSeatsComponent implements OnInit {
       this.route.navigate(['../bookingSeat'], { relativeTo: this.router });
     else alert('No seats are selected...');
   }
+  
 }

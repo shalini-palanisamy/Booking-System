@@ -3,7 +3,7 @@
     <app-loading></app-loading>
   </div>
   <form [formGroup]="signInForm" (ngSubmit)="Onsubmit()" *ngIf="!isLoading">
-    <h2>SignIn</h2>
+    <h2>SignUp</h2>
     <div class="form-group">
       <div>
         <label for="">Name*</label>
@@ -20,6 +20,15 @@
         >
           Please enter the required field*
         </small>
+        <small *ngIf="signInForm.get('name').hasError('minlength')">
+          Minimum length should be 3 characters.
+        </small>
+        <small *ngIf="signInForm.get('name').hasError('maxlength')"
+          >Maximum length should be 50 characters.</small
+        >
+        <small *ngIf="signInForm.get('name').hasError('invalidName')">
+          Invalid name format (only letters and spaces).
+        </small>
       </div>
       <div>
         <label for="">Email*</label>
@@ -31,10 +40,17 @@
         />
         <small
           *ngIf="
-            !signInForm.get('email').valid && signInForm.get('email').touched
+            signInForm.get('email').hasError('required') &&
+            signInForm.get('email').touched
           "
         >
-          Please enter valid email*
+          Email is required.
+        </small>
+        <small *ngIf="signInForm.get('email').hasError('email')">
+          Please enter a valid email address.
+        </small>
+        <small *ngIf="signInForm.get('email').hasError('maxlength')">
+          Email cannot exceed 50 characters.
         </small>
       </div>
       <div class="pass">
@@ -55,6 +71,9 @@
         >
         <small *ngIf="signInForm.get('password').hasError('strongPassword')"
           >Password is not strong enough.</small
+        >
+        <small *ngIf="signInForm.get('password').hasError('maxlength')"
+          >Password cannot exceed 20 characters</small
         >
       </div>
       <div>
@@ -81,7 +100,7 @@
         type="submit"
         [disabled]="!signInForm.valid"
       >
-        SignIn
+        SignUp
       </button>
     </div>
     <div class="error">{{ error }}</div>

@@ -9,16 +9,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   isLoading = false;
+
   @Output() searchElement = new EventEmitter<object>();
+
   ngOnInit() {
     this.searchForm = new FormGroup({
       fromLoc: new FormControl(null, [Validators.required]),
       toLoc: new FormControl(null, [Validators.required]),
-      date: new FormControl(null, [Validators.required]),
     });
   }
+
   OnShow() {
     console.log(this.searchForm.value);
     this.searchElement.emit(this.searchForm.value);
   }
+  
 }

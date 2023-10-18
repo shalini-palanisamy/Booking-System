@@ -21,6 +21,7 @@ import { BusStatusComponent } from './admin/BusStatus/BusStatus.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthGuard } from './auth/auth.guard';
 import { AddBusComponent } from './admin/addBus/addBus.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: '', component: HeaderComponent },
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
   ],
   providers: [
     {

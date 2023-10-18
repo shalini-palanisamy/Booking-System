@@ -11,13 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./BusStatus.component.css'],
 })
 export class BusStatusComponent implements OnInit {
+  searchStatus = false;
+  busData;
+  searchBus;
+  showtable = false;
+  SeatDetails;
+  showForm = false;
+  CancelForm: FormGroup;
+  cancelticket = false;
+
   constructor(
     private http: HttpClient,
     private SeatView: SeatFetchService,
     private authSerive: AuthService,
     private route: Router
   ) {}
-  cancelticket = false;
+
   ngOnInit(): void {
     this.http
       .get('https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json')
@@ -41,14 +50,6 @@ export class BusStatusComponent implements OnInit {
       SeatName: new FormControl(null, [Validators.required, Validators.email]),
     });
   }
-
-  searchStatus = false;
-  busData;
-  searchBus;
-  showtable = false;
-  SeatDetails;
-  showForm = false;
-  CancelForm: FormGroup;
 
   OnView(bus) {
     this.searchStatus = false;
@@ -99,9 +100,12 @@ export class BusStatusComponent implements OnInit {
         const match = index.SeatNo.match(/\d+/); // This regex matches one or more digits
         if (match) {
           extractedNumber = parseInt(match[0], 10); // Convert the matched string to an integer
-          console.log(extractedNumber); // This will print 20 to the console
         }
-        this.SeatView.cancellationAdjust(this.SeatDetails, extractedNumber - 1,index);
+        this.SeatView.cancellationAdjust(
+          this.SeatDetails,
+          extractedNumber - 1,
+          index
+        );
         this.SeatView.cancellation(index);
         this.SeatView.OnFetch(this.SeatView.SelectedBus.BusNo).subscribe(
           (res) => {

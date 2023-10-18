@@ -59,36 +59,36 @@ export class AddBusComponent implements OnInit {
     });
   }
   Onsubmit() {
-    console.log(this.AddBusForm);
-    this.BusToAdd.BusName = this.AddBusForm.value.BusName;
-    this.BusToAdd.BusValue = this.AddBusForm.value.BusNo;
-    this.BusToAdd.FromLocation = this.AddBusForm.value.FromLoc;
-    this.BusToAdd.ToLocation = this.AddBusForm.value.ToLoc;
-    this.BusToAdd.Price = this.AddBusForm.value.SeaterPrice;
-    this.BusToAdd.seats.seater.price = this.AddBusForm.value.SeaterPrice;
-    this.BusToAdd.seats.sleeper.upper.price =
-      this.AddBusForm.value.SleeperPrice;
-    this.BusToAdd.seats.sleeper.lower.price =
-      this.AddBusForm.value.SleeperPrice + 200;
-    this.BusToAdd.BusNo = this.SeatView.TotalBus + 1;
-    this.http
-      .post(
-        'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json',
-        this.BusToAdd
-      )
-      .pipe(
-        map((data: any) => {
-          return data.name;
-        })
-      )
-      .subscribe((res) => {
-        this.BusToAdd.id = res;
-        this.addseatSearvice.addSeats(res);
-        alert('The Bus has been added');
-        this.editUrl();
-      });
+    if (this.AddBusForm.valid) {
+      this.BusToAdd.BusName = this.AddBusForm.value.BusName;
+      this.BusToAdd.BusValue = this.AddBusForm.value.BusNo;
+      this.BusToAdd.FromLocation = this.AddBusForm.value.FromLoc;
+      this.BusToAdd.ToLocation = this.AddBusForm.value.ToLoc;
+      this.BusToAdd.Price = this.AddBusForm.value.SeaterPrice;
+      this.BusToAdd.seats.seater.price = this.AddBusForm.value.SeaterPrice;
+      this.BusToAdd.seats.sleeper.upper.price =
+        this.AddBusForm.value.SleeperPrice;
+      this.BusToAdd.seats.sleeper.lower.price =
+        this.AddBusForm.value.SleeperPrice + 200;
+      this.BusToAdd.BusNo = this.SeatView.TotalBus + 1;
+      this.http
+        .post(
+          'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json',
+          this.BusToAdd
+        )
+        .pipe(
+          map((data: any) => {
+            return data.name;
+          })
+        )
+        .subscribe((res) => {
+          this.BusToAdd.id = res;
+          this.addseatSearvice.addSeats(res);
+          alert('The Bus has been added');
+          this.editUrl();
+        });
+    }
   }
-
   editUrl() {
     this.http
       .put(

@@ -11,15 +11,14 @@ import { map } from 'rxjs';
   styleUrls: ['./addBus.component.css'],
 })
 export class AddBusComponent implements OnInit {
-  AddBusForm: FormGroup;
-  callEdit = false;
+  addBusForm: FormGroup;
   dataUrl;
   constructor(
     private SeatView: SeatFetchService,
     private http: HttpClient,
     private addseatSearvice: addSeatService
   ) {}
-  BusToAdd = {
+  busToAdd = {
     BookedSeats: { seater: 0, sleeper: 0 },
     AvailbleSeat: { seater: 18, sleeper: 20 },
     BusName: '',
@@ -49,7 +48,8 @@ export class AddBusComponent implements OnInit {
     id: '',
   };
   ngOnInit() {
-    this.AddBusForm = new FormGroup({
+    // Initialize the AddBusForm with form controls and validation rules
+    this.addBusForm = new FormGroup({
       BusName: new FormControl(null, [Validators.required]),
       BusNo: new FormControl(null, [Validators.required]),
       FromLoc: new FormControl(null, [Validators.required]),
@@ -58,23 +58,27 @@ export class AddBusComponent implements OnInit {
       SleeperPrice: new FormControl(null, [Validators.required]),
     });
   }
-  Onsubmit() {
-    if (this.AddBusForm.valid) {
-      this.BusToAdd.BusName = this.AddBusForm.value.BusName;
-      this.BusToAdd.BusValue = this.AddBusForm.value.BusNo;
-      this.BusToAdd.FromLocation = this.AddBusForm.value.FromLoc;
-      this.BusToAdd.ToLocation = this.AddBusForm.value.ToLoc;
-      this.BusToAdd.Price = this.AddBusForm.value.SeaterPrice;
-      this.BusToAdd.seats.seater.price = this.AddBusForm.value.SeaterPrice;
-      this.BusToAdd.seats.sleeper.upper.price =
-        this.AddBusForm.value.SleeperPrice;
-      this.BusToAdd.seats.sleeper.lower.price =
-        this.AddBusForm.value.SleeperPrice + 200;
-      this.BusToAdd.BusNo = this.SeatView.TotalBus + 1;
+
+  // Method to handle bus addition form submission
+  submitBusData() {
+    if (this.addBusForm.valid) {
+      // Populate the BusToAdd structure with form values
+      this.busToAdd.BusName = this.addBusForm.value.BusName;
+      this.busToAdd.BusValue = this.addBusForm.value.BusNo;
+      this.busToAdd.FromLocation = this.addBusForm.value.FromLoc;
+      this.busToAdd.ToLocation = this.addBusForm.value.ToLoc;
+      this.busToAdd.Price = this.addBusForm.value.SeaterPrice;
+      this.busToAdd.seats.seater.price = this.addBusForm.value.SeaterPrice;
+      this.busToAdd.seats.sleeper.upper.price =
+        this.addBusForm.value.SleeperPrice;
+      this.busToAdd.seats.sleeper.lower.price =
+        this.addBusForm.value.SleeperPrice + 200;
+      this.busToAdd.BusNo = this.SeatView.totalBus + 1;
+      // Post the new bus data to the Firebase database
       this.http
         .post(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json',
-          this.BusToAdd
+          this.busToAdd
         )
         .pipe(
           map((data: any) => {
@@ -82,23 +86,25 @@ export class AddBusComponent implements OnInit {
           })
         )
         .subscribe((res) => {
-          this.BusToAdd.id = res;
+          this.busToAdd.id = res;
+          // Add seats for the newly created bus
           this.addseatSearvice.addSeats(res);
+          // Display a success alert
           alert('The Bus has been added');
+          // Update the URL of the bus
           this.editUrl();
         });
     }
   }
+  // Method to edit the URL of the bus
   editUrl() {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-          this.BusToAdd.id +
+          this.busToAdd.id +
           '.json',
-        this.BusToAdd
+        this.busToAdd
       )
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe((res) => {});
   }
 }

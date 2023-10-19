@@ -106,3 +106,7 @@ input {
 #value {
   margin-left: 1000px;
 }
+.reset {
+  margin-left: 50px;
+  background-color: black;
+}

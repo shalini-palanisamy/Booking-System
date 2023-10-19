@@ -10,39 +10,11 @@
 <div class="container">
   <div class="search">
     <app-search (searchElement)="extractedBuses($event)"></app-search>
+    <button (click)="resetSearch()" class="reset">Reset Search</button>
   </div>
-  <div class="content">
-    <div *ngIf="searchStatus === false">
-      <div *ngFor="let busValue of busesFetched" class="contentval">
-        <div class="items" (click)="passSelectedBusData(busValue)">
-          <div class="firLine">
-            <h3 class="busName">{{ busValue.BusName }}</h3>
-            <p class="Price">Rs.{{ busValue.Price }}</p>
-          </div>
-          <div class="date">
-            <div>
-              <p>{{ busValue.FromLocation }}</p>
-              <p>{{ busValue.time.startTime }}</p>
-            </div>
-            <div>
-              <p><----{{ busValue.time.totalHours }}----></p>
-            </div>
-            <div>
-              <p>{{ busValue.ToLocation }}</p>
-              <p>{{ busValue.time.endTime }}</p>
-            </div>
-          </div>
-          <p>
-            Seater: {{ busValue.AvailbleSeat.seater }}/Sleeper:
-            {{ busValue.AvailbleSeat.sleeper }}
-          </p>
-
-          <p class="Rating">{{ busValue.Rating }}</p>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="searchStatus">
-      <div *ngFor="let busValue of searchResult" class="contentval">
+  <div *ngIf="searchStatus ? searchResult : busesFetched as displayedData">
+    <div *ngFor="let busValue of displayedData" class="contentval">
+      <div class="items" (click)="selectBus(busValue)">
         <div class="items" (click)="passSelectedBusData(busValue)">
           <div class="firLine">
             <h3 class="busName">{{ busValue.BusName }}</h3>

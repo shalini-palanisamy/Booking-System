@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { SeatsService } from './BusSeats/Seats.servicce';
 import { AuthService } from '../auth/auth.service';
+import { SearchStatusService } from './search/searchstatus.service';
 
 @Component({
   selector: 'app-viewBus',
@@ -20,10 +21,15 @@ export class ViewBusComponent implements OnInit {
     private route: Router,
     private router: ActivatedRoute,
     private busSelectedService: SeatsService,
-    private authSerive: AuthService
+    private authSerive: AuthService,
+    private searchStatusService: SearchStatusService
   ) {}
 
   ngOnInit() {
+    this.searchStatusService.searchStatus.subscribe((status) => {
+      this.searchStatus = status;
+    });
+
     //To fetch the Bus details as an object of array from database
     this.http
       .get('https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json')
@@ -45,7 +51,6 @@ export class ViewBusComponent implements OnInit {
 
   extractedBuses(searchValue) {
     this.searchResult = [];
-    this.searchStatus = true;
     //searchValue will holds the input from the user for from and to location
     searchValue.fromLoc = searchValue.fromLoc.toLowerCase(); //this will convert the string to lowerCase to preform validation
     searchValue.toLoc = searchValue.toLoc.toLowerCase();
@@ -68,5 +73,9 @@ export class ViewBusComponent implements OnInit {
 
   logOut() {
     this.authSerive.logOut(); //call the auth service logout method
+  }
+  resetSearch() {
+    this.searchStatus = false;
+    this.searchResult = [];
   }
 }

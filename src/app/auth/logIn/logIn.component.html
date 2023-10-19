@@ -2,7 +2,7 @@
   <div *ngIf="isLoading" class="load">
     <app-loading></app-loading>
   </div>
-  <form [formGroup]="logInForm" (ngSubmit)="Onsubmit()" *ngIf="!isLoading">
+  <form [formGroup]="logInForm" (ngSubmit)="submitLogIn()" *ngIf="!isLoading">
     <div class="form-group">
       <div>
         <label for="">Email*</label>

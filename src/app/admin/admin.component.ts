@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthResponseData, AuthService } from '../auth/auth.service';
+import { AuthResponseData, AuthService } from '../auth/auth.service'; // Import required modules and services.
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -10,69 +10,60 @@ import { Observable } from 'rxjs';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  logInForm: FormGroup;
-  validateAdmin;
-  displayError = false;
+  logInForm: FormGroup; // FormGroup to manage the login form controls.
+  validateAdmin; // Placeholder for admin validation logic (not defined here).
+  displayError = false; // Flag to indicate whether to display an error message.
+
   constructor(private authService: AuthService, private route: Router) {}
+
   ngOnInit() {
+    // Initialize the login form with email and password fields and their respective validators.
+
     this.logInForm = new FormGroup({
       email: new FormControl(null, [
-        Validators.required,
-        Validators.email,
-        Validators.maxLength(50),
+        Validators.required, // Email is required.
+        Validators.email, // Ensure that the email is a valid email address.
+        Validators.maxLength(50), // Maximum character length for email.
       ]),
       password: new FormControl(null, [
-        Validators.required,
-        Validators.maxLength(20),
+        Validators.required, // Password is required.
+        Validators.maxLength(20), // Maximum character length for the password.
       ]),
     });
   }
-  Onsubmit() {
+
+  // Function to handle the login form submission.
+  submitLogIn() {
     console.log(this.logInForm);
     if (!this.logInForm.valid) {
-      return;
+      return; // If the form is not valid, do not proceed with login.
     }
-    const email = this.logInForm.value.email;
-    const password = this.logInForm.value.password;
+
+    const email = this.logInForm.value.email; // Get the email from the form.
+    const password = this.logInForm.value.password; // Get the password from the form.
 
     let authObs: Observable<AuthResponseData>;
+
+    // Check if the provided email and password match admin credentials.
     if (email === 'idpuser@gmail.com' && password === 'IdpIndia@68') {
+      // If they match, attempt to log in through the authentication service.
       authObs = this.authService.logIn(email, password);
+
       authObs.subscribe(
         (resData) => {
-          console.log(resData);
-          this.route.navigate(['busStatus']);
+          console.log(resData); // Log the response data (e.g., successful login).
+          this.route.navigate(['busStatus']); // Navigate to a different page after a successful login.
         },
         (errorMessage) => {
-          console.log(errorMessage);
-          this.logInForm.reset();
-          this.logInForm.get('password').markAsUntouched();
+          console.log(errorMessage); // Log any error messages from the login attempt.
+          this.logInForm.reset(); // Reset the form to clear input fields.
+          this.logInForm.get('password').markAsUntouched(); // Mark the password field as untouched.
         }
       );
     } else {
-      this.logInForm.reset();
-      this.logInForm.get('password').markAsUntouched();
-      alert('Invalid User');
+      this.logInForm.reset(); // Reset the form to clear input fields.
+      this.logInForm.get('password').markAsUntouched(); // Mark the password field as untouched.
+      alert('Invalid User'); // Display an alert for an invalid user.
     }
-    // this.http
-    //   .get(
-    //     'https://ebusticketbooking-default-rtdb.firebaseio.com/Admin/-NfKDIcNtwH4ta-aU1zc.json'
-    //   )
-    //   .pipe(
-    //     map((data) => {
-    //       return data;
-    //     })
-    //   )
-    //   .subscribe((res) => {
-    //     this.validateAdmin = res;
-    //     if (
-    //       this.logInForm.value.email === this.validateAdmin.UserEmail &&
-    //       this.logInForm.value.password === this.validateAdmin.passWord
-    //     ) {
-    //       this.route.navigate(['busStatus'], { relativeTo: this.router });
-    //     } else {
-    //       this.displayError = true;
-    //     }
-    //   });
   }
 }

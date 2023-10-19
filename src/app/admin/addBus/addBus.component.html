@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="AddBusForm" (ngSubmit)="Onsubmit()">
+  <form [formGroup]="addBusForm" (ngSubmit)="submitBusData()">
     <div class="form-group">
       <div class="busName">
         <label for="">Bus Name*</label>
@@ -11,8 +11,8 @@
         />
         <small
           *ngIf="
-            !AddBusForm.get('BusName').valid &&
-            AddBusForm.get('BusName').touched
+            !addBusForm.get('BusName').valid &&
+            addBusForm.get('BusName').touched
           "
         >
           This field is required*
@@ -29,7 +29,7 @@
         />
         <small
           *ngIf="
-            !AddBusForm.get('BusNo').valid && AddBusForm.get('BusNo').touched
+            !addBusForm.get('BusNo').valid && addBusForm.get('BusNo').touched
           "
         >
           Please enter the required field*
@@ -46,8 +46,8 @@
         />
         <small
           *ngIf="
-            !AddBusForm.get('FromLoc').valid &&
-            AddBusForm.get('FromLoc').touched
+            !addBusForm.get('FromLoc').valid &&
+            addBusForm.get('FromLoc').touched
           "
         >
           Please enter the required field*
@@ -64,7 +64,7 @@
         />
         <small
           *ngIf="
-            !AddBusForm.get('ToLoc').valid && AddBusForm.get('ToLoc').touched
+            !addBusForm.get('ToLoc').valid && addBusForm.get('ToLoc').touched
           "
         >
           Please enter the required field*
@@ -81,8 +81,8 @@
         />
         <small
           *ngIf="
-            !AddBusForm.get('SeaterPrice').valid &&
-            AddBusForm.get('SeaterPrice').touched
+            !addBusForm.get('SeaterPrice').valid &&
+            addBusForm.get('SeaterPrice').touched
           "
         >
           Please enter the required field*
@@ -99,14 +99,14 @@
         />
         <small
           *ngIf="
-            !AddBusForm.get('SleeperPrice').valid &&
-            AddBusForm.get('SleeperPrice').touched
+            !addBusForm.get('SleeperPrice').valid &&
+            addBusForm.get('SleeperPrice').touched
           "
         >
           Please enter the required field*
         </small>
       </div>
-      <button type="submit" [disabled]="!AddBusForm.valid">Add Bus</button>
+      <button type="submit" [disabled]="!addBusForm.valid">Add Bus</button>
     </div>
   </form>
 </div>

@@ -4,7 +4,7 @@ import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class addSeatService {
-  CountSeat = 0;
+  countSeat = 0;
   Seats = {
     SeatNo: '',
     SeatPosition: '',
@@ -19,13 +19,14 @@ export class addSeatService {
   };
   storeValue;
   selectedBus;
+
   constructor(private http: HttpClient) {}
-  addSeats(BusId) {
-    console.log(BusId);
+  // Method to add seats for a specific bus
+  addSeats(busId) {
     this.http
       .get(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-          BusId +
+          busId +
           '.json'
       )
       .pipe(
@@ -38,8 +39,10 @@ export class addSeatService {
         this.updateSeat();
       });
   }
+  // Method to update seats for the selected bus
   updateSeat() {
-    this.CountSeat =
+    // Calculate the total number of seats for the bus
+    this.countSeat =
       this.selectedBus.seats.seater.TotalSeats +
       this.selectedBus.seats.sleeper.upper.TotalSeats +
       this.selectedBus.seats.sleeper.lower.TotalSeats;
@@ -118,7 +121,7 @@ export class addSeatService {
         this.selectedBus.seats.seater.TotalSeats +
         this.selectedBus.seats.sleeper.lower.TotalSeats +
         1;
-      seatindex <= this.CountSeat;
+      seatindex <= this.countSeat;
       seatindex++
     ) {
       this.Seats.Busno = this.selectedBus.BusNo;
@@ -157,8 +160,8 @@ export class addSeatService {
       })(this, currentSeat);
     }
   }
+  // Method to edit seat URL
   editUrl(value) {
-    console.log(value);
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +

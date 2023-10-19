@@ -2,7 +2,7 @@
   <div *ngIf="isLoading" class="load">
     <app-loading></app-loading>
   </div>
-  <form [formGroup]="signInForm" (ngSubmit)="Onsubmit()" *ngIf="!isLoading">
+  <form [formGroup]="signInForm" (ngSubmit)="submitSignUp()" *ngIf="!isLoading">
     <h2>SignUp</h2>
     <div class="form-group">
       <div>

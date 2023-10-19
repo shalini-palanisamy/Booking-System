@@ -4,14 +4,17 @@ import { map } from 'rxjs';
 import { SeatsService } from 'src/app/viewBus/BusSeats/Seats.servicce';
 @Injectable({ providedIn: 'root' })
 export class SeatFetchService {
-  SelectedBus;
-  TotalBus;
+  selectedBus; // Holds the selected bus information.
+  totalBus;
+
   constructor(private http: HttpClient, private seatService: SeatsService) {}
-  OnFetch(Bus) {
+
+  // Fetch seat data for a specific bus.
+  fetchBusDetails(bus) {
     return this.http
       .get(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          Bus.BusNo +
+          bus.BusNo +
           '.json'
       )
       .pipe(
@@ -27,50 +30,52 @@ export class SeatFetchService {
         })
       );
   }
-  cancellation(data) {
-    console.log(data);
-    console.log(this.SelectedBus);
 
+  // Handle seat cancellation.
+  cancellation(data) {
+    // Update booked and available seats for 'seater' type.
     if (data.SeatType === 'seater') {
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.SelectedBus.id +
+            this.selectedBus.id +
             '/BookedSeats/seater.json',
-          Math.abs(this.SelectedBus.BookedSeats.seater - 1)
+          Math.abs(this.selectedBus.BookedSeats.seater - 1)
         )
         .subscribe((res) => {});
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.SelectedBus.id +
+            this.selectedBus.id +
             '/AvailbleSeat/seater.json',
-          this.SelectedBus.AvailbleSeat.seater + 1
+          this.selectedBus.AvailbleSeat.seater + 1
         )
         .subscribe((res) => {});
     } else {
+      // Update booked and available seats for 'sleeper' type.
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.SelectedBus.id +
+            this.selectedBus.id +
             '/BookedSeats/sleeper.json',
-          Math.abs(this.SelectedBus.BookedSeats.sleeper - 1)
+          Math.abs(this.selectedBus.BookedSeats.sleeper - 1)
         )
         .subscribe((res) => {});
 
       this.http
         .put(
           'https://ebusticketbooking-default-rtdb.firebaseio.com/Buses/' +
-            this.SelectedBus.id +
+            this.selectedBus.id +
             '/AvailbleSeat/sleeper.json',
-          this.SelectedBus.AvailbleSeat.sleeper + 1
+          this.selectedBus.AvailbleSeat.sleeper + 1
         )
         .subscribe((res) => {});
     }
+    // Update booking status and related customer information.
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.SelectedBus.BusNo +
+          this.selectedBus.BusNo +
           '/' +
           data.id +
           '/BookingStatus.json',
@@ -80,7 +85,7 @@ export class SeatFetchService {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.SelectedBus.BusNo +
+          this.selectedBus.BusNo +
           '/' +
           data.id +
           '/CustAge.json',
@@ -90,7 +95,7 @@ export class SeatFetchService {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.SelectedBus.BusNo +
+          this.selectedBus.BusNo +
           '/' +
           data.id +
           '/CustName.json',
@@ -100,7 +105,7 @@ export class SeatFetchService {
     this.http
       .put(
         'https://ebusticketbooking-default-rtdb.firebaseio.com/BusNo' +
-          this.SelectedBus.BusNo +
+          this.selectedBus.BusNo +
           '/' +
           data.id +
           '/CustGender.json',
@@ -108,10 +113,8 @@ export class SeatFetchService {
       )
       .subscribe((res) => {});
   }
+  // Update booking status and related customer information.
   cancellationAdjust(Stucture, index, value) {
-    console.log(Stucture);
-    console.log(index);
-    console.log(value);
     if (value.BookingStatus === true) {
       if (value.SeatNo.includes('W')) {
         if (Stucture[index + 1].BookingStatus === false) {

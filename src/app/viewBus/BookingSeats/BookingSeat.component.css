@@ -107,3 +107,7 @@ header button {
   height: 20px;
   margin-top: 0px;
 }
+button:disabled {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}

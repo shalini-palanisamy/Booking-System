@@ -143,6 +143,7 @@
             name="gender"
             class="form-control"
             formControlName="gender"
+            [required]="formVal.CustGender === ''"
           >
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -153,7 +154,9 @@
     <div>
       <h3>Total Price:{{ totalPrice }}</h3>
     </div>
-    <button type="submit">Confirm Booking</button>
+    <button type="submit" [disabled]="!submitBooking.valid">
+      Confirm Booking
+    </button>
   </form>
   <div *ngIf="showConfirm && !paymentConfirm">
     <div *ngFor="let value of seatDataArray" class="status">

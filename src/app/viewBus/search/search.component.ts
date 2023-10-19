@@ -15,8 +15,18 @@ export class SearchComponent implements OnInit {
   constructor(private searchStatusService: SearchStatusService) {}
   ngOnInit() {
     this.searchForm = new FormGroup({
-      fromLoc: new FormControl(null, [Validators.required]),
-      toLoc: new FormControl(null, [Validators.required]),
+      fromLoc: new FormControl(null, [
+        Validators.maxLength(15), // Maximum character length for 'name' field.
+        Validators.required, // The 'name' field is required.
+        Validators.minLength(3), // Minimum length of 3 characters for 'name' field.
+        this.customNameValidator(), // Custom validation function for 'name'.
+      ]),
+      toLoc: new FormControl(null, [
+        Validators.maxLength(15), // Maximum character length for 'name' field.
+        Validators.required, // The 'name' field is required.
+        Validators.minLength(3), // Minimum length of 3 characters for 'name' field.
+        this.customNameValidator(), // Custom validation function for 'name'.
+      ]),
     }); //Creating controls for reactive form
   }
 
@@ -24,4 +34,16 @@ export class SearchComponent implements OnInit {
     this.searchStatusService.setSearchStatus(true);
     this.searchElement.emit(this.searchForm.value);
   } //to emit the value from user through form to parent component
+
+  // Custom validation function for 'name' field.
+  customNameValidator() {
+    return (control: FormControl): { [key: string]: any } | null => {
+      const namePattern = /^[a-zA-Z\s]*$/; // Regular expression pattern for valid names (letters and spaces).
+      const value = control.value;
+      if (!namePattern.test(value)) {
+        return { invalidName: true }; // Return an error if the name is invalid.
+      }
+      return null; // Name is valid.
+    };
+  }
 }

@@ -49,6 +49,9 @@
         <small *ngIf="signInForm.get('email').hasError('email')">
           Please enter a valid email address.
         </small>
+        <small *ngIf="signInForm.get('email').hasError('minlength')">
+          Minimum length should be 6.
+        </small>
         <small *ngIf="signInForm.get('email').hasError('maxlength')">
           Email cannot exceed 50 characters.
         </small>
@@ -62,19 +65,41 @@
           class="form-control"
           formControlName="password"
         />
+        <small *ngIf="signInForm.get('password').hasError('maxlength')"
+          >Password cannot exceed 20 characters</small
+        >
         <small
           *ngIf="
             signInForm.get('password').hasError('required') &&
             signInForm.get('password').touched
           "
-          >Password is required.</small
         >
-        <small *ngIf="signInForm.get('password').hasError('strongPassword')"
-          >Password is not strong enough.</small
+          Password is required.
+        </small>
+        <small
+          *ngIf="signInForm.get('password').hasError('capitalLetterMissing')"
         >
-        <small *ngIf="signInForm.get('password').hasError('maxlength')"
-          >Password cannot exceed 20 characters</small
+          Password must contain at least one capital letter.
+        </small>
+        <small
+          *ngIf="signInForm.get('password').hasError('smallLetterMissing')"
         >
+          Password must contain at least one small letter.
+        </small>
+        <small *ngIf="signInForm.get('password').hasError('numberMissing')">
+          Password must contain at least one number.
+        </small>
+        <small
+          *ngIf="signInForm.get('password').hasError('specialCharacterMissing')"
+        >
+          Password must contain at least one special character (@$!%*?&).
+        </small>
+        <small *ngIf="signInForm.get('password').hasError('strongPassword')">
+          Password is not strong enough.
+        </small>
+        <small *ngIf="signInForm.get('password').hasError('maxlength')">
+          Password cannot exceed 20 characters.
+        </small>
       </div>
       <div>
         <label for="confirmPassword">Confirm Password*</label>

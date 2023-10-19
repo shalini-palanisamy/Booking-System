@@ -54,10 +54,12 @@ export class LogInComponent implements OnInit {
 
       authObs.subscribe(
         (resData) => {
+          console.log(resData);
           this.isLoading = false; // Set isLoading to false after the login request.
           this.route.navigate(['viewBus']); // Navigate to a different page after a successful login.
         },
         (errorMessage) => {
+          console.log(errorMessage);
           this.error = errorMessage; // Store and display any error message from the login attempt.
           this.isLoading = false; // Set isLoading to false after the login request.
           this.logInForm.reset(); // Reset the form to clear input fields.

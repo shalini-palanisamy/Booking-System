@@ -27,11 +27,13 @@ export class SignInComponent implements OnInit {
         this.customNameValidator(), // Custom validation function for 'name'.
       ]),
       email: new FormControl(null, [
+        Validators.minLength(6),
         Validators.email, // Ensure that the 'email' is a valid email address.
         Validators.required, // The 'email' field is required.
         Validators.maxLength(50), // Maximum character length for 'email' field.
       ]),
       password: new FormControl(null, [
+        Validators.minLength(8),
         Validators.maxLength(20), // Maximum character length for 'password' field.
         Validators.required, // The 'password' field is required.
         this.passwordFormField(), // Custom validation function for 'password'.
@@ -103,14 +105,30 @@ export class SignInComponent implements OnInit {
       if (!password) {
         return null; // No validation error if the password is empty.
       }
+
       const regex =
         /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       // Regular expression pattern for a strong password.
 
-      if (!regex.test(password)) {
-        return { strongPassword: true }; // Return an error if the password is not strong.
+      const errors = {};
+
+      if (!/[A-Z]/.test(password)) {
+        errors['capitalLetterMissing'] = true;
       }
-      return null; // Password is strong.
+      if (!/[a-z]/.test(password)) {
+        errors['smallLetterMissing'] = true;
+      }
+      if (!/\d/.test(password)) {
+        errors['numberMissing'] = true;
+      }
+      if (!/[@$!%*?&]/.test(password)) {
+        errors['specialCharacterMissing'] = true;
+      }
+      if (!regex.test(password)) {
+        errors['strongPassword'] = true;
+      }
+
+      return Object.keys(errors).length > 0 ? errors : null;
     };
   }
 

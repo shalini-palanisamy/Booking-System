@@ -1,3 +1,25 @@
+header {
+  background-color: rgb(128, 126, 126);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+header * {
+  display: inline;
+}
+header li a {
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+}
+header li {
+  margin: 20px;
+}
+
 input[type="checkbox"] {
   display: none;
 }
@@ -270,4 +292,16 @@ button {
   justify-content: left;
   gap: 250px;
   margin-left: 300px;
+}
+.busName {
+  margin-top: 70px;
+}
+header button {
+  background-color: rgb(128, 126, 126);
+  border: none;
+  color: white;
+  height: 20px;
+  margin-top: 0px;
+  width: 100px;
+  margin-left: 900px;
 }

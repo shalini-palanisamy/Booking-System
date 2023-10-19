@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SeatsService } from './Seats.servicce';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-busSeats',
@@ -19,7 +20,8 @@ export class BusSeatsComponent implements OnInit {
   constructor(
     private seatService: SeatsService,
     private route: Router,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private authSerive: AuthService // Authentication service
   ) {}
 
   ngOnInit(): void {
@@ -210,5 +212,10 @@ export class BusSeatsComponent implements OnInit {
       // Alert the user that no seats are selected
       alert('No seats are selected...');
     }
+  }
+
+  logout() {
+    // Log out the user
+    this.authSerive.logOut();
   }
 }

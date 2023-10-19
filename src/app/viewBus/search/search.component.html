@@ -12,11 +12,21 @@
           />
           <small
             *ngIf="
-              searchForm.get('fromLoc').hasError('required') &&
-              searchForm.get('fromLoc').touched
+              !searchForm.get('fromLoc').valid &&
+              searchForm.get('toLoc').touched
             "
-            >Please enter the required field*</small
           >
+            Please enter the required field*
+          </small>
+          <small *ngIf="searchForm.get('fromLoc').hasError('minlength')">
+            Minimum length should be 3 characters.
+          </small>
+          <small *ngIf="searchForm.get('fromLoc').hasError('maxlength')"
+            >Maximum length should be 50 characters.</small
+          >
+          <small *ngIf="searchForm.get('fromLoc').hasError('invalidName')">
+            Invalid name format (only letters and spaces).
+          </small>
         </div>
         <div>
           <label for="ToLocation">To</label>
@@ -28,11 +38,20 @@
           />
           <small
             *ngIf="
-              searchForm.get('toLoc').hasError('required') &&
-              searchForm.get('toLoc').touched
+              !searchForm.get('toLoc').valid && searchForm.get('toLoc').touched
             "
-            >Please enter the required field*</small
           >
+            Please enter the required field*
+          </small>
+          <small *ngIf="searchForm.get('toLoc').hasError('minlength')">
+            Minimum length should be 3 characters.
+          </small>
+          <small *ngIf="searchForm.get('toLoc').hasError('maxlength')"
+            >Maximum length should be 50 characters.</small
+          >
+          <small *ngIf="searchForm.get('toLoc').hasError('invalidName')">
+            Invalid name format (only letters and spaces).
+          </small>
         </div>
       </div>
       <button type="submit" [disabled]="!searchForm.valid">Search</button>

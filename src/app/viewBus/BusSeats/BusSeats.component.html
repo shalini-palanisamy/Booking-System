@@ -1,4 +1,13 @@
-<div class="header">
+<header>
+  <nav>
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/viewBus">Ticket Booking</a></li>
+      <button (click)="logout()" class="">Logout</button>
+    </ul>
+  </nav>
+</header>
+<div class="busName">
   <div>
     <h3>{{ busDetails.BusName }}</h3>
   </div>
@@ -155,6 +164,8 @@
       <div class="table-cell"><p>TOTAL SEATS:</p></div>
       <div class="table-cell">{{ totalSeats }}</div>
     </div>
-    <div><button type="submit" (click)="confirmSeats()">Confirm Seats</button></div>
+    <div>
+      <button type="submit" (click)="confirmSeats()">Confirm Seats</button>
+    </div>
   </div>
 </div>

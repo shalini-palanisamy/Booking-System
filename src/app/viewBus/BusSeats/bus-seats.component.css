@@ -7,7 +7,9 @@ header {
   height: 50px;
   display: flex;
   align-items: center;
+  z-index: 100; /* Add this line */
 }
+
 header * {
   display: inline;
 }
@@ -27,9 +29,9 @@ input[type="checkbox"] {
 /* Create a custom checkbox container */
 .custom-checkbox {
   display: inline-block;
-  position: relative;
   width: 50px; /* Set the width and height as per your image size */
   height: 50px;
+  position: sticky;
 }
 
 /* Style the custom checkbox */
@@ -208,6 +210,7 @@ button {
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr; /* Two columns */
   grid-gap: 50px; /* Gap between columns */
+  padding-top: 50px;
 }
 .left-column-seater label {
   margin-bottom: 0px;

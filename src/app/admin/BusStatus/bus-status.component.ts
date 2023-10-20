@@ -2,42 +2,45 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SeatFetchService } from './SeatFetch.service';
+import { SeatFetchService } from './seat-fetch.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
-import { SearchStatusService } from 'src/app/viewBus/search/searchstatus.service';
+import { SearchStatusService } from 'src/app/viewBus/search/search-status.service';
 @Component({
-  selector: 'app-busStatus',
-  templateUrl: './BusStatus.component.html',
-  styleUrls: ['./BusStatus.component.css'],
+  selector: 'app-bus-status',
+  templateUrl: './bus-status.component.html',
+  styleUrls: ['./bus-status.component.css'],
 })
 export class BusStatusComponent implements OnInit {
-  searchStatus = false;
-  busData;
-  searchBus;
-  showtable = false;
-  seatDetails;
-  showForm = false;
-  cancelForm: FormGroup;
-  cancelticket = false;
+  searchStatus = false; // Indicates the search status
+  busData; // Holds the bus data fetched from the API
+  searchBus; // Holds the search results
+  showtable = false; // Controls the visibility of the bus details table
+  seatDetails; // Holds the details of selected bus seats
+  showForm = false; // Controls the visibility of the form for seat cancellation
+  cancelForm: FormGroup; // Form for seat cancellation
+  cancelticket = false; // Indicates if a ticket cancellation is in progress
 
   constructor(
-    private http: HttpClient,
-    private seatView: SeatFetchService,
-    private authSerive: AuthService,
-    private route: Router,
-    private searchStatusService: SearchStatusService
+    private http: HttpClient, // HTTP client for making API requests
+    private seatView: SeatFetchService, // Service for fetching seat information
+    private authSerive: AuthService, // Authentication service
+    private route: Router, // Router for navigation
+    private searchStatusService: SearchStatusService // Service for managing search status
   ) {}
 
   ngOnInit(): void {
+    // Subscribe to changes in search status
     this.searchStatusService.searchStatus.subscribe((status) => {
       this.searchStatus = status;
     });
 
+    // Fetch bus data from the API
     this.http
       .get('https://ebusticketbooking-default-rtdb.firebaseio.com/Buses.json')
       .pipe(
         map((data) => {
+          // Process and restructure the fetched data
           const dataEntryed = [];
           for (const key in data) {
             if (data.hasOwnProperty(key)) {
@@ -48,21 +51,25 @@ export class BusStatusComponent implements OnInit {
         })
       )
       .subscribe((res) => {
-        this.busData = res;
-        this.seatView.totalBus = this.busData.length;
-        console.log(this.seatView.totalBus);
+        this.busData = res; // Store the fetched bus data
+        this.seatView.totalBus = this.busData.length; // Set the total number of buses
+        console.log(this.seatView.totalBus); // Log the total number of buses
       });
+
+    // Initialize the seat cancellation form
     this.cancelForm = new FormGroup({
       SeatName: new FormControl(null, [Validators.required, Validators.email]),
     });
   }
 
+  // Method to handle extracted bus data
   extractedBuses(bus) {
-    this.showtable = !this.showtable;
-    this.seatView.selectedBus = bus;
+    this.showtable = !this.showtable; // Toggle the visibility of the bus details table
+    this.seatView.selectedBus = bus; // Set the selected bus in the service
     this.seatView.fetchBusDetails(bus).subscribe((res) => {
-      this.seatDetails = res;
+      this.seatDetails = res; // Fetch and store details of selected bus seats
       const seatNumbers = this.seatDetails.map((item) => {
+        // Extract and parse seat numbers from SeatNo
         const seatNumber = parseInt(item.SeatNo.replace(/\D/g, ''), 10);
         return seatNumber;
       });
@@ -95,6 +102,7 @@ export class BusStatusComponent implements OnInit {
       } //To iterate the array of object fetched from DB which find the matches for the user input
     }
   }
+
   submitCancellation() {
     const seatName = this.cancelForm.value.SeatName.toUpperCase();
     const seatToCancel = this.seatDetails.find(
@@ -127,14 +135,25 @@ export class BusStatusComponent implements OnInit {
       alert('Seat Number entered was not valid or this seat is not booked...'); // Alert the user about the issue.
     }
   }
+
+  // Method to log the user out
   logOut() {
-    this.authSerive.logOut();
+    this.authSerive.logOut(); // Call the logout method from the authentication service
   }
+
+  // Method to navigate to the 'addBus' route
   addbus() {
-    this.route.navigate(['addBus']);
+    this.route.navigate(['addBus']); // Navigate to the 'addBus' route when called
   }
+
+  // Method to reset the search status and search results
   resetSearch() {
-    this.searchStatus = false;
-    this.searchBus = [];
+    this.searchStatus = false; // Reset the search status to false
+    this.searchBus = []; // Clear the search results by emptying the 'searchBus' array
+  }
+
+  // Function for tracking items in an *ngFor loop
+  trackByFn(index: number, bus: any) {
+    return bus.id; // Returns the unique identifier 'id' for tracking items in the loop
   }
 }

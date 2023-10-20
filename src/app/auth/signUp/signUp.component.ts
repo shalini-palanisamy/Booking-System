@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signIn',
-  templateUrl: './signIn.component.html',
-  styleUrls: ['./signIn.component.css'],
+  templateUrl: './signUp.component.html',
+  styleUrls: ['./signUp.component.css'],
 })
 export class SignInComponent implements OnInit {
   signInForm: FormGroup; // This FormGroup will manage our form's controls.

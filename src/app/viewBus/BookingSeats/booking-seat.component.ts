@@ -5,15 +5,15 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { SeatsService } from '../BusSeats/Seats.servicce';
-import { BookingEditSerive } from './BookingEdit.service';
+import { SeatsService } from '../BusSeats/seats.service';
+import { BookingEditSerive } from './booking-edit.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
-  selector: 'app-bookingSeat',
-  templateUrl: './BookingSeat.component.html',
-  styleUrls: ['./BookingSeat.component.css'],
+  selector: 'app-booking-seat',
+  templateUrl: './booking-seat.component.html',
+  styleUrls: ['./booking-seat.component.css'],
 })
 export class BookingSeatComponent implements OnInit {
   submitBooking: FormGroup; // Form group for submitting booking data

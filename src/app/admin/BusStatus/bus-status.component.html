@@ -11,7 +11,10 @@
 
   <div class="content">
     <ng-container *ngIf="searchStatus ? searchBus : busData as displayedData">
-      <div *ngFor="let busValue of displayedData" class="contentval">
+      <div
+        *ngFor="let busValue of displayedData; let i = index; trackBy: trackByFn"
+        class="contentval"
+      >
         <div
           class="items"
           (click)="extractedBuses(busValue); selectedBus = busValue.BusName"

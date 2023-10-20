@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SeatsService } from './Seats.servicce';
+import { SeatsService } from './seats.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
-  selector: 'app-busSeats',
-  templateUrl: './BusSeats.component.html',
-  styleUrls: ['./BusSeats.component.css'],
+  selector: 'app-bus-seats',
+  templateUrl: './bus-seats.component.html',
+  styleUrls: ['./bus-seats.component.css'],
 })
 export class BusSeatsComponent implements OnInit {
   fetchedSeatInfo; //hold the seat information of the selected bus
@@ -217,5 +217,9 @@ export class BusSeatsComponent implements OnInit {
   logout() {
     // Log out the user
     this.authSerive.logOut();
+  }
+
+  trackByFn(index: number, seat: any): any {
+    return seat.id;
   }
 }

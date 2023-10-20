@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SeatFetchService } from '../BusStatus/SeatFetch.service';
+import { SeatFetchService } from '../BusStatus/seat-fetch.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { addSeatService } from './addSeat.service';
+import { addSeatService } from './add-seat.service';
 import { map } from 'rxjs';
 
 @Component({
-  selector: 'app-addBus',
-  templateUrl: './addBus.component.html',
-  styleUrls: ['./addBus.component.css'],
+  selector: 'app-add-bus',
+  templateUrl: './add-bus.component.html',
+  styleUrls: ['./add-bus.component.css'],
 })
 export class AddBusComponent implements OnInit {
   addBusForm: FormGroup;

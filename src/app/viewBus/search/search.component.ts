@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SearchStatusService } from './searchstatus.service';
+import { SearchStatusService } from './search-status.service';
 
 @Component({
   selector: 'app-search',

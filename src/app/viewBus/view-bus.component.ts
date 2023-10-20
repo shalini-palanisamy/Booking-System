@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
-import { SeatsService } from './BusSeats/Seats.servicce';
+
 import { AuthService } from '../auth/auth.service';
-import { SearchStatusService } from './search/searchstatus.service';
+import { SearchStatusService } from './search/search-status.service';
+import { SeatsService } from './BusSeats/seats.service';
 
 @Component({
-  selector: 'app-viewBus',
-  templateUrl: './viewBus.component.html',
-  styleUrls: ['./viewBus.component.css'],
+  selector: 'app-view-bus',
+  templateUrl: './view-bus.component.html',
+  styleUrls: ['./view-bus.component.css'],
 })
 export class ViewBusComponent implements OnInit {
   searchStatus = false; //to trace the status of the searching function
@@ -74,8 +75,13 @@ export class ViewBusComponent implements OnInit {
   logOut() {
     this.authSerive.logOut(); //call the auth service logout method
   }
+
   resetSearch() {
     this.searchStatus = false;
     this.searchResult = [];
   }
+
+  trackByFn(index: number, busValue: any): any {
+    return busValue.id;
+  } //optimize rendering and improve performance when working with lists of dynamic data.
 }

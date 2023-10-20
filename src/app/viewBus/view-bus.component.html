@@ -1,7 +1,6 @@
 <header>
   <nav>
     <ul>
-      <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/viewBus">Ticket Booking</a></li>
       <button (click)="logOut()" class="loging">Logout</button>
     </ul>
@@ -13,7 +12,10 @@
     <button (click)="resetSearch()" class="reset">Reset Search</button>
   </div>
   <div *ngIf="searchStatus ? searchResult : busesFetched as displayedData">
-    <div *ngFor="let busValue of displayedData" class="contentval">
+    <div
+      *ngFor="let busValue of displayedData; let i = index; trackBy: trackByFn"
+      class="contentval"
+    >
       <div class="items" (click)="selectBus(busValue)">
         <div class="items" (click)="passSelectedBusData(busValue)">
           <div class="firLine">

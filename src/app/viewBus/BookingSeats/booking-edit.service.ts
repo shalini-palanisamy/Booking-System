@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SeatsService } from '../BusSeats/Seats.servicce';
+import { SeatsService } from '../BusSeats/seats.service';
 
 @Injectable({ providedIn: 'root' })
 export class BookingEditSerive {

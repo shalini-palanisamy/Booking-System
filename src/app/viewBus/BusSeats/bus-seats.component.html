@@ -1,7 +1,6 @@
 <header>
   <nav>
     <ul>
-      <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/viewBus">Ticket Booking</a></li>
       <button (click)="logout()" class="">Logout</button>
     </ul>
@@ -38,7 +37,10 @@
   <div class="content">
     <div class="left-column-seater">
       <!-- "Lower" seats -->
-      <div *ngFor="let value of fetchedSeatInfo; let i = index" class="empty">
+      <div
+        *ngFor="let value of fetchedSeatInfo; let i = index; trackBy: trackByFn"
+        class="empty"
+      >
         <div
           *ngIf="
             value.SeatType === 'seater' && value.SeatNo.includes('W') !== -1
@@ -83,7 +85,9 @@
       </div>
     </div>
     <div class="lower-sleeper">
-      <ng-container *ngFor="let value of fetchedSeatInfo; let i = index">
+      <ng-container
+        *ngFor="let value of fetchedSeatInfo; let i = index; trackBy: trackByFn"
+      >
         <div
           *ngIf="value.SeatType === 'sleeper' && value.SeatPosition === 'lower'"
           class="lowerSleeper-column"
@@ -107,7 +111,9 @@
     </div>
     <div class="vertical-line"></div>
     <div class="right-column">
-      <ng-container *ngFor="let value of fetchedSeatInfo; let i = index">
+      <ng-container
+        *ngFor="let value of fetchedSeatInfo; let i = index; trackBy: trackByFn"
+      >
         <div
           *ngIf="value.SeatType === 'sleeper' && value.SeatPosition === 'upper'"
           class="upper"

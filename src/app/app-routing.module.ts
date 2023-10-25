@@ -30,6 +30,7 @@ const appRoutes: Routes = [
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],

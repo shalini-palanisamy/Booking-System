@@ -18,16 +18,16 @@
             !signInForm.get('name').valid && signInForm.get('name').touched
           "
         >
-          Please enter the required field*
+          Name is required*
         </small>
         <small *ngIf="signInForm.get('name').hasError('minlength')">
-          Minimum length should be 3 characters.
+          Minimum length should be 3 characters*
         </small>
         <small *ngIf="signInForm.get('name').hasError('maxlength')"
-          >Maximum length should be 50 characters.</small
+          >Maximum length should be 50 characters*</small
         >
         <small *ngIf="signInForm.get('name').hasError('invalidName')">
-          Invalid name format (only letters and spaces).
+          Invalid name format (only letters and spaces)*
         </small>
       </div>
       <div>
@@ -44,16 +44,16 @@
             signInForm.get('email').touched
           "
         >
-          Email is required.
+          Email is required*
         </small>
         <small *ngIf="signInForm.get('email').hasError('email')">
-          Please enter a valid email address.
+          Enter a valid email address*
         </small>
         <small *ngIf="signInForm.get('email').hasError('minlength')">
-          Minimum length should be 6.
+          Minimum length should be 6*
         </small>
         <small *ngIf="signInForm.get('email').hasError('maxlength')">
-          Email cannot exceed 50 characters.
+          Email cannot exceed 50 characters*
         </small>
       </div>
       <div class="pass">
@@ -66,7 +66,7 @@
           formControlName="password"
         />
         <small *ngIf="signInForm.get('password').hasError('maxlength')"
-          >Password cannot exceed 20 characters</small
+          >Password cannot exceed 20 characters*</small
         >
         <small
           *ngIf="
@@ -74,31 +74,31 @@
             signInForm.get('password').touched
           "
         >
-          Password is required.
+          Create password is required*
         </small>
         <small
           *ngIf="signInForm.get('password').hasError('capitalLetterMissing')"
         >
-          Password must contain at least one capital letter.
+          Password must contain at least one capital letter*
         </small>
         <small
           *ngIf="signInForm.get('password').hasError('smallLetterMissing')"
         >
-          Password must contain at least one small letter.
+          Password must contain at least one small letter*
         </small>
         <small *ngIf="signInForm.get('password').hasError('numberMissing')">
-          Password must contain at least one number.
+          Password must contain at least one number*
         </small>
         <small
           *ngIf="signInForm.get('password').hasError('specialCharacterMissing')"
         >
-          Password must contain at least one special character (@$!%*?&).
+          Password must contain at least one special character (@$!%*?&)*
         </small>
         <small *ngIf="signInForm.get('password').hasError('strongPassword')">
-          Password is not strong enough.
+          Password is not strong enough*
         </small>
         <small *ngIf="signInForm.get('password').hasError('maxlength')">
-          Password cannot exceed 20 characters.
+          Password cannot exceed 20 characters*
         </small>
       </div>
       <div>
@@ -113,11 +113,11 @@
             signInForm.get('confirmPassword').hasError('required') &&
             signInForm.get('confirmPassword').touched
           "
-          >Password is required.</small
+          >Confirm password is required*</small
         >
         <small
           *ngIf="signInForm.get('confirmPassword').hasError('passwordMismatch')"
-          >Password must matches with the created password</small
+          >Password must matches with the created password*</small
         >
       </div>
       <button

@@ -18,13 +18,13 @@
             logInForm.get('email').touched
           "
         >
-          Email is required.
+          Email is required*
         </small>
         <small *ngIf="logInForm.get('email').hasError('email')">
-          Please enter a valid email address.
+          Please enter a valid email address*
         </small>
         <small *ngIf="logInForm.get('email').hasError('maxlength')">
-          Email cannot exceed 50 characters.
+          Email cannot exceed 50 characters*
         </small>
       </div>
       <div class="pass">
@@ -42,7 +42,7 @@
             logInForm.get('password').touched
           "
         >
-          Please enter the required field*
+          Password is required field*
         </small>
       </div>
       <button

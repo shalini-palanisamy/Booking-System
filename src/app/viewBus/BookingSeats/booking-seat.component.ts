@@ -5,10 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/auth/auth.service';
 import { SeatsService } from '../BusSeats/seats.service';
 import { BookingEditSerive } from './booking-edit.service';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-booking-seat',
@@ -27,13 +28,13 @@ export class BookingSeatComponent implements OnInit {
   bookingSummary; // Stores booking summary data
   formBuilder = inject(FormBuilder); // Form builder for creating form groups
   errorMessages = {
-    required: 'This field is required.',
-    minlength: 'Minimum length should be 3 characters.',
-    min: 'Minimum age is 5.',
-    invalidName: 'Invalid name format (only letters and spaces).',
-    maxlength: 'Maximum length should be 15 characters.',
-    maxAge: 'Maximum age is 120.',
-    pattern: 'Invalid age format. Please enter a valid number.',
+    required: 'This field is required*',
+    minlength: 'Minimum length should be 3 characters*',
+    min: 'Minimum age is 5*',
+    invalidName: 'Invalid name format (only letters and spaces)*',
+    maxlength: 'Maximum length should be 15 characters*',
+    maxAge: 'Maximum age is 120*',
+    pattern: 'Invalid age format. Please enter a valid number*',
   };
 
   constructor(

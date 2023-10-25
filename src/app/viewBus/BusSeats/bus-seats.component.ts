@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SeatsService } from './seats.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { AuthService } from 'src/app/auth/auth.service';
+import { SeatsService } from './seats.service';
 
 @Component({
   selector: 'app-bus-seats',

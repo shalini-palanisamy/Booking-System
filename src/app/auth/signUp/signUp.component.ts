@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthResponseData, AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
+import { AuthResponseData, AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signIn',
   templateUrl: './signUp.component.html',
   styleUrls: ['./signUp.component.css'],
 })
-
 export class SignInComponent implements OnInit {
   signInForm: FormGroup; // This FormGroup will manage our form's controls.
   error = null; // This variable will store error messages.

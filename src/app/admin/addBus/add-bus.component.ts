@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SeatFetchService } from '../BusStatus/seat-fetch.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { addSeatService } from './add-seat.service';
 import { map } from 'rxjs';
+
+import { SeatFetchService } from '../BusStatus/seat-fetch.service';
 
 @Component({
   selector: 'app-add-bus',

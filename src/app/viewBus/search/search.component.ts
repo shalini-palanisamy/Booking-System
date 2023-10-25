@@ -46,4 +46,8 @@ export class SearchComponent implements OnInit {
       return null; // Name is valid.
     };
   }
+
+  resetForm() {
+    this.searchForm.reset(); // This will reset the form to its initial state.
+  }
 }

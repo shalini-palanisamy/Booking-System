@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { AuthService } from '../auth/auth.service';
 import { SearchStatusService } from './search/search-status.service';
 import { SeatsService } from './BusSeats/seats.service';
+import { SearchComponent } from './search/search.component';
 
 @Component({
   selector: 'app-view-bus',
@@ -16,6 +17,7 @@ export class ViewBusComponent implements OnInit {
   searchStatus = false; //to trace the status of the searching function
   busesFetched; //To hold the buses details
   searchResult; //To hold the buses which has been searched
+  @ViewChild(SearchComponent) searchComponent: SearchComponent;
 
   constructor(
     private http: HttpClient,
@@ -79,6 +81,7 @@ export class ViewBusComponent implements OnInit {
   resetSearch() {
     this.searchStatus = false;
     this.searchResult = [];
+    this.searchComponent.resetForm();
   }
 
   trackByFn(index: number, busValue: any): any {

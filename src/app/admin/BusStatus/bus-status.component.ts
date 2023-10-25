@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SeatFetchService } from './seat-fetch.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SearchStatusService } from 'src/app/viewBus/search/search-status.service';
+import { SearchComponent } from 'src/app/viewBus/search/search.component';
 @Component({
   selector: 'app-bus-status',
   templateUrl: './bus-status.component.html',
@@ -21,6 +22,7 @@ export class BusStatusComponent implements OnInit {
   showForm = false; // Controls the visibility of the form for seat cancellation
   cancelForm: FormGroup; // Form for seat cancellation
   cancelticket = false; // Indicates if a ticket cancellation is in progress
+  @ViewChild(SearchComponent) searchComponent: SearchComponent;
 
   constructor(
     private http: HttpClient, // HTTP client for making API requests
@@ -151,6 +153,7 @@ export class BusStatusComponent implements OnInit {
   resetSearch() {
     this.searchStatus = false; // Reset the search status to false
     this.searchBus = []; // Clear the search results by emptying the 'searchBus' array
+    this.searchComponent.resetForm();
   }
 
   // Function for tracking items in an *ngFor loop

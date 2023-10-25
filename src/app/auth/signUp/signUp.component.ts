@@ -14,6 +14,7 @@ export class SignInComponent implements OnInit {
   signInForm: FormGroup; // This FormGroup will manage our form's controls.
   error = null; // This variable will store error messages.
   isLoading = false; // This variable will be used to indicate whether a form submission is in progress.
+  commonDomains = ['gmail.com', 'yahoo.com', 'outlook.com'];
 
   constructor(private authService: AuthService, private route: Router) {}
 
@@ -32,6 +33,7 @@ export class SignInComponent implements OnInit {
         Validators.email, // Ensure that the 'email' is a valid email address.
         Validators.required, // The 'email' field is required.
         Validators.maxLength(50), // Maximum character length for 'email' field.
+        this.commonEmailDomainsValidator(this.commonDomains),
       ]),
       password: new FormControl(null, [
         Validators.minLength(8),
@@ -139,5 +141,22 @@ export class SignInComponent implements OnInit {
       return { passwordMismatch: true }; // Return an error if passwords do not match.
     }
     return null; // Passwords match.
+  }
+
+  // Custom validator function to check for common email domains
+  commonEmailDomainsValidator(domains: string[]) {
+    return (control: FormControl): { [key: string]: boolean } | null => {
+      if (control.value) {
+        const email = control.value as string;
+        const domain = email.split('@')[1]; // Get the domain part of the email
+
+        if (!domains.includes(domain)) {
+          // If the domain is not in the allowed list, return an error
+          return { invalidDomain: true };
+        }
+      }
+
+      return null;
+    };
   }
 }

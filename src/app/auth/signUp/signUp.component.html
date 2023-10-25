@@ -55,6 +55,9 @@
         <small *ngIf="signInForm.get('email').hasError('maxlength')">
           Email cannot exceed 50 characters*
         </small>
+        <small *ngIf="signInForm.get('email').hasError('invalidDomain')"
+          >Invalid email domain. Only common domains are allowed*</small
+        >
       </div>
       <div class="pass">
         <label for="">Create Password*</label>

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   templateUrl: './signUp.component.html',
   styleUrls: ['./signUp.component.css'],
 })
+
 export class SignInComponent implements OnInit {
   signInForm: FormGroup; // This FormGroup will manage our form's controls.
   error = null; // This variable will store error messages.

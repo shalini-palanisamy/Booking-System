@@ -68,9 +68,6 @@
           class="form-control"
           formControlName="password"
         />
-        <small *ngIf="signInForm.get('password').hasError('maxlength')"
-          >Password cannot exceed 20 characters*</small
-        >
         <small
           *ngIf="
             signInForm.get('password').hasError('required') &&

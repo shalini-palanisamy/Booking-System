@@ -54,11 +54,15 @@ export class SignInComponent implements OnInit {
     // Subscribe to changes in the 'password' and 'confirmPassword' fields to update their validation dynamically.
 
     this.signInForm.get('password').valueChanges.subscribe(() => {
-      this.signInForm.get('confirmPassword').updateValueAndValidity();
+      if (this.signInForm.get('confirmPassword').value !== null) {
+        this.signInForm.get('confirmPassword').updateValueAndValidity();
+      }
     });
 
     this.signInForm.get('confirmPassword').valueChanges.subscribe(() => {
-      this.signInForm.get('confirmPassword').updateValueAndValidity();
+      if (this.signInForm.get('password').value !== null) {
+        this.signInForm.get('confirmPassword').updateValueAndValidity();
+      }
     });
   }
 
@@ -103,7 +107,7 @@ export class SignInComponent implements OnInit {
 
   // Custom validation function for 'password' field.
   passwordFormField() {
-    return (control) => {
+    return (control: FormControl): { [key: string]: any } | null => {
       const password = control.value as string; // Get the password value.
       if (!password) {
         return null; // No validation error if the password is empty.

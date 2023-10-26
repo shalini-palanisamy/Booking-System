@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth/auth.guard';
-import { LogInComponent } from './auth/logIn/logIn.component';
+import { LogInComponent } from './shared/logIn/logIn.component';
 import { SignInComponent } from './auth/signUp/signUp.component';
-import { ViewBusComponent } from './viewBus/view-bus.component';
+import { UserComponent } from './viewBus/user.component';
 
 const appRoutes: Routes = [
   {
@@ -17,10 +17,10 @@ const appRoutes: Routes = [
   { path: 'signIn', component: SignInComponent },
   {
     path: 'viewBus',
-    component: ViewBusComponent,
+    component: UserComponent,
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./viewBus/view-bus.module').then((m) => m.ViewBusModule),
+      import('./viewBus/user.module').then((m) => m.UserModule),
   },
   {
     path: 'admin',

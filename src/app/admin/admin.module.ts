@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 
 import { BusStatusComponent } from './BusStatus/bus-status.component';
 import { AddBusComponent } from './addBus/add-bus.component';
-import { SearchModule } from '../viewBus/search/search.module';
+import { SearchModule } from '../shared/search/search.module';
 import { AuthGuard } from '../auth/auth.guard';
 import { RouterModule, Routes } from '@angular/router';
-import { LogInModule } from '../auth/logIn/logIn.module';
+import { LogInModule } from '../shared/logIn/logIn.module';
 
 const childRoutes: Routes = [
   {

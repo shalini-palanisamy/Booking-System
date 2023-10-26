@@ -3,10 +3,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { SearchModule } from './search/search.module';
+import { SearchModule } from '../shared/search/search.module';
 import { BookingSeatComponent } from './BookingSeats/booking-seat.component';
 import { BusSeatsComponent } from './BusSeats/bus-seats.component';
-import { ViewBusRoutingModule } from './view-bus-routing.module';
+import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
   declarations: [BusSeatsComponent, BookingSeatComponent],
@@ -14,8 +14,8 @@ import { ViewBusRoutingModule } from './view-bus-routing.module';
     ReactiveFormsModule,
     HttpClientModule,
     SearchModule,
-    ViewBusRoutingModule,
+    UserRoutingModule,
     CommonModule,
   ],
 })
-export class ViewBusModule {}
+export class UserModule {}

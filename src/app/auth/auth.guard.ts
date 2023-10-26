@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
-      take(1),
+      take(1), //take only the first value emitted by the observable and then complete the observable and unsubcribe it automatically mainly to prevent memory leaks
       map((user) => {
         // Check if the user is authenticated (logged in).
         const isAuth = !!user;

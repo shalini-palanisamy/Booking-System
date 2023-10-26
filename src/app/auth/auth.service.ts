@@ -17,12 +17,10 @@ export interface AuthResponseData {
 }
 
 @Injectable({ providedIn: 'root' })
+//managing the user signUp, signIn and also manages the tokens.
 export class AuthService {
   // A subject to hold the currently authenticated user.
   user = new BehaviorSubject<User>(null);
-
-  // A timer to keep track of the token expiration.
-  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -38,13 +36,14 @@ export class AuthService {
         }
       )
       .pipe(
-        catchError(this.handleError),
+        //here pipe is used to perform muiltple operations to the observable chain
+        catchError(this.handleError), //to handle the error if occurs at the time of SignUp process
         tap((resData) => {
+          //tap is to call the helper method to handle user authentication.
           this.handleAuthentication(
             resData.email,
             resData.localId,
-            resData.idToken,
-            +resData.expiresIn
+            resData.idToken
           );
         })
       );
@@ -67,8 +66,7 @@ export class AuthService {
           this.handleAuthentication(
             resData.email,
             resData.localId,
-            resData.idToken,
-            +resData.expiresIn
+            resData.idToken
           );
         })
       );
@@ -78,20 +76,10 @@ export class AuthService {
     this.user.next(null);
     this.router.navigate(['']);
     localStorage.removeItem('userData');
-    if (this.tokenExpirationTimer) {
-      clearTimeout(this.tokenExpirationTimer);
-    }
-    this.tokenExpirationTimer = null;
   }
   // Helper method to handle user authentication.
-  private handleAuthentication(
-    email: string,
-    userId: string,
-    token: string,
-    expiresIn: number
-  ) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(email, userId, token, expirationDate);
+  private handleAuthentication(email: string, userId: string, token: string) {
+    const user = new User(email, userId, token);
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
   }

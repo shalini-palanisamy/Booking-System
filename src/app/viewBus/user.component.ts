@@ -4,16 +4,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { AuthService } from '../auth/auth.service';
-import { SearchStatusService } from './search/search-status.service';
+import { SearchStatusService } from '../shared/search/search-status.service';
 import { SeatsService } from './BusSeats/seats.service';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from '../shared/search/search.component';
 
 @Component({
   selector: 'app-view-bus',
-  templateUrl: './view-bus.component.html',
-  styleUrls: ['./view-bus.component.css'],
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css'],
 })
-export class ViewBusComponent implements OnInit {
+export class UserComponent implements OnInit {
   searchStatus = false; //to trace the status of the searching function
   busesFetched; //To hold the buses details
   searchResult; //To hold the buses which has been searched

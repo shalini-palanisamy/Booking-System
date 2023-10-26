@@ -8,12 +8,12 @@ import { AuthComponent } from './auth/auth.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
-import { SearchModule } from './shared/search/search.module';
-import { LogInModule } from './shared/logIn/logIn.module';
+import { SearchModule } from './viewBus/search/search.module';
 import { CoreModule } from './core.module';
 import { AuthModule } from './auth/auth.model';
 import { UserRoutingModule } from './viewBus/user-routing.module';
 import { UserComponent } from './viewBus/user.component';
+import { LogInModule } from './auth/logIn/logIn.module';
 
 @NgModule({
   declarations: [AppComponent, AuthComponent, AdminComponent, UserComponent],

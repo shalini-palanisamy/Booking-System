@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoadingSpinnerComponent } from './loadingSpinner/loading-spinner.component';
 import { SignInComponent } from './signUp/signUp.component';
-import { LogInModule } from '../shared/logIn/logIn.module';
+import { LogInModule } from './logIn/logIn.module';
 
 @NgModule({
   declarations: [LoadingSpinnerComponent, SignInComponent],

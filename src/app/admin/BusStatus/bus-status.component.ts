@@ -6,8 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { SeatFetchService } from './seat-fetch.service';
 import { AuthService } from 'src/app/auth/auth.service';
-import { SearchStatusService } from 'src/app/shared/search/search-status.service';
-import { SearchComponent } from 'src/app/shared/search/search.component';
+import { SearchStatusService } from 'src/app/viewBus/search/search-status.service';
+import { SearchComponent } from 'src/app/viewBus/search/search.component';
 @Component({
   selector: 'app-bus-status',
   templateUrl: './bus-status.component.html',

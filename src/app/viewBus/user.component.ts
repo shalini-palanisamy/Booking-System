@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { AuthService } from '../auth/auth.service';
-import { SearchStatusService } from '../shared/search/search-status.service';
+import { SearchStatusService } from './search/search-status.service';
 import { SeatsService } from './BusSeats/seats.service';
-import { SearchComponent } from '../shared/search/search.component';
+import { SearchComponent } from './search/search.component';
 
 @Component({
   selector: 'app-view-bus',

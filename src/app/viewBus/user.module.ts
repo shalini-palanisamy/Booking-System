@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { SearchModule } from '../shared/search/search.module';
+import { SearchModule } from './search/search.module';
 import { BookingSeatComponent } from './BookingSeats/booking-seat.component';
 import { BusSeatsComponent } from './BusSeats/bus-seats.component';
 import { UserRoutingModule } from './user-routing.module';

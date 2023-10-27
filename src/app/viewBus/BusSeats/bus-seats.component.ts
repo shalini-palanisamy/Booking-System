@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/auth/auth.service';
 import { SeatsService } from './seats.service';
@@ -23,7 +24,15 @@ export class BusSeatsComponent implements OnInit {
     private route: Router,
     private router: ActivatedRoute,
     private authSerive: AuthService // Authentication service
-  ) {}
+  ) {
+    this.route.events
+      .pipe(filter((res): res is NavigationEnd => res instanceof NavigationEnd))
+      .subscribe((event) => {
+        if (event.id === 1 && event.url === event.urlAfterRedirects) {
+          this.route.navigate(['viewBus']);
+        }
+      });
+  }
 
   ngOnInit(): void {
     this.fetchSeatStructure();

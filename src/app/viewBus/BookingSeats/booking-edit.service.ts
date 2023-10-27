@@ -16,7 +16,7 @@ export class BookingEditSerive {
   constructor(private SeatService: SeatsService, private http: HttpClient) {}
 
   // This method is responsible for updating the seat booking status and seat counts.
-  OnEditData() {
+  onEditData() {
     for (let index of this.seatFormData) {
       // Find the corresponding seat based on SeatNo
       this.SeatService.selectedSeats.find((seat) => {

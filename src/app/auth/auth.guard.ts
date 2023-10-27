@@ -28,8 +28,7 @@ export class AuthGuard implements CanActivate {
       take(1), //take only the first value emitted by the observable and then complete the observable and unsubcribe it automatically mainly to prevent memory leaks
       map((user) => {
         // Check if the user is authenticated (logged in).
-        const isAuth = !!user;
-        if (isAuth) {
+        if (!!user) {
           return true; // Allow access to the route.
         } else {
           // If not authenticated, redirect to the main page.

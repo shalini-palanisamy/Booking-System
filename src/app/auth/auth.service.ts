@@ -21,8 +21,10 @@ export interface AuthResponseData {
 export class AuthService {
   // A subject to hold the currently authenticated user.
   user = new BehaviorSubject<User>(null);
-
-  constructor(private http: HttpClient, private router: Router) {}
+  private tokenExpirationTimer: any;
+  constructor(private http: HttpClient, private router: Router) {
+    this.autoLogin();
+  }
 
   // Method for user registration (signup).
   signUp(email: string, password: string) {
@@ -43,7 +45,8 @@ export class AuthService {
           this.handleAuthentication(
             resData.email,
             resData.localId,
-            resData.idToken
+            resData.idToken,
+            +resData.expiresIn
           );
         })
       );
@@ -66,21 +69,88 @@ export class AuthService {
           this.handleAuthentication(
             resData.email,
             resData.localId,
-            resData.idToken
+            resData.idToken,
+            +resData.expiresIn
           );
         })
       );
   }
 
-  logOut() {
-    this.user.next(null);
-    this.router.navigate(['']);
-    localStorage.removeItem('userData');
+  // Automatically log in a user based on their stored data in local storage.
+  autoLogin() {
+    // Check if there is user data stored in local storage.
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+
+    if (!userData) {
+      // If no user data is found, return and do nothing.
+      return;
+    }
+
+    // Create a user object using the stored data.
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    // Check if the user has a valid token.
+    if (loadedUser.token) {
+      // Set the user as authenticated.
+      this.user.next(loadedUser);
+
+      // Calculate the remaining token expiration time.
+      const expirationDuration =
+        new Date(userData._tokenExpirationDate).getTime() -
+        new Date().getTime();
+
+      // Automatically log the user out when the token expires.
+      this.autoLogout(expirationDuration);
+    }
   }
+
+  // Log the user out and clear their data.
+  logOut() {
+    // Clear the user by setting it to null.
+    this.user.next(null);
+
+    // Navigate to the main page or any desired route.
+    this.router.navigate(['']);
+
+    // Remove user data from local storage.
+    localStorage.removeItem('userData');
+
+    // Clear the token expiration timer if it exists.
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  // Automatically log the user out after the token expiration duration.
+  autoLogout(expirationDuration: number) {
+    // Set a timer to log the user out after the specified duration.
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logOut();
+    }, expirationDuration);
+  }
+
   // Helper method to handle user authentication.
-  private handleAuthentication(email: string, userId: string, token: string) {
-    const user = new User(email, userId, token);
+  private handleAuthentication(
+    email: string,
+    userId: string,
+    token: string,
+    expiresIn: number
+  ) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 

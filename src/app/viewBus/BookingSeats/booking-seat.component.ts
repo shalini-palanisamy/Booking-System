@@ -5,7 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/auth/auth.service';
 import { SeatsService } from '../BusSeats/seats.service';
@@ -42,7 +43,15 @@ export class BookingSeatComponent implements OnInit {
     private bookingService: BookingEditSerive, // Service for editing and managing bookings
     private route: Router, // Router for navigation
     private authSerive: AuthService // Authentication service
-  ) {}
+  ) {
+    this.route.events
+      .pipe(filter((res): res is NavigationEnd => res instanceof NavigationEnd))
+      .subscribe((event) => {
+        if (event.id === 1 && event.url === event.urlAfterRedirects) {
+          this.route.navigate(['viewBus']);
+        }
+      });
+  }
 
   ngOnInit() {
     // Get selected seats and bus data
@@ -119,7 +128,7 @@ export class BookingSeatComponent implements OnInit {
 
   paymentPage() {
     // Submit and confirm the booking
-    this.bookingService.OnEditData();
+    this.bookingService.onEditData();
     alert('Your tickets have been booked...');
     this.paymentConfirm = true;
     this.bookingSummary = this.bookingService.bookedSeats;

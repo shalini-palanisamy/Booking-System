@@ -49,6 +49,7 @@ export class SignInComponent implements OnInit {
     this.signInForm.get('confirmPassword').setValidators([
       Validators.required, // The 'confirmPassword' field is required.
       this.matchConfirmPassword.bind(this), // Custom validation to ensure password confirmation matches.
+      //ensures that the this context inside the matchConfirmPassword function refers to the component instance.
     ]);
 
     // Subscribe to changes in the 'password' and 'confirmPassword' fields to update their validation dynamically.
@@ -59,11 +60,11 @@ export class SignInComponent implements OnInit {
       }
     });
 
-    this.signInForm.get('confirmPassword').valueChanges.subscribe(() => {
-      if (this.signInForm.get('password').value !== null) {
-        this.signInForm.get('confirmPassword').updateValueAndValidity();
-      }
-    });
+    // this.signInForm.get('confirmPassword').valueChanges.subscribe(() => {
+    //   if (this.signInForm.get('password').value !== null) {
+    //     this.signInForm.get('confirmPassword').updateValueAndValidity();
+    //   }
+    // });
   }
 
   // Custom validation function for 'name' field.
@@ -140,8 +141,11 @@ export class SignInComponent implements OnInit {
   }
 
   // Custom validation function to confirm that the password and confirmPassword match.
-  matchConfirmPassword(control: FormControl): { [s: string]: boolean } {
-    if (control.value !== this.signInForm.get('password').value) {
+  matchConfirmPassword(control: FormControl): { [s: string]: boolean } | null {
+    const password = this.signInForm.get('password').value; // Get the password value
+    const confirmPassword = control.value; // Get the confirmPassword value
+
+    if (password !== confirmPassword) {
       return { passwordMismatch: true }; // Return an error if passwords do not match.
     }
     return null; // Passwords match.

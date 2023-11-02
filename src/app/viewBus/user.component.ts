@@ -14,9 +14,9 @@ import { SearchComponent } from './search/search.component';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  searchStatus = false; //to trace the status of the searching function
-  busesFetched; //To hold the buses details
-  searchResult; //To hold the buses which has been searched
+  searchStatus = false; 
+  busesFetched; 
+  searchResult; 
   @ViewChild(SearchComponent) searchComponent: SearchComponent;
 
   constructor(

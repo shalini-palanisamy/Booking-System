@@ -18,16 +18,16 @@ import { BookingEditSerive } from './booking-edit.service';
   styleUrls: ['./booking-seat.component.css'],
 })
 export class BookingSeatComponent implements OnInit {
-  submitBooking: FormGroup; // Form group for submitting booking data
-  selectedSeats; // Array to store selected seats
-  selectedBus; // Store the selected bus
-  seatForms: FormGroup[] = []; // Form groups for individual seat information
-  totalPrice = 0; // Total price for selected seats
-  showConfirm = false; // Indicates whether to show the confirmation screen
-  seatDataArray; // Array to store seat data for submission
-  paymentConfirm = false; // Indicates whether payment is confirmed
-  bookingSummary; // Stores booking summary data
-  formBuilder = inject(FormBuilder); // Form builder for creating form groups
+  submitBooking: FormGroup; 
+  selectedSeats; 
+  selectedBus; 
+  seatForms: FormGroup[] = []; 
+  totalPrice = 0; 
+  showConfirm = false; 
+  seatDataArray;
+  paymentConfirm = false;
+  bookingSummary; 
+  formBuilder = inject(FormBuilder);
   errorMessages = {
     required: 'This field is required*',
     minlength: 'Minimum length should be 3 characters*',
@@ -39,10 +39,10 @@ export class BookingSeatComponent implements OnInit {
   };
 
   constructor(
-    private seatSerives: SeatsService, // Seat service for seat-related data
-    private bookingService: BookingEditSerive, // Service for editing and managing bookings
-    private route: Router, // Router for navigation
-    private authSerive: AuthService // Authentication service
+    private seatSerives: SeatsService, 
+    private bookingService: BookingEditSerive, 
+    private route: Router, 
+    private authSerive: AuthService 
   ) {
     this.route.events
       .pipe(filter((res): res is NavigationEnd => res instanceof NavigationEnd))

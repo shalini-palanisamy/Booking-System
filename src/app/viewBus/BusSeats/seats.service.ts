@@ -4,9 +4,9 @@ import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SeatsService {
-  selectedBus; //to hold the data of the bus which has been selected by the user for booking seats
-  seatStucture; //to hold the seat details of a selected bus to display seat layout
-  selectedSeats; //to hold the selected seat info
+  selectedBus; 
+  seatStucture; 
+  selectedSeats; 
   
   constructor(private http: HttpClient) {}
 

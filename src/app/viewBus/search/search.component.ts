@@ -8,7 +8,7 @@ import { SearchStatusService } from './search-status.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  searchForm: FormGroup; //formgroup variable name for searching a bus
+  searchForm: FormGroup; 
 
   @Output() searchElement = new EventEmitter<object>(); //searchElement is the eventEmitter which is used to pass the data from child component to parent
 

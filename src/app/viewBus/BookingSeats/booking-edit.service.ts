@@ -5,13 +5,13 @@ import { SeatsService } from '../BusSeats/seats.service';
 
 @Injectable({ providedIn: 'root' })
 export class BookingEditSerive {
-  seatFormData; // This variable is used to store the form data for seats booked by customers.
-  totalAmount; // It holds the total amount for the booking.
-  currentId; // This variable keeps track of the current seat's ID during processing.
-  updateSeatValue; // Used to store data for updating the seat status and customer information.
-  bookedSeats = []; // An array to collect information about successfully booked seats.
-  seaterCount = 0; // Keeps count of seater seats booked.
-  sleeperCount = 0; // Keeps count of sleeper seats booked.
+  seatFormData;
+  totalAmount;
+  currentId;
+  updateSeatValue;
+  bookedSeats = [];
+  seaterCount = 0;
+  sleeperCount = 0;
 
   constructor(private SeatService: SeatsService, private http: HttpClient) {}
 

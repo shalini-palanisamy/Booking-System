@@ -11,9 +11,8 @@ import { AuthResponseData, AuthService } from '../auth/auth.service'; // Import 
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  logInForm: FormGroup; // FormGroup to manage the login form controls.
-  validateAdmin; // Placeholder for admin validation logic (not defined here).
-  displayError = false; // Flag to indicate whether to display an error message.
+  logInForm: FormGroup;
+  displayError = false;
 
   constructor(private authService: AuthService, private route: Router) {}
 

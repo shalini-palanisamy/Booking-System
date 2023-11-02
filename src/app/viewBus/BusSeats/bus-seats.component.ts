@@ -11,9 +11,9 @@ import { SeatsService } from './seats.service';
   styleUrls: ['./bus-seats.component.css'],
 })
 export class BusSeatsComponent implements OnInit {
-  fetchedSeatInfo; //hold the seat information of the selected bus
-  busDetails; //hold the selected bus information
-  selectedSeats: any[] = []; //array to hold the seats selected by the user
+  fetchedSeatInfo; 
+  busDetails; 
+  selectedSeats: any[] = []; 
   totalSeats = 0;
   seater = 0;
   sleeper = 0;
@@ -23,7 +23,7 @@ export class BusSeatsComponent implements OnInit {
     private seatService: SeatsService,
     private route: Router,
     private router: ActivatedRoute,
-    private authSerive: AuthService // Authentication service
+    private authSerive: AuthService 
   ) {
     this.route.events
       .pipe(filter((res): res is NavigationEnd => res instanceof NavigationEnd))

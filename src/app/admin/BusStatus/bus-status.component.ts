@@ -14,22 +14,22 @@ import { SearchComponent } from 'src/app/viewBus/search/search.component';
   styleUrls: ['./bus-status.component.css'],
 })
 export class BusStatusComponent implements OnInit {
-  searchStatus = false; // Indicates the search status
-  busData; // Holds the bus data fetched from the API
-  searchBus; // Holds the search results
-  showtable = false; // Controls the visibility of the bus details table
-  seatDetails; // Holds the details of selected bus seats
-  showForm = false; // Controls the visibility of the form for seat cancellation
-  cancelForm: FormGroup; // Form for seat cancellation
-  cancelticket = false; // Indicates if a ticket cancellation is in progress
+  searchStatus = false; 
+  busData; 
+  searchBus; 
+  showtable = false; 
+  seatDetails; 
+  showForm = false; 
+  cancelForm: FormGroup; 
+  cancelticket = false; 
   @ViewChild(SearchComponent) searchComponent: SearchComponent;
 
   constructor(
-    private http: HttpClient, // HTTP client for making API requests
-    private seatView: SeatFetchService, // Service for fetching seat information
-    private authSerive: AuthService, // Authentication service
-    private route: Router, // Router for navigation
-    private searchStatusService: SearchStatusService // Service for managing search status
+    private http: HttpClient, 
+    private seatView: SeatFetchService, 
+    private authSerive: AuthService, 
+    private route: Router, 
+    private searchStatusService: SearchStatusService 
   ) {}
 
   ngOnInit(): void {

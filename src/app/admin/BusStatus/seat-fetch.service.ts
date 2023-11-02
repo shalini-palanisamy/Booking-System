@@ -5,7 +5,7 @@ import { map } from 'rxjs';
 import { SeatsService } from 'src/app/viewBus/BusSeats/seats.service';
 @Injectable({ providedIn: 'root' })
 export class SeatFetchService {
-  selectedBus; // Holds the selected bus information.
+  selectedBus;
   totalBus;
 
   constructor(private http: HttpClient, private seatService: SeatsService) {}

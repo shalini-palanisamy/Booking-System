@@ -18,15 +18,15 @@ import { BookingEditSerive } from './booking-edit.service';
   styleUrls: ['./booking-seat.component.css'],
 })
 export class BookingSeatComponent implements OnInit {
-  submitBooking: FormGroup; 
-  selectedSeats; 
-  selectedBus; 
-  seatForms: FormGroup[] = []; 
-  totalPrice = 0; 
-  showConfirm = false; 
-  seatDataArray;
+  submitBooking: FormGroup;
+  selectedSeats;
+  selectedBus;
+  seatForms: FormGroup[] = [];
+  totalPrice = 0;
+  showConfirm = false;
+  seatDataArray = [];
   paymentConfirm = false;
-  bookingSummary; 
+  bookingSummary;
   formBuilder = inject(FormBuilder);
   errorMessages = {
     required: 'This field is required*',
@@ -39,10 +39,10 @@ export class BookingSeatComponent implements OnInit {
   };
 
   constructor(
-    private seatSerives: SeatsService, 
-    private bookingService: BookingEditSerive, 
-    private route: Router, 
-    private authSerive: AuthService 
+    private seatSerives: SeatsService,
+    private bookingService: BookingEditSerive,
+    private route: Router,
+    private authSerive: AuthService
   ) {
     this.route.events
       .pipe(filter((res): res is NavigationEnd => res instanceof NavigationEnd))

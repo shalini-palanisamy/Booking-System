@@ -4,10 +4,10 @@ import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SeatsService {
-  selectedBus; 
-  seatStucture; 
-  selectedSeats; 
-  
+  selectedBus;
+  seatStucture;
+  selectedSeats;
+
   constructor(private http: HttpClient) {}
 
   fetchSeatInfo() {

@@ -14,9 +14,9 @@ import { SearchComponent } from './search/search.component';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  searchStatus = false; 
-  busesFetched; 
-  searchResult; 
+  searchStatus = false;
+  busesFetched = [];
+  searchResult = [];
   @ViewChild(SearchComponent) searchComponent: SearchComponent;
 
   constructor(
@@ -57,9 +57,11 @@ export class UserComponent implements OnInit {
     //searchValue will holds the input from the user for from and to location
     searchValue.fromLoc = searchValue.fromLoc.toLowerCase(); //this will convert the string to lowerCase to preform validation
     searchValue.toLoc = searchValue.toLoc.toLowerCase();
+    let fromLoc;
+    let toLoc;
     for (let index of this.busesFetched) {
-      let fromLoc = index.FromLocation.toLowerCase();
-      let toLoc = index.ToLocation.toLowerCase();
+      fromLoc = index.FromLocation.toLowerCase();
+      toLoc = index.ToLocation.toLowerCase();
       if (
         fromLoc.includes(searchValue.fromLoc) &&
         toLoc.includes(searchValue.toLoc)

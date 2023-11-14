@@ -14,22 +14,22 @@ import { SearchComponent } from 'src/app/viewBus/search/search.component';
   styleUrls: ['./bus-status.component.css'],
 })
 export class BusStatusComponent implements OnInit {
-  searchStatus = false; 
-  busData; 
-  searchBus; 
-  showtable = false; 
-  seatDetails; 
-  showForm = false; 
-  cancelForm: FormGroup; 
-  cancelticket = false; 
+  searchStatus = false;
+  busData;
+  searchBus;
+  showtable = false;
+  seatDetails;
+  showForm = false;
+  cancelForm: FormGroup;
+  cancelticket = false;
   @ViewChild(SearchComponent) searchComponent: SearchComponent;
 
   constructor(
-    private http: HttpClient, 
-    private seatView: SeatFetchService, 
-    private authSerive: AuthService, 
-    private route: Router, 
-    private searchStatusService: SearchStatusService 
+    private http: HttpClient,
+    private seatView: SeatFetchService,
+    private authSerive: AuthService,
+    private route: Router,
+    private searchStatusService: SearchStatusService
   ) {}
 
   ngOnInit(): void {
@@ -93,9 +93,11 @@ export class BusStatusComponent implements OnInit {
     if (this.searchStatus) {
       searchValue.fromLoc = searchValue.fromLoc.toLowerCase(); //this will convert the string to lowerCase to preform validation
       searchValue.toLoc = searchValue.toLoc.toLowerCase();
+      let fromLoc;
+      let toLoc;
       for (let index of this.busData) {
-        let fromLoc = index.FromLocation.toLowerCase();
-        let toLoc = index.ToLocation.toLowerCase();
+        fromLoc = index.FromLocation.toLowerCase();
+        toLoc = index.ToLocation.toLowerCase();
         if (
           fromLoc.includes(searchValue.fromLoc) &&
           toLoc.includes(searchValue.toLoc)

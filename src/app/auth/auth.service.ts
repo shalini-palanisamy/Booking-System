@@ -16,7 +16,7 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'root' }) 
 //managing the user signUp, signIn and also manages the tokens.
 export class AuthService {
   // A subject to hold the currently authenticated user.
